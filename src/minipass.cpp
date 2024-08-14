@@ -12,12 +12,13 @@
 #include "../inc/utils.hpp"
 
 MiniPass::MiniPass()
-	: passwordLength(8)
+	: passwordLength(16)
 	, removeNumbers(false)
 	, removeLowercaseLetters(false)
 	, removeUppercaseLetters(false)
 	, removeSpecialCharacters(false)
 	, makeMnemonic(false)
+	, keepHistory(false)
 	, removeCustomCharacters() {}
 
 MiniPass::MiniPass(const PasswordSettings& passwordSettings)
@@ -27,6 +28,7 @@ MiniPass::MiniPass(const PasswordSettings& passwordSettings)
 	, removeUppercaseLetters(passwordSettings.removeUppercaseLetters)
 	, removeSpecialCharacters(passwordSettings.removeSpecialCharacters)
 	, makeMnemonic(passwordSettings.makeMnemonic)
+	, keepHistory(passwordSettings.keepHistory)
 	, removeCustomCharacters(passwordSettings.removeCustomCharacters) {}
 
 MiniPass::MiniPass(const MiniPass& newCopy)
@@ -36,6 +38,7 @@ MiniPass::MiniPass(const MiniPass& newCopy)
 	, removeUppercaseLetters(newCopy.removeUppercaseLetters)
 	, removeSpecialCharacters(newCopy.removeSpecialCharacters)
 	, makeMnemonic(newCopy.makeMnemonic)
+	, keepHistory(newCopy.keepHistory)
 	, removeCustomCharacters(newCopy.removeCustomCharacters) {}
 
 MiniPass& MiniPass::operator=(const MiniPass& other) {
@@ -46,6 +49,7 @@ MiniPass& MiniPass::operator=(const MiniPass& other) {
 		removeUppercaseLetters = other.removeUppercaseLetters;
 		removeSpecialCharacters = other.removeSpecialCharacters;
 		makeMnemonic = other.makeMnemonic;
+		keepHistory = other.keepHistory;
 		removeCustomCharacters = other.removeCustomCharacters;
 	}
 	return *this;
@@ -78,7 +82,7 @@ std::string MiniPass::ApplyMnemonicFilter() {
 
 std::string MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
 	std::string mnemonicSeed;
-	std::string filename = "../../res/mnemonic-seeds.txt";
+	std::string filename = "res/mnemonic-seeds.txt";
 	std::ifstream file(filename);
 
 	if (!std::filesystem::exists(filename)) {
@@ -158,8 +162,8 @@ std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
 
 void MiniPass::KeepHistory(const std::string& password) const {
 	std::fstream passwordsDB;
-	passwordsDB.open("PasswordsHistory.csv", std::ios::out | std::ios::app);
-	if (std::filesystem::is_empty("PasswordsHistory.csv")) {
+	passwordsDB.open("build/Release/PasswordsHistory.csv", std::ios::out | std::ios::app);
+	if (std::filesystem::is_empty("build/Release/PasswordsHistory.csv")) {
 		passwordsDB << "Creation Date,Password,Mnemonic Phrase" << std::endl;
 	}
 	std::string quotedPassword = "\"" + EscapeDoubleQuotes(password) + "\"";
@@ -172,5 +176,8 @@ void MiniPass::PrintPassword(const std::string& password) const {
 	if (makeMnemonic) {
 		std::string res = GetMnemonicPhrase();
 		std::cout << "Mnemonic Phrase: " << res << std::endl;
+	}
+	if (keepHistory) {
+		std::cout << "Password saved to build/Release/PasswordsHistory.csv. " << std::endl;
 	}
 }

@@ -15,6 +15,7 @@ private:
 	bool removeUppercaseLetters;
 	bool removeSpecialCharacters;
 	bool makeMnemonic;
+	bool keepHistory;
 	std::string removeCustomCharacters;
 	std::string mnemonicPhrase;
 

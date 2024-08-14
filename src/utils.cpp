@@ -115,15 +115,15 @@ void PrintHelp() {
 #endif
 
 	std::cout << "Options:" << std::endl;
-	std::cout << "-h, --help       | Show this help message and exit." << std::endl;
-	std::cout << "-d, --default    | Generate a password with default settings (length = 16, all options enabled)." << std::endl;
-	std::cout << "-l, --length N   | Set the length of the password to N characters (default: 16)." << std::endl;
-	std::cout << "-n, --numbers    | Exclude numbers from the password." << std::endl;
-	std::cout << "-o, --lower      | Exclude lowercase letters from the password." << std::endl;
-	std::cout << "-u, --upper      | Exclude uppercase letters from the password." << std::endl;
-	std::cout << "-s, --special    | Exclude special characters from the password." << std::endl;
-	std::cout << "-k, --history    | Save generated passwords in history." << std::endl;
-	std::cout << "-m, --mnemonic   | Create a mnemonic password (a password that is easier to remember)." << std::endl;
-	std::cout << "-c, --custom STR | Exclude specific characters from the password. STR is a string of characters to exclude." << std::endl;
+	std::cout << "-h, --help           | Show this help message and exit." << std::endl;
+	std::cout << "-d, --default        | Generate a password with default settings (length = 16, all options enabled)." << std::endl;
+	std::cout << "-l N, --length N     | Set the length of the password to N characters (default: 16)." << std::endl;
+	std::cout << "-n, --numbers        | Exclude numbers from the password." << std::endl;
+	std::cout << "-o, --lower          | Exclude lowercase letters from the password." << std::endl;
+	std::cout << "-u, --upper          | Exclude uppercase letters from the password." << std::endl;
+	std::cout << "-s, --special        | Exclude special characters from the password." << std::endl;
+	std::cout << "-k, --history		   | Save generated passwords in history." << std::endl;
+	std::cout << "-m, --mnemonic       | Create a mnemonic password (a password that is easier to remember)." << std::endl;
+	std::cout << "-c STR, --custom STR | Exclude specific characters from the password. STR is a string of characters to exclude." << std::endl;
 	std::cout << std::endl;
 }

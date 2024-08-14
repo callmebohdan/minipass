@@ -15,7 +15,7 @@ int GenerateRandomIindex(const T& inputSet) {
 };
 
 struct PasswordSettings {
-	uint32_t passwordLength = 8;
+	uint32_t passwordLength = 16;
 	bool defaultSettings = false;
 	bool removeNumbers = false;
 	bool removeLowercaseLetters = false;
