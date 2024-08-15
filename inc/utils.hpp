@@ -6,7 +6,7 @@
 #include <string>
 
 template <typename T>
-int GenerateRandomIindex(const T& inputSet) {
+int GenerateRandomIndex(const T& inputSet) {
 	std::random_device rd;
 	std::mt19937 gen(rd());
 	size_t size = inputSet.size() - 1;

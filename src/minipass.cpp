@@ -109,11 +109,11 @@ std::string MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
 		return {};
 	}
 
-	int randomMnemonicSeedIndex = GenerateRandomIindex(characterNamedSeeds);
+	int randomMnemonicSeedIndex = GenerateRandomIndex(characterNamedSeeds);
 	std::unordered_set<int> indexCache;
 
 	while (indexCache.find(randomMnemonicSeedIndex) != indexCache.end()) {
-		randomMnemonicSeedIndex = GenerateRandomIindex(characterNamedSeeds);
+		randomMnemonicSeedIndex = GenerateRandomIndex(characterNamedSeeds);
 	}
 
 	indexCache.insert(randomMnemonicSeedIndex);
@@ -128,7 +128,7 @@ std::string MiniPass::GenerateRandomPassword() {
 	}
 
 	while (password.length() < passwordLength) {
-		auto randomizedCharacter = GenerateRandomIindex(allowedCharacters);
+		auto randomizedCharacter = GenerateRandomIndex(allowedCharacters);
 		password += allowedCharacters[randomizedCharacter];
 	}
 	return password;
