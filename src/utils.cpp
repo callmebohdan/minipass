@@ -1,3 +1,5 @@
+#include <algorithm>
+#include <cctype>
 #include <cstdlib>
 #include <iostream>
 #include <string>
@@ -18,11 +20,20 @@ PasswordSettings ParseCommandLineArguments(int argc, char* argv[]) {
 		}
 		else if (arg == "-l" || arg == "--length") {
 			if (i + 1 < argc) {
-				passwordSettings.passwordLength = std::stoi(argv[++i]);
+				std::string nextValue{argv[++i]};
+				bool isNumeric = !nextValue.empty() && std::all_of(nextValue.begin(), nextValue.end(), ::isdigit);
+				if (isNumeric) {
+					passwordSettings.passwordLength = std::stoi(nextValue);
+				}
+				else
+				{
+					std::cerr << "Error: " << arg << " requires a numeric value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+					exit(1);
+				}
 			}
 			else
 			{
-				std::cerr << "Warning:" << arg << "requires a value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+				std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
 				exit(1);
 			}
 		}
@@ -32,7 +43,7 @@ PasswordSettings ParseCommandLineArguments(int argc, char* argv[]) {
 			}
 			else
 			{
-				std::cerr << "Warning:" << arg << "requires a value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+				std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.removeCustomCharacters << ") will be used instead." << std::endl;
 				exit(1);
 			}
 		}
@@ -64,13 +75,13 @@ PasswordSettings ParseCommandLineArguments(int argc, char* argv[]) {
 					passwordSettings.makeMnemonic = true;
 					break;
 				case 'l':
-					std::cerr << "Warning: '-l' requires a value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+					std::cerr << "Error: '-l' requires a separate value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
 					break;
 				case 'c':
-					std::cerr << "Warning: '-c' requires a value. Default value (" << passwordSettings.removeCustomCharacters << ") will be used instead." << std::endl;
+					std::cerr << "Error: '-c' requires a separate value. Default value (" << passwordSettings.removeCustomCharacters << ") will be used instead." << std::endl;
 					break;
 				default:
-					std::cerr << "Entered unknown option: -" << arg[j] << std::endl;
+					std::cerr << "Error: Entered unknown option: '-" << arg[j] << "'" << std::endl;
 					exit(1);
 				}
 			}
@@ -97,7 +108,7 @@ PasswordSettings ParseCommandLineArguments(int argc, char* argv[]) {
 			passwordSettings.makeMnemonic = true;
 		}
 		else {
-			std::cerr << "Entered unknown option: " << arg << std::endl;
+			std::cerr << "Error: Entered unknown option: '-" << arg << "'" << std::endl;
 			exit(1);
 		}
 	}

@@ -24,7 +24,7 @@ public:
 	~MiniPass() = default;
 	MiniPass(const PasswordSettings& passwordSettings);
 	MiniPass(const MiniPass& newCopy);
-	MiniPass& MiniPass::operator=(const MiniPass& other);
+	MiniPass& operator=(const MiniPass& other);
 
 	std::string AllowedCharacters() const;
 	std::string ApplyMnemonicFilter();
