@@ -3,12 +3,14 @@
 
 #include <cstdint>
 #include <string>
-#include "../inc/utils.hpp"
+#include "utils.hpp"
 
 class MiniPass
 {
 private:
 	std::string password;
+
+public:
 	uint32_t passwordLength;
 	bool removeNumbers;
 	bool removeLowercaseLetters;
@@ -19,7 +21,6 @@ private:
 	std::string removeCustomCharacters;
 	std::string mnemonicPhrase;
 
-public:
 	MiniPass();
 	~MiniPass() = default;
 	MiniPass(const PasswordSettings& passwordSettings);
@@ -33,8 +34,8 @@ public:
 	std::string GetCurrentTime() const;
 	std::string GetMnemonicPhrase() const;
 	std::string EscapeDoubleQuotes(const std::string& str) const;
-	void KeepHistory(const std::string& password) const;
-	void PrintPassword(const std::string& password) const;
+	void KeepHistory() const;
+	void PrintPassword() const;
 };
 
 #endif  // MINIPASS_HPP

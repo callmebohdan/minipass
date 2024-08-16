@@ -3,7 +3,7 @@
 #include <cstdlib>
 #include <iostream>
 #include <string>
-#include "../inc/utils.hpp"
+#include "utils.hpp"
 
 PasswordSettings ParseCommandLineArguments(int argc, char* argv[]) {
 	PasswordSettings passwordSettings;
@@ -14,47 +14,96 @@ PasswordSettings ParseCommandLineArguments(int argc, char* argv[]) {
 
 	for (int i = 1; i < argc; i++) {
 		std::string arg = argv[i];
-		if (arg == "-h" || arg == "--help") {
-			PrintHelp();
-			exit(0);
-		}
-		else if (arg == "-l" || arg == "--length") {
-			if (i + 1 < argc) {
-				std::string nextValue{argv[++i]};
-				bool isNumeric = !nextValue.empty() && std::all_of(nextValue.begin(), nextValue.end(), ::isdigit);
-				if (isNumeric) {
-					passwordSettings.passwordLength = std::stoi(nextValue);
+
+		if (arg.substr(0, 2) == "--") {
+			if (arg == "--help") {
+				PrintHelp();
+				exit(0);
+			}
+			if (arg == "--default") {
+				passwordSettings = PasswordSettings();
+			}
+			else if (arg == "--length") {
+				if (i + 1 < argc) {
+					std::string nextValue{ argv[++i] };
+					bool isNumeric = !nextValue.empty() && std::all_of(nextValue.begin(), nextValue.end(), ::isdigit);
+					if (isNumeric) {
+						passwordSettings.passwordLength = std::stoi(nextValue);
+					}
+					else
+					{
+						std::cerr << "Error: " << arg << " requires a numeric value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+					}
 				}
 				else
 				{
-					std::cerr << "Error: " << arg << " requires a numeric value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
-					exit(1);
+					std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
 				}
 			}
-			else
-			{
-				std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
-				exit(1);
+			else if (arg == "--custom") {
+				if (i + 1 < argc) {
+					passwordSettings.removeCustomCharacters = argv[++i];
+				}
+				else
+				{
+					std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.removeCustomCharacters << ") will be used instead." << std::endl;
+				}
+			}
+			else if (arg == "--numbers") {
+				passwordSettings.removeNumbers = true;
+			}
+			else if (arg == "--lower") {
+				passwordSettings.removeLowercaseLetters = true;
+			}
+			else if (arg == "--upper") {
+				passwordSettings.removeUppercaseLetters = true;
+			}
+			else if (arg == "--special") {
+				passwordSettings.removeSpecialCharacters = true;
+			}
+			else if (arg == "--history") {
+				passwordSettings.keepHistory = true;
+			}
+			else if (arg == "--mnemonic") {
+				passwordSettings.makeMnemonic = true;
 			}
 		}
-		else if (arg == "-c" || arg == "--custom") {
-			if (i + 1 < argc) {
-				passwordSettings.removeCustomCharacters = argv[++i];
+		else if (arg[0] == '-' && arg[1] != '-' && arg.size() == 1) {
+			if (arg == "-l") {
+				if (i + 1 < argc) {
+					std::string nextValue{ argv[++i] };
+					bool isNumeric = !nextValue.empty() && std::all_of(nextValue.begin(), nextValue.end(), ::isdigit);
+					if (isNumeric) {
+						passwordSettings.passwordLength = std::stoi(nextValue);
+					}
+					else
+					{
+						std::cerr << "Error: " << arg << " requires a numeric value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+					}
+				}
+				else
+				{
+					std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+				}
 			}
-			else
-			{
-				std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.removeCustomCharacters << ") will be used instead." << std::endl;
-				exit(1);
+			else if (arg == "-c") {
+				if (i + 1 < argc) {
+					passwordSettings.removeCustomCharacters = argv[++i];
+				}
+				else
+				{
+					std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.removeCustomCharacters << ") will be used instead." << std::endl;
+				}
 			}
 		}
-		else if (arg[0] == '-' && arg.size() > 1) {
+		else if (arg[0] == '-' && arg[1] != '-' && arg.size() > 1) {
 			for (size_t j = 1; j < arg.size(); j++) {
 				switch (arg[j]) {
 				case 'h':
 					PrintHelp();
 					break;
 				case 'd':
-					passwordSettings.defaultSettings = true;
+					passwordSettings = PasswordSettings();
 					break;
 				case 'n':
 					passwordSettings.removeNumbers = true;
@@ -81,35 +130,12 @@ PasswordSettings ParseCommandLineArguments(int argc, char* argv[]) {
 					std::cerr << "Error: '-c' requires a separate value. Default value (" << passwordSettings.removeCustomCharacters << ") will be used instead." << std::endl;
 					break;
 				default:
-					std::cerr << "Error: Entered unknown option: '-" << arg[j] << "'" << std::endl;
-					exit(1);
+					std::cerr << "Error: Entered unknown option: '-" << arg[j] << "'. Skipping it." << std::endl;
 				}
 			}
 		}
-		else if (arg == "--default") {
-			passwordSettings.defaultSettings = true;
-		}
-		else if (arg == "--numbers") {
-			passwordSettings.removeNumbers = true;
-		}
-		else if (arg == "--lower") {
-			passwordSettings.removeLowercaseLetters = true;
-		}
-		else if (arg == "--upper") {
-			passwordSettings.removeUppercaseLetters = true;
-		}
-		else if (arg == "--special") {
-			passwordSettings.removeSpecialCharacters = true;
-		}
-		else if (arg == "--history") {
-			passwordSettings.keepHistory = true;
-		}
-		else if (arg == "--mnemonic") {
-			passwordSettings.makeMnemonic = true;
-		}
 		else {
 			std::cerr << "Error: Entered unknown option: '-" << arg << "'" << std::endl;
-			exit(1);
 		}
 	}
 	return passwordSettings;

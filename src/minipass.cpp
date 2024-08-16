@@ -8,8 +8,8 @@
 #include <string>
 #include <unordered_set>
 #include <vector>
-#include "../inc/minipass.hpp"
-#include "../inc/utils.hpp"
+#include "minipass.hpp"
+#include "utils.hpp"
 
 MiniPass::MiniPass()
 	: passwordLength(16)
@@ -160,10 +160,10 @@ std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
 	return result;
 }
 
-void MiniPass::KeepHistory(const std::string& password) const {
+void MiniPass::KeepHistory() const {
 	std::fstream passwordsDB;
-	passwordsDB.open("build/Release/PasswordsHistory.csv", std::ios::out | std::ios::app);
-	if (std::filesystem::is_empty("build/Release/PasswordsHistory.csv")) {
+	passwordsDB.open("build/bin/Release/PasswordsHistory.csv", std::ios::out | std::ios::app);
+	if (std::filesystem::is_empty("build/bin/Release/PasswordsHistory.csv")) {
 		passwordsDB << "Creation Date,Password,Mnemonic Phrase" << std::endl;
 	}
 	std::string quotedPassword = "\"" + EscapeDoubleQuotes(password) + "\"";
@@ -171,13 +171,13 @@ void MiniPass::KeepHistory(const std::string& password) const {
 	passwordsDB.close();
 }
 
-void MiniPass::PrintPassword(const std::string& password) const {
+void MiniPass::PrintPassword() const {
 	std::cout << "Random Password: " << password << std::endl;
 	if (makeMnemonic) {
 		std::string res = GetMnemonicPhrase();
 		std::cout << "Mnemonic Phrase: " << res << std::endl;
 	}
 	if (keepHistory) {
-		std::cout << "Password saved to build/Release/PasswordsHistory.csv. " << std::endl;
+		std::cout << "Password saved to build/bin/Release/PasswordsHistory.csv. " << std::endl;
 	}
 }
