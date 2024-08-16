@@ -4,7 +4,18 @@ A minimalistic command-line password generator with customizable settings.
 
 ## Requirements
 
-Download and install the [latest release](https://cmake.org/download) of Cmake.
+1. Download and install the [latest release](https://cmake.org/download) of Cmake.
+2. Download and install gtest:
+
+    ```bash
+    $ cd C:\Program Files
+    $ git clone https://github.com/microsoft/vcpkg.git
+    $ cd vcpkg
+    $ .\bootstrap-vcpkg.bat
+    $ $env:VCPKG_ROOT = "C:\Program Files\vcpkg"
+    $ $env:PATH = "$env:VCPKG_ROOT;$env:PATH"
+    $ vcpkg install gtest
+    ```
 
 ## Installation
 
@@ -19,7 +30,7 @@ $ cmake --build build --config Release
 ## Usage
 
 ```bash
-$ ./build/Release/minipass [options]
+$ ./build/bin/Release/MiniPass.exe [options]
 ```
 
 ## Options
@@ -38,3 +49,15 @@ $ ./build/Release/minipass [options]
 | -m     | --mnemonic   | Create a mnemonic password.                          | Random Password: kupsxettpiaizjmx |
 |        |              |                                                      | Mnemonic Phrase: kingdom update pressure study xerox era terminal type preview icon axis insight zucchini justice media xerox |
 | -c STR | --custom STR | Exclude specific characters (STR) from the password. | Random Password: 9"Y"9yzyy`"}~ZY~ |
+
+## Testing with gtest
+
+1. To test MiniPass class from minipass.cpp:
+```bash
+./build/bin/Release/TestMinipass.exe
+```
+
+2. To test functions from utils.cpp:
+```bash
+./build/bin/Release/TestUtils.exe
+```

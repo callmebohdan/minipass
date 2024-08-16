@@ -1,16 +1,12 @@
-﻿cmake_minimum_required (VERSION 3.8)
+﻿cmake_minimum_required (VERSION 3.10)
 
-project ("minipass")
+project (minipass LANGUAGES CXX)
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
 
-add_executable(minipass
-    src/main.cpp
-    src/minipass.cpp
-    src/utils.cpp
-)
+enable_testing()
 
-target_include_directories(minipass PRIVATE
-    ${CMAKE_SOURCE_DIR}/inc
-)
+add_subdirectory(src)
+add_subdirectory(test)
