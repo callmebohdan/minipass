@@ -33,6 +33,7 @@
 
 # IDE and editor files
 .vs/
+.vscode/
 
 # Build directories
 out/
