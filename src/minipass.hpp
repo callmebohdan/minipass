@@ -20,6 +20,7 @@ public:
 	bool keepHistory;
 	std::string removeCustomCharacters;
 	std::string mnemonicPhrase;
+	std::string keepHistoryFilePath;
 
 	MiniPass();
 	~MiniPass() = default;
@@ -34,7 +35,7 @@ public:
 	std::string GetCurrentTime() const;
 	std::string GetMnemonicPhrase() const;
 	std::string EscapeDoubleQuotes(const std::string& str) const;
-	void KeepHistory() const;
+	void KeepHistory();
 	void PrintPassword() const;
 };
 

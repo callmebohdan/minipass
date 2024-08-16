@@ -1,5 +1,5 @@
 #include <chrono>
-#include <corecrt.h>
+#include <cstring> 
 #include <ctime>
 #include <filesystem>
 #include <fstream>
@@ -137,11 +137,9 @@ std::string MiniPass::GenerateRandomPassword() {
 std::string MiniPass::GetCurrentTime() const {
 	auto now = std::chrono::system_clock::now();
 	std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
-	std::tm localTime;
-	localtime_s(&localTime, &currentTime);
-	char buffer[100];
-	std::strftime(buffer, sizeof(buffer), "%D | %X", &localTime);
-	return std::string(buffer);
+	auto time = std::ctime(&currentTime);
+	time[strlen(time) - 1] = '\0';
+	return time;
 }
 
 std::string MiniPass::GetMnemonicPhrase() const {
@@ -160,10 +158,11 @@ std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
 	return result;
 }
 
-void MiniPass::KeepHistory() const {
+void MiniPass::KeepHistory() {
+	keepHistoryFilePath = "build/bin/PasswordsHistory.csv";
 	std::fstream passwordsDB;
-	passwordsDB.open("build/bin/Release/PasswordsHistory.csv", std::ios::out | std::ios::app);
-	if (std::filesystem::is_empty("build/bin/Release/PasswordsHistory.csv")) {
+	passwordsDB.open(keepHistoryFilePath, std::ios::out | std::ios::app);
+	if (std::filesystem::is_empty(keepHistoryFilePath)) {
 		passwordsDB << "Creation Date,Password,Mnemonic Phrase" << std::endl;
 	}
 	std::string quotedPassword = "\"" + EscapeDoubleQuotes(password) + "\"";
@@ -178,6 +177,6 @@ void MiniPass::PrintPassword() const {
 		std::cout << "Mnemonic Phrase: " << res << std::endl;
 	}
 	if (keepHistory) {
-		std::cout << "Password saved to build/bin/Release/PasswordsHistory.csv. " << std::endl;
+		std::cout << "Password saved to " << keepHistoryFilePath << std::endl;
 	}
 }
