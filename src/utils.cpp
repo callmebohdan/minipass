@@ -146,7 +146,7 @@ void PrintHelp() {
 
 	// Platform-specific usage message
 #if defined(__linux__)
-	std::cout << std::endl << "Usage: minipass [options]" << std::endl;
+	std::cout << std::endl << "Usage: ./minipass [options]" << std::endl;
 #elif defined (_WIN32) || defined(_WIN64)
 	std::cout << std::endl << "Usage: .\\minipass.exe [options]" << std::endl;
 #endif

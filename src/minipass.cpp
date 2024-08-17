@@ -1,4 +1,3 @@
-#include <chrono>
 #include <cstring> 
 #include <ctime>
 #include <filesystem>
@@ -135,11 +134,11 @@ std::string MiniPass::GenerateRandomPassword() {
 }
 
 std::string MiniPass::GetCurrentTime() const {
-	auto now = std::chrono::system_clock::now();
-	std::time_t currentTime = std::chrono::system_clock::to_time_t(now);
-	auto time = std::ctime(&currentTime);
-	time[strlen(time) - 1] = '\0';
-	return time;
+	std::time_t now = std::time(nullptr);
+	char currentTime[26];
+	ctime_s(currentTime, sizeof(currentTime), &now);
+	currentTime[strlen(currentTime) - 1] = '\0';
+	return currentTime;
 }
 
 std::string MiniPass::GetMnemonicPhrase() const {
@@ -159,7 +158,11 @@ std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
 }
 
 void MiniPass::KeepHistory() {
+#if defined(__linux__)
 	keepHistoryFilePath = "build/bin/PasswordsHistory.csv";
+#elif defined (_WIN32) || defined(_WIN64)
+	keepHistoryFilePath = "build/bin/Release/PasswordsHistory.csv";
+#endif
 	std::fstream passwordsDB;
 	passwordsDB.open(keepHistoryFilePath, std::ios::out | std::ios::app);
 	if (std::filesystem::is_empty(keepHistoryFilePath)) {
