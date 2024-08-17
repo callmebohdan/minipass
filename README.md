@@ -4,20 +4,6 @@ A minimalistic command-line password generator with customizable settings.
 
 ## Requirements
 
-Linux:
-
-1. Install Cmake:
-
-    ```bash
-    $ sudo apt-get install cmake -y
-    ```
-
-2. Install gtest:
-
-    ```bash
-    $ sudo apt-get install libgtest-dev -y
-    ```
-
 Windows:
 
 1. Install [Cmake](https://cmake.org/download).
@@ -33,6 +19,20 @@ Windows:
     $ vcpkg install gtest
     ```
 
+Linux:
+
+1. Install Cmake:
+
+    ```bash
+    $ sudo apt-get install cmake -y
+    ```
+
+2. Install gtest:
+
+    ```bash
+    $ sudo apt-get install libgtest-dev -y
+    ```
+
 ## Installation
 
 Windows:
@@ -40,7 +40,9 @@ Windows:
 ```powershell
 $ git clone https://github.com/callmebohdan/minipass.git
 $ cd minipass
-$ if (Test-Path build) {cmake --build build --target clean}; cmake -S . -B build ; cmake --build build --config Release
+$ if (Test-Path build) {cmake --build build --target clean}
+$ cmake -S . -B build
+$ cmake --build build --config Release
 ```
 
 Linux:
@@ -48,7 +50,9 @@ Linux:
 ```bash
 $ git clone https://github.com/callmebohdan/minipass.git
 $ cd minipass
-$ [ -d "build" ] && cmake --build build --target clean ; cmake -S . -B build ; cmake --build build --config Release
+$ [ -d "build" ] && cmake --build build --target clean 
+$ cmake -S . -B build
+$ cmake --build build --config Release
 ```
 
 ## Usage
