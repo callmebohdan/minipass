@@ -18,15 +18,8 @@ target_link_libraries(GTest::GTest INTERFACE gtest_main)
 
 add_executable(TestMinipass test_minipass.cpp)
 target_link_libraries(TestMinipass GTest::GTest minipass_lib)
+add_test(NAME TestMiniPass COMMAND TestMinipass)
 
 add_executable(TestUtils test_utils.cpp)
 target_link_libraries(TestUtils GTest::GTest utils_lib)
-
-add_test(NAME TestMiniPass COMMAND TestMinipass)
 add_test(NAME TestUtils COMMAND TestUtils)
-
-set_target_properties(TestMinipass PROPERTIES
-    RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin
-)
-
-set_target_properties(TestUtils PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)

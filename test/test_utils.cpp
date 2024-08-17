@@ -21,7 +21,7 @@ TEST(GenerateRandomIndexTest, BigSet) {
 }
 
 TEST(GenerateRandomIndexTest, OverflowSet) {
-	std::vector<int> inputSet(static_cast<size_t>(std::numeric_limits<int>::max()) + 1, 1);
+	std::vector<int> inputSet(static_cast<size_t>(std::numeric_limits<int>::max()) + 1);
     EXPECT_THROW(GenerateRandomIndex(inputSet), std::overflow_error);
 }
 

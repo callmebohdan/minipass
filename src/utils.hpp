@@ -2,6 +2,7 @@
 #define UTILS_HPP
 
 #include <cstdint>
+#include <limits>
 #include <random>
 #include <stdexcept>
 #include <string>
@@ -10,6 +11,10 @@ template <typename T>
 int GenerateRandomIndex(const T& inputSet) {
 	if (inputSet.empty()) {
 		throw std::out_of_range("Input set is empty, cannot generate a random index.");
+	}
+
+	if (inputSet.size() > static_cast<size_t>(std::numeric_limits<int>::max())) {
+		throw std::overflow_error("Input set size exceeds maximum allowable value.");
 	}
 	
 	std::random_device rd;

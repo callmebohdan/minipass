@@ -60,13 +60,13 @@ $ cmake --build build --config Release
 Windows:
 
 ```powershell
-$ ./build/bin/Release/MiniPass.exe [options]
+$ .\build\src\Release\MiniPass.exe [options]
 ```
 
 Linux:
 
 ```bash
-$ .\build\bin\MiniPass [options]
+$ .\build\src\MiniPass [options]
 ```
 
 ## Options
@@ -92,22 +92,22 @@ Windows:
 
 1. Test minipass.cpp:
     ```powershell
-    ./build/bin/Release/TestMinipass.exe
+    .\build\test\Release\TestMinipass.exe
     ```
 
 2. Test utils.cpp:
     ```powershell
-    ./build/bin/Release/TestUtils.exe
+    .\build\test\Release\TestUtils.exe
     ```
 
 Linux:
 
 1. Test minipass.cpp:
     ```bash
-    .\build\bin\TestMinipass
+    ./build/test/TestMinipass
     ```
 
 2. Test utils.cpp:
     ```bash
-    .\build\bin\TestUtils
+    ./build/test/TestUtils
     ```
