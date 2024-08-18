@@ -2,20 +2,19 @@
 #include "../src/minipass.hpp"
 #include "../src/utils.hpp"
 
-TEST(Minipass, DefaultConstructor) {
+TEST(TestMiniPass, DefaultConstructor) {
 	MiniPass minipass;
-
-	ASSERT_EQ(minipass.passwordLength, 16);
-	ASSERT_FALSE(minipass.removeNumbers);
-	ASSERT_FALSE(minipass.removeLowercaseLetters);
-	ASSERT_FALSE(minipass.removeUppercaseLetters);
-	ASSERT_FALSE(minipass.removeSpecialCharacters);
-	ASSERT_FALSE(minipass.makeMnemonic);
-	ASSERT_FALSE(minipass.keepHistory);
-	ASSERT_EQ(minipass.removeCustomCharacters, "");
+	ASSERT_EQ(minipass.GetPasswordLength(), 16);
+	ASSERT_FALSE(minipass.IsRemoveNumbers());
+	ASSERT_FALSE(minipass.IsRemoveLowercaseLetters());
+	ASSERT_FALSE(minipass.IsRemoveUppercaseLetters());
+	ASSERT_FALSE(minipass.IsRemoveSpecialCharacters());
+	ASSERT_FALSE(minipass.IsMakeMnemonic());
+	ASSERT_FALSE(minipass.IsKeepHistory());
+	ASSERT_EQ(minipass.GetRemoveCustomCharacters(), "");
 }
 
-TEST(Minipass, ParametrizedConstructor) {
+TEST(TestMiniPass, ParametrizedConstructor) {
 	PasswordSettings settings;
 	settings.passwordLength = 32;
 	settings.removeNumbers = true;
@@ -28,18 +27,18 @@ TEST(Minipass, ParametrizedConstructor) {
 
 	MiniPass minipass(settings);
 
-	ASSERT_EQ(minipass.passwordLength, settings.passwordLength);
-	ASSERT_EQ(minipass.removeNumbers, settings.removeNumbers);
-	ASSERT_EQ(minipass.removeLowercaseLetters, settings.removeLowercaseLetters);
-	ASSERT_EQ(minipass.removeUppercaseLetters, settings.removeUppercaseLetters);
-	ASSERT_EQ(minipass.removeSpecialCharacters, settings.removeSpecialCharacters);
-	ASSERT_EQ(minipass.makeMnemonic, settings.makeMnemonic);
-	ASSERT_EQ(minipass.keepHistory, settings.keepHistory);
-	ASSERT_EQ(minipass.removeCustomCharacters, settings.removeCustomCharacters);
+	ASSERT_EQ(minipass.GetPasswordLength(), settings.passwordLength);
+	ASSERT_EQ(minipass.IsRemoveNumbers(), settings.removeNumbers);
+	ASSERT_EQ(minipass.IsRemoveLowercaseLetters(), settings.removeLowercaseLetters);
+	ASSERT_EQ(minipass.IsRemoveUppercaseLetters(), settings.removeUppercaseLetters);
+	ASSERT_EQ(minipass.IsRemoveSpecialCharacters(), settings.removeSpecialCharacters);
+	ASSERT_EQ(minipass.IsMakeMnemonic(), settings.makeMnemonic);
+	ASSERT_EQ(minipass.IsKeepHistory(), settings.keepHistory);
+	ASSERT_EQ(minipass.GetRemoveCustomCharacters(), settings.removeCustomCharacters);
 }
 
-TEST(Minipass, CopyConstructor) {
-	MiniPass minipassOriginal;
+TEST(TestMiniPass, CopyConstructor) {
+	PasswordSettings minipassOriginal;
 	minipassOriginal.passwordLength = 32;
 	minipassOriginal.removeNumbers = true;
 	minipassOriginal.removeLowercaseLetters = true;
@@ -51,18 +50,18 @@ TEST(Minipass, CopyConstructor) {
 
 	MiniPass minipassCopy(minipassOriginal);
 
-	ASSERT_EQ(minipassCopy.passwordLength, minipassOriginal.passwordLength);
-	ASSERT_EQ(minipassCopy.removeNumbers, minipassOriginal.removeNumbers);
-	ASSERT_EQ(minipassCopy.removeLowercaseLetters, minipassOriginal.removeLowercaseLetters);
-	ASSERT_EQ(minipassCopy.removeUppercaseLetters, minipassOriginal.removeUppercaseLetters);
-	ASSERT_EQ(minipassCopy.removeSpecialCharacters, minipassOriginal.removeSpecialCharacters);
-	ASSERT_EQ(minipassCopy.makeMnemonic, minipassOriginal.makeMnemonic);
-	ASSERT_EQ(minipassCopy.keepHistory, minipassOriginal.keepHistory);
-	ASSERT_EQ(minipassCopy.removeCustomCharacters, minipassOriginal.removeCustomCharacters);
+	ASSERT_EQ(minipassCopy.GetPasswordLength(), minipassOriginal.passwordLength);
+	ASSERT_EQ(minipassCopy.IsRemoveNumbers(), minipassOriginal.removeNumbers);
+	ASSERT_EQ(minipassCopy.IsRemoveLowercaseLetters(), minipassOriginal.removeLowercaseLetters);
+	ASSERT_EQ(minipassCopy.IsRemoveUppercaseLetters(), minipassOriginal.removeUppercaseLetters);
+	ASSERT_EQ(minipassCopy.IsRemoveSpecialCharacters(), minipassOriginal.removeSpecialCharacters);
+	ASSERT_EQ(minipassCopy.IsMakeMnemonic(), minipassOriginal.makeMnemonic);
+	ASSERT_EQ(minipassCopy.IsKeepHistory(), minipassOriginal.keepHistory);
+	ASSERT_EQ(minipassCopy.GetRemoveCustomCharacters(), minipassOriginal.removeCustomCharacters);
 }
 
-TEST(Minipass, AssignmentOperator) {
-	MiniPass minipassOriginal;
+TEST(TestMiniPass, AssignmentOperator) {
+	PasswordSettings minipassOriginal;
 	minipassOriginal.passwordLength = 32;
 	minipassOriginal.removeNumbers = true;
 	minipassOriginal.removeLowercaseLetters = true;
@@ -75,12 +74,12 @@ TEST(Minipass, AssignmentOperator) {
 	MiniPass minipassOther;
 	minipassOther = minipassOriginal;
 
-	ASSERT_EQ(minipassOther.passwordLength, minipassOriginal.passwordLength);
-	ASSERT_EQ(minipassOther.removeNumbers, minipassOriginal.removeNumbers);
-	ASSERT_EQ(minipassOther.removeLowercaseLetters, minipassOriginal.removeLowercaseLetters);
-	ASSERT_EQ(minipassOther.removeUppercaseLetters, minipassOriginal.removeUppercaseLetters);
-	ASSERT_EQ(minipassOther.removeSpecialCharacters, minipassOriginal.removeSpecialCharacters);
-	ASSERT_EQ(minipassOther.makeMnemonic, minipassOriginal.makeMnemonic);
-	ASSERT_EQ(minipassOther.keepHistory, minipassOriginal.keepHistory);
-	ASSERT_EQ(minipassOther.removeCustomCharacters, minipassOriginal.removeCustomCharacters);
+	ASSERT_EQ(minipassOther.GetPasswordLength(), minipassOriginal.passwordLength);
+	ASSERT_EQ(minipassOther.IsRemoveNumbers(), minipassOriginal.removeNumbers);
+	ASSERT_EQ(minipassOther.IsRemoveLowercaseLetters(), minipassOriginal.removeLowercaseLetters);
+	ASSERT_EQ(minipassOther.IsRemoveUppercaseLetters(), minipassOriginal.removeUppercaseLetters);
+	ASSERT_EQ(minipassOther.IsRemoveSpecialCharacters(), minipassOriginal.removeSpecialCharacters);
+	ASSERT_EQ(minipassOther.IsMakeMnemonic(), minipassOriginal.makeMnemonic);
+	ASSERT_EQ(minipassOther.IsKeepHistory(), minipassOriginal.keepHistory);
+	ASSERT_EQ(minipassOther.GetRemoveCustomCharacters(), minipassOriginal.removeCustomCharacters);
 }
