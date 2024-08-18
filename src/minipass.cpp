@@ -69,14 +69,14 @@ std::string MiniPass::AllowedCharacters() const {
 			filteredCharacters += c;
 		}
 	}
+
 	return filteredCharacters;
 }
 
-std::string MiniPass::ApplyMnemonicFilter() {
-	for (char c : password) {
-		mnemonicPhrase += GenerateRandomMnemonicSeed(c) + " ";
+void MiniPass::ApplyMnemonicFilter(const std::string& password) {
+	for (char ch : password) {
+		mnemonicPhrase += GenerateRandomMnemonicSeed(ch) + " ";
 	}
-	return mnemonicPhrase;
 }
 
 std::string MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
@@ -130,6 +130,7 @@ std::string MiniPass::GenerateRandomPassword() {
 		auto randomizedCharacter = GenerateRandomIndex(allowedCharacters);
 		password += allowedCharacters[randomizedCharacter];
 	}
+
 	return password;
 }
 
@@ -139,10 +140,6 @@ std::string MiniPass::GetCurrentTime() const {
 	ctime_s(currentTime, sizeof(currentTime), &now);
 	currentTime[strlen(currentTime) - 1] = '\0';
 	return currentTime;
-}
-
-std::string MiniPass::GetMnemonicPhrase() const {
-	return mnemonicPhrase;
 }
 
 std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
@@ -157,7 +154,7 @@ std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
 	return result;
 }
 
-void MiniPass::KeepHistory() {
+void MiniPass::KeepHistory(const std::string& password) {
 #if defined(__linux__)
 	keepHistoryFilePath = "build/src/PasswordsHistory.csv";
 #elif defined (_WIN32) || defined(_WIN64)
@@ -173,13 +170,27 @@ void MiniPass::KeepHistory() {
 	passwordsDB.close();
 }
 
-void MiniPass::PrintPassword() const {
+void MiniPass::PrintPassword(const std::string& password) const {
 	std::cout << "Random Password: " << password << std::endl;
 	if (makeMnemonic) {
-		std::string res = GetMnemonicPhrase();
-		std::cout << "Mnemonic Phrase: " << res << std::endl;
+		std::cout << "Mnemonic Phrase: " << GetMnemonicPhrase() << std::endl;
 	}
 	if (keepHistory) {
-		std::cout << "Password saved to " << keepHistoryFilePath << std::endl;
+		std::cout << "Password saved to " << GetKeepHistoryFilePath() << std::endl;
 	}
+}
+
+void MiniPass::ReturnGeneratedPassword()
+{
+	std::string generatedPassword = GenerateRandomPassword();
+
+	if (makeMnemonic) {
+		ApplyMnemonicFilter(generatedPassword);
+	}
+
+	if (keepHistory) {
+		KeepHistory(generatedPassword);
+	}
+
+	PrintPassword(generatedPassword);
 }
