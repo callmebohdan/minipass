@@ -43,7 +43,7 @@ if exist "%QT_PATH%\bin\windeployqt.exe" (
 )
 
 if exist "%BUILD_DIR%\src\minipass.exe" (
-    echo Copying the application into bin/ directory...
+    echo Copying the application into the bin/ directory...
     mkdir "%BIN_DIR%\platforms"    
     copy "%BUILD_DIR%\src\minipass.exe" "%BIN_DIR%"
     copy "%BUILD_DIR%\src\Qt6Core.dll" "%BIN_DIR%"
@@ -53,6 +53,14 @@ if exist "%BUILD_DIR%\src\minipass.exe" (
     "%BIN_DIR%\minipass.exe"
 ) else (
     echo Error: minipass.exe was not created.
+)
+
+if exist "%BUILD_DIR%\test\" (
+    echo Copying the tests into the bin/ directory...
+    copy "%BUILD_DIR%\test\TestMinipass.exe" "%BIN_DIR%"
+    copy "%BUILD_DIR%\test\TestUtils.exe" "%BIN_DIR%"
+) else (
+    echo Error: tests were not created.
 )
 
 endlocal
