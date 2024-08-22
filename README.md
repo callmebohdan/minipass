@@ -4,10 +4,19 @@ A minimalistic command-line password generator with customizable settings.
 
 ## Requirements
 
+ - Cmake v3.30.2
+ - GTest v1.12.1
+ - MinGW-w64 v4.4.1 (Windows)
+ - GCC v14.2 (Linux)
+ - Qt6 v6.7.2
+
+## Installation
+
 Windows:
 
-1. Install [Cmake](https://cmake.org/download).
-2. Install [gtest](https://github.com/google/googletest/blob/main/googletest/README.md):
+1. [Install Cmake](https://cmake.org/download).
+
+2. [Install GTest](https://github.com/google/googletest/blob/main/googletest/README.md):
 
     ```powershell
     $ cd C:\Program Files
@@ -19,30 +28,53 @@ Windows:
     $ vcpkg install gtest
     ```
 
+3. [Install MinGW-w64 via MSYS2](https://code.visualstudio.com/docs/cpp/config-mingw).
+
+4. Add the MinGW install location to PATH:
+
+    ```powershell
+    $env:PATH = "C:\msys64\ucrt64\bin;$env:PATH"
+    ```
+
+5. [Install Qt6 via Qt Online Installer](https://doc.qt.io/qt-6/qt-online-installation.html): 
+
+6. Add the Qt6 install location to PATH:
+
+    ```powershell
+    $env:PATH = "C:\Qt\6.7.2\mingw_64\bin;$env:PATH"
+    ```
+
 Linux:
 
 1. Install Cmake:
 
     ```bash
-    $ sudo apt-get install cmake -y
+    $ sudo apt-get -y install cmake
     ```
 
-2. Install gtest:
+2. Install GTest:
 
     ```bash
-    $ sudo apt-get install libgtest-dev -y
+    $ sudo apt-get -y install libgtest-dev
     ```
 
-## Installation
+3. Install gcc:
+
+    ```bash
+    $ sudo apt-get -y install build-essential
+    ```
+
+4. [Install Qt6](https://web.stanford.edu/dept/cs_edu/resources/qt/install-linux).
+
+## Usage
 
 Windows:
 
 ```powershell
 $ git clone https://github.com/callmebohdan/minipass.git
 $ cd minipass
-$ if (Test-Path build) {cmake --build build --target clean}
-$ cmake -S . -B build
-$ cmake --build build --config Release
+$ .\scripts\build_and_run.bat
+$ .\bin\minipass.exe [options]
 ```
 
 Linux:
@@ -53,19 +85,6 @@ $ cd minipass
 $ [ -d "build" ] && cmake --build build --target clean 
 $ cmake -S . -B build
 $ cmake --build build --config Release
-```
-
-## Usage
-
-Windows:
-
-```powershell
-$ .\build\src\Release\MiniPass.exe [options]
-```
-
-Linux:
-
-```bash
 $ .\build\src\MiniPass [options]
 ```
 
@@ -86,18 +105,18 @@ $ .\build\src\MiniPass [options]
 |        |              |                                                      | Mnemonic Phrase: kingdom update pressure study xerox era terminal type preview icon axis insight zucchini justice media xerox |
 | -c STR | --custom STR | Exclude specific characters (STR) from the password. | Random Password: 9"Y"9yzyy`"}~ZY~ |
 
-## Testing with gtest
+## Testing with GTest
 
 Windows:
 
 1. Test minipass.cpp:
     ```powershell
-    .\build\test\Release\TestMinipass.exe
+    .\bin\TestMinipass.exe
     ```
 
 2. Test utils.cpp:
     ```powershell
-    .\build\test\Release\TestUtils.exe
+    .\bin\TestUtils.exe
     ```
 
 Linux:
