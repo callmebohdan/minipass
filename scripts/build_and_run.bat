@@ -39,18 +39,19 @@ mingw32-make
 
 if exist "%QT_PATH%\bin\windeployqt.exe" (
     echo Deploying Qt libraries...
-    "%QT_PATH%\bin\windeployqt.exe" "%BUILD_DIR%\src\minipass.exe"
+    "%QT_PATH%\bin\windeployqt.exe" "%BUILD_DIR%\src\minipassGUI.exe"
 )
 
-if exist "%BUILD_DIR%\src\minipass.exe" (
+if exist "%BUILD_DIR%\src\minipassCLI.exe" (
     echo Copying the application into the bin/ directory...
     mkdir "%BIN_DIR%\platforms"    
-    copy "%BUILD_DIR%\src\minipass.exe" "%BIN_DIR%"
+    copy "%BUILD_DIR%\src\minipassGUI.exe" "%BIN_DIR%"
+    copy "%BUILD_DIR%\src\minipassCLI.exe" "%BIN_DIR%"
     copy "%BUILD_DIR%\src\Qt6Core.dll" "%BIN_DIR%"
     copy "%BUILD_DIR%\src\Qt6Gui.dll" "%BIN_DIR%"
     copy "%BUILD_DIR%\src\Qt6Widgets.dll" "%BIN_DIR%"
     copy "%BUILD_DIR%\src\platforms" "%BIN_DIR%\platforms"    
-    "%BIN_DIR%\minipass.exe"
+    "%BIN_DIR%\minipassGUI.exe"
 ) else (
     echo Error: minipass.exe was not created.
 )

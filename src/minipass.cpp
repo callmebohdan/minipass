@@ -155,10 +155,11 @@ std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
 }
 
 void MiniPass::KeepHistory(const std::string& password) {
+	std::string executableDir = std::filesystem::current_path().string();
 #if defined(__linux__)
-	keepHistoryFilePath = "bin/PasswordsHistory.csv";
+	keepHistoryFilePath = executableDir + "//PasswordsHistory.csv";
 #elif defined (_WIN32) || defined(_WIN64)
-	keepHistoryFilePath = "bin/PasswordsHistory.csv";
+	keepHistoryFilePath = executableDir + "\\PasswordsHistory.csv";
 #endif
 	std::fstream passwordsDB;
 	passwordsDB.open(keepHistoryFilePath, std::ios::out | std::ios::app);

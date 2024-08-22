@@ -74,7 +74,8 @@ Windows:
 $ git clone https://github.com/callmebohdan/minipass.git
 $ cd minipass
 $ .\scripts\build_and_run.bat
-$ .\bin\minipass.exe [options]
+$ .\bin\minipassCLI.exe [options]
+$ .\bin\minipassGUI.exe
 ```
 
 Linux:
@@ -104,6 +105,10 @@ $ .\build\src\MiniPass [options]
 | -m     | --mnemonic   | Create a mnemonic password.                          | Random Password: kupsxettpiaizjmx |
 |        |              |                                                      | Mnemonic Phrase: kingdom update pressure study xerox era terminal type preview icon axis insight zucchini justice media xerox |
 | -c STR | --custom STR | Exclude specific characters (STR) from the password. | Random Password: 9"Y"9yzyy`"}~ZY~ |
+
+## Example
+
+![minipass](assets/minipass.png)
 
 ## Testing with GTest
 

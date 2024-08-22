@@ -36,4 +36,3 @@ if exist "%BIN_DIR%" (
 )
 
 endlocal
-pause
