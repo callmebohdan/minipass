@@ -5,15 +5,14 @@
 
 int main(int argc, char* argv[])
 {
-	QApplication application(argc, argv);
-
-	MainWindow mainWindow;
-
-	//MiniPass passwordOptions{ ParseCommandLineArguments(argc, argv) };
-
-	//passwordOptions.ReturnGeneratedPassword();
-
-	mainWindow.show();
-
-	return application.exec();
+	if (argc == 1) {
+		QApplication application(argc, argv);
+		MainWindow mainWindow;
+		mainWindow.show();
+		return application.exec();
+	}
+	else {
+		MiniPass passwordOptions{ParseCommandLineArguments(argc, argv)};
+		passwordOptions.ReturnGeneratedPassword();
+	}
 }
