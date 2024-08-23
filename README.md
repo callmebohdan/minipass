@@ -5,12 +5,12 @@ A minimalistic command-line password generator with customizable settings.
 ## Requirements
 
  - Cmake v3.30.2
- - GTest v1.12.1
  - MinGW-w64 v4.4.1 (Windows)
  - GCC v14.2 (Linux)
  - Qt6 v6.7.2
+ - GTest v1.12.1
 
-## Installation
+## Requirements installation
 
 Windows:
 
@@ -64,30 +64,101 @@ Linux:
     $ sudo apt-get -y install build-essential
     ```
 
-4. [Install Qt6](https://web.stanford.edu/dept/cs_edu/resources/qt/install-linux).
+4. Install Qt6:
+
+    ```bash
+    sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev qt6-base-dev qt6-base-dev-tools libxcb-cursor0
+    ```
+
+## Build
+
+Windows:
+
+1. Clone the repository:
+
+    ```powershell
+    git clone https://github.com/callmebohdan/minipass.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```powershell
+    cd minipass
+    ```
+
+3. Build and run the project:
+
+    ```powershell
+    .\scripts\build_and_run.bat
+    ```
+
+4. Clean the project:
+
+    ```powershell
+    .\scripts\clean.bat
+    ```
+
+Linux:
+
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/callmebohdan/minipass.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd minipass
+    ```
+
+3. Build and run the project:
+
+    ```bash
+    sh ./scripts/build_and_run.sh
+    ```
+
+4. Clean the project:
+
+    ```bash
+    sh ./scripts/clean.sh
+    ```
+
+5. To fix the **Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway** run:
+
+    ```bash
+    export QT_QPA_PLATFORM=xcb
+    ```
 
 ## Usage
 
 Windows:
 
-```powershell
-$ git clone https://github.com/callmebohdan/minipass.git
-$ cd minipass
-$ .\scripts\build_and_run.bat
-$ .\bin\minipassCLI.exe [options]
-$ .\bin\minipassGUI.exe
-```
+    GUI:
+
+    ```powershell
+    .\bin\minipassGUI.exe
+    ```
+
+    CLI:
+
+    ```powershell
+    .\bin\minipassCLI.exe [options]
+    ```
 
 Linux:
 
-```bash
-$ git clone https://github.com/callmebohdan/minipass.git
-$ cd minipass
-$ [ -d "build" ] && cmake --build build --target clean 
-$ cmake -S . -B build
-$ cmake --build build --config Release
-$ .\build\src\MiniPass [options]
-```
+    GUI:
+
+    ```bash
+    ./bin/minipassGUI
+    ```
+
+    CLI:
+
+    ```bash
+    ./bin/minipassCLI [options]
+    ```
 
 ## Options
 
@@ -108,7 +179,13 @@ $ .\build\src\MiniPass [options]
 
 ## Example
 
-![minipass](assets/minipass.png)
+Windows:
+
+![minipassWindowsGUI](assets/minipassWindowsGUI.png)
+
+Linux:
+
+![minipassLinuxGUI](assets/minipassLinuxGUI.png)
 
 ## Testing with GTest
 
@@ -128,10 +205,10 @@ Linux:
 
 1. Test minipass.cpp:
     ```bash
-    ./build/test/TestMinipass
+    ./bin/TestMinipass
     ```
 
 2. Test utils.cpp:
     ```bash
-    ./build/test/TestUtils
+    ./bin/TestUtils
     ```
