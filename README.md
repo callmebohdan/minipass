@@ -19,13 +19,31 @@ Windows:
 2. [Install GTest](https://github.com/google/googletest/blob/main/googletest/README.md):
 
     ```powershell
-    $ cd C:\Program Files
-    $ git clone https://github.com/microsoft/vcpkg.git
-    $ cd vcpkg 
-    $ .\bootstrap-vcpkg.bat
-    $ $env:VCPKG_ROOT = "C:\Program Files\vcpkg"
-    $ $env:PATH = "$env:VCPKG_ROOT;$env:PATH"
-    $ vcpkg install gtest
+    cd C:\Program Files
+    ```
+    
+    ```powershell
+    git clone https://github.com/microsoft/vcpkg.git
+    ```
+    
+    ```powershell
+    cd vcpkg
+    ```
+
+    ```powershell
+    .\bootstrap-vcpkg.bat
+    ```
+    
+    ```powershell
+    $env:VCPKG_ROOT = "C:\Program Files\vcpkg"
+    ```
+
+    ```powershell
+    $env:PATH = "$env:VCPKG_ROOT;$env:PATH"
+    ```
+
+    ```powershell
+    vcpkg install gtest
     ```
 
 3. [Install MinGW-w64 via MSYS2](https://code.visualstudio.com/docs/cpp/config-mingw).
@@ -49,19 +67,25 @@ Linux:
 1. Install Cmake:
 
     ```bash
-    $ sudo apt-get -y install cmake
+    sudo apt-get -y install cmake
     ```
 
 2. Install GTest:
 
     ```bash
-    $ sudo apt-get -y install libgtest-dev
+    sudo apt-get -y install libgtest-dev
     ```
 
+   Build and install static libraries:
+   
+    ```bash
+    cd /usr/src/gtest && sudo cmake . && sudo make && sudo mv libg* /usr/lib/ && cd -
+    ```
+   
 3. Install gcc:
 
     ```bash
-    $ sudo apt-get -y install build-essential
+    sudo apt-get -y install build-essential
     ```
 
 4. Install Qt6:
@@ -132,33 +156,29 @@ Linux:
 
 ## Usage
 
-Windows:
+Windows GUI:
 
-    GUI:
+```powershell
+.\bin\minipassGUI.exe
+```
 
-    ```powershell
-    .\bin\minipassGUI.exe
-    ```
+Windows CLI:
 
-    CLI:
+```powershell
+.\bin\minipassCLI.exe [options]
+```
 
-    ```powershell
-    .\bin\minipassCLI.exe [options]
-    ```
+Linux GUI:
 
-Linux:
+```bash
+./bin/minipassGUI
+```
 
-    GUI:
+Linux CLI:
 
-    ```bash
-    ./bin/minipassGUI
-    ```
-
-    CLI:
-
-    ```bash
-    ./bin/minipassCLI [options]
-    ```
+```bash
+./bin/minipassCLI [options]
+```
 
 ## Options
 
@@ -212,3 +232,4 @@ Linux:
     ```bash
     ./bin/TestUtils
     ```
+
