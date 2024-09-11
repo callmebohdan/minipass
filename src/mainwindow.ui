@@ -9,15 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>471</width>
-    <height>353</height>
+    <width>529</width>
+    <height>365</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string notr="true">minipass</string>
   </property>
   <property name="toolButtonStyle">
-   <enum>Qt::ToolButtonStyle::ToolButtonTextOnly</enum>
+   <enum>Qt::ToolButtonIconOnly</enum>
   </property>
   <property name="animated">
    <bool>true</bool>
@@ -34,7 +34,7 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>241</width>
+      <width>281</width>
       <height>241</height>
      </rect>
     </property>
@@ -46,13 +46,13 @@
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>221</width>
+       <width>261</width>
        <height>211</height>
       </rect>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <property name="rowWrapPolicy">
-       <enum>QFormLayout::RowWrapPolicy::WrapLongRows</enum>
+       <enum>QFormLayout::DontWrapRows</enum>
       </property>
       <item row="0" column="0">
        <widget class="QLabel" name="LabelRemoveCustomCharacters">
@@ -76,7 +76,7 @@
          </size>
         </property>
         <property name="contextMenuPolicy">
-         <enum>Qt::ContextMenuPolicy::DefaultContextMenu</enum>
+         <enum>Qt::NoContextMenu</enum>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
@@ -215,8 +215,8 @@
      <rect>
       <x>10</x>
       <y>250</y>
-      <width>451</width>
-      <height>81</height>
+      <width>511</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="title">
@@ -225,9 +225,9 @@
     <widget class="QPlainTextEdit" name="plainTextEditRandomPassword">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>20</y>
-       <width>321</width>
+       <x>150</x>
+       <y>30</y>
+       <width>411</width>
        <height>21</height>
       </rect>
      </property>
@@ -236,8 +236,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
-       <width>101</width>
+       <y>30</y>
+       <width>131</width>
        <height>16</height>
       </rect>
      </property>
@@ -249,8 +249,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>50</y>
-       <width>81</width>
+       <y>60</y>
+       <width>131</width>
        <height>16</height>
       </rect>
      </property>
@@ -261,9 +261,9 @@
     <widget class="QPlainTextEdit" name="plainTextEditLogMessage">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>50</y>
-       <width>321</width>
+       <x>150</x>
+       <y>60</y>
+       <width>411</width>
        <height>21</height>
       </rect>
      </property>
@@ -272,9 +272,9 @@
    <widget class="QGroupBox" name="groupBoxActions">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>300</x>
       <y>10</y>
-      <width>201</width>
+      <width>221</width>
       <height>241</height>
      </rect>
     </property>
@@ -284,9 +284,9 @@
     <widget class="QToolButton" name="toolButtonGenerate">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>20</y>
-       <width>111</width>
+       <x>10</x>
+       <y>30</y>
+       <width>201</width>
        <height>21</height>
       </rect>
      </property>
@@ -297,9 +297,9 @@
     <widget class="QToolButton" name="toolButtonReset">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>50</y>
-       <width>91</width>
+       <x>10</x>
+       <y>90</y>
+       <width>201</width>
        <height>22</height>
       </rect>
      </property>
@@ -310,9 +310,9 @@
     <widget class="QToolButton" name="toolButtonExit">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>80</y>
-       <width>111</width>
+       <x>10</x>
+       <y>120</y>
+       <width>201</width>
        <height>22</height>
       </rect>
      </property>
@@ -323,9 +323,9 @@
     <widget class="QToolButton" name="toolButtonOpenPasswordsHistory">
      <property name="geometry">
       <rect>
-       <x>20</x>
-       <y>110</y>
-       <width>161</width>
+       <x>10</x>
+       <y>60</y>
+       <width>201</width>
        <height>21</height>
       </rect>
      </property>
@@ -349,13 +349,14 @@
   </widget>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::ApplicationExit"/>
+    <iconset theme="QIcon::ThemeIcon::ApplicationExit">
+     <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Exit</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::MenuRole::QuitRole</enum>
+    <enum>QAction::NoRole</enum>
    </property>
   </action>
  </widget>

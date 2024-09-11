@@ -137,8 +137,10 @@ std::string MiniPass::GenerateRandomPassword() {
 std::string MiniPass::GetCurrentTime() const {
 	std::time_t now = std::time(nullptr);
 	char currentTime[26];
-	ctime_s(currentTime, sizeof(currentTime), &now);
-	currentTime[strlen(currentTime) - 1] = '\0';
+	std::tm* tmNow = std::localtime(&now); // Convert to local time
+    if (std::strftime(currentTime, sizeof(currentTime), "%Y-%m-%d %H:%M:%S", tmNow) == 0) {
+        return "";
+    }
 	return currentTime;
 }
 

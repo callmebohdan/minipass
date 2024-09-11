@@ -5,12 +5,12 @@ A minimalistic command-line password generator with customizable settings.
 ## Requirements
 
  - Cmake v3.30.2
- - GTest v1.12.1
  - MinGW-w64 v4.4.1 (Windows)
  - GCC v14.2 (Linux)
  - Qt6 v6.7.2
+ - GTest v1.12.1
 
-## Installation
+## Requirements installation
 
 Windows:
 
@@ -19,13 +19,31 @@ Windows:
 2. [Install GTest](https://github.com/google/googletest/blob/main/googletest/README.md):
 
     ```powershell
-    $ cd C:\Program Files
-    $ git clone https://github.com/microsoft/vcpkg.git
-    $ cd vcpkg 
-    $ .\bootstrap-vcpkg.bat
-    $ $env:VCPKG_ROOT = "C:\Program Files\vcpkg"
-    $ $env:PATH = "$env:VCPKG_ROOT;$env:PATH"
-    $ vcpkg install gtest
+    cd C:\Program Files
+    ```
+    
+    ```powershell
+    git clone https://github.com/microsoft/vcpkg.git
+    ```
+    
+    ```powershell
+    cd vcpkg
+    ```
+
+    ```powershell
+    .\bootstrap-vcpkg.bat
+    ```
+    
+    ```powershell
+    $env:VCPKG_ROOT = "C:\Program Files\vcpkg"
+    ```
+
+    ```powershell
+    $env:PATH = "$env:VCPKG_ROOT;$env:PATH"
+    ```
+
+    ```powershell
+    vcpkg install gtest
     ```
 
 3. [Install MinGW-w64 via MSYS2](https://code.visualstudio.com/docs/cpp/config-mingw).
@@ -49,44 +67,117 @@ Linux:
 1. Install Cmake:
 
     ```bash
-    $ sudo apt-get -y install cmake
+    sudo apt-get -y install cmake
     ```
 
 2. Install GTest:
 
     ```bash
-    $ sudo apt-get -y install libgtest-dev
+    sudo apt-get -y install libgtest-dev
     ```
 
+   Build and install static libraries:
+   
+    ```bash
+    cd /usr/src/gtest && sudo cmake . && sudo make && sudo mv libg* /usr/lib/ && cd -
+    ```
+   
 3. Install gcc:
 
     ```bash
-    $ sudo apt-get -y install build-essential
+    sudo apt-get -y install build-essential
     ```
 
-4. [Install Qt6](https://web.stanford.edu/dept/cs_edu/resources/qt/install-linux).
+4. Install Qt6:
 
-## Usage
+    ```bash
+    sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev qt6-base-dev qt6-base-dev-tools libxcb-cursor0
+    ```
+
+## Build
 
 Windows:
 
-```powershell
-$ git clone https://github.com/callmebohdan/minipass.git
-$ cd minipass
-$ .\scripts\build_and_run.bat
-$ .\bin\minipassCLI.exe [options]
-$ .\bin\minipassGUI.exe
-```
+1. Clone the repository:
+
+    ```powershell
+    git clone https://github.com/callmebohdan/minipass.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```powershell
+    cd minipass
+    ```
+
+3. Build and run the project:
+
+    ```powershell
+    .\scripts\build_and_run.bat
+    ```
+
+4. Clean the project:
+
+    ```powershell
+    .\scripts\clean.bat
+    ```
 
 Linux:
 
+1. Clone the repository:
+
+    ```bash
+    git clone https://github.com/callmebohdan/minipass.git
+    ```
+
+2. Navigate to the project directory:
+
+    ```bash
+    cd minipass
+    ```
+
+3. Build and run the project:
+
+    ```bash
+    sh ./scripts/build_and_run.sh
+    ```
+
+4. Clean the project:
+
+    ```bash
+    sh ./scripts/clean.sh
+    ```
+
+5. To fix the **Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway** run:
+
+    ```bash
+    export QT_QPA_PLATFORM=xcb
+    ```
+
+## Usage
+
+Windows GUI:
+
+```powershell
+.\bin\minipassGUI.exe
+```
+
+Windows CLI:
+
+```powershell
+.\bin\minipassCLI.exe [options]
+```
+
+Linux GUI:
+
 ```bash
-$ git clone https://github.com/callmebohdan/minipass.git
-$ cd minipass
-$ [ -d "build" ] && cmake --build build --target clean 
-$ cmake -S . -B build
-$ cmake --build build --config Release
-$ .\build\src\MiniPass [options]
+./bin/minipassGUI
+```
+
+Linux CLI:
+
+```bash
+./bin/minipassCLI [options]
 ```
 
 ## Options
@@ -108,7 +199,13 @@ $ .\build\src\MiniPass [options]
 
 ## Example
 
-![minipass](assets/minipass.png)
+Windows:
+
+![minipassWindowsGUI](assets/minipassWindowsGUI.png)
+
+Linux:
+
+![minipassLinuxGUI](assets/minipassLinuxGUI.png)
 
 ## Testing with GTest
 
@@ -128,10 +225,11 @@ Linux:
 
 1. Test minipass.cpp:
     ```bash
-    ./build/test/TestMinipass
+    ./bin/TestMinipass
     ```
 
 2. Test utils.cpp:
     ```bash
-    ./build/test/TestUtils
+    ./bin/TestUtils
     ```
+

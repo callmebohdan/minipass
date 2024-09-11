@@ -13,4 +13,6 @@ qt_add_executable(minipassGUI ${GUI_SOURCE_FILES} ${GUI_HEADER_FILES} ${UI_FILES
 
 target_link_libraries(minipassGUI PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
 
-set_target_properties(minipassGUI PROPERTIES WIN64_EXECUTABLE ON LINK_FLAGS "-mwindows")
+if (WIN32)
+    set_target_properties(minipassGUI PROPERTIES WIN64_EXECUTABLE ON LINK_FLAGS "-mwindows")
+endif()
