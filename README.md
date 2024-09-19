@@ -201,11 +201,11 @@ Linux CLI:
 
 Windows:
 
-![minipassWindowsGUI](assets/minipassWindowsGUI.png)
+![minipass-example-windows-gui](assets/examples/windows/minipass-example-windows-gui.png)
 
 Linux:
 
-![minipassLinuxGUI](assets/minipassLinuxGUI.png)
+![minipass-example-linux-gui](assets/examples/linux/minipass-example-linux-gui.png)
 
 ## Testing with GTest
 
