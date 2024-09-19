@@ -1,4 +1,4 @@
-﻿set(ASSET_FILES ../assets/minipass.rc)
+﻿set(ASSET_FILES ../assets/icon/minipass.rc)
 set(CLI_HEADER_FILES utils.hpp minipass.hpp)
 set(GUI_HEADER_FILES mainwindow.hpp utils.hpp minipass.hpp)
 set(CLI_SOURCE_FILES mainCLI.cpp utils.cpp minipass.cpp)
