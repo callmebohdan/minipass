@@ -106,7 +106,7 @@ Windows:
 3. Build and run the project:
 
     ```powershell
-    .\scripts\build_and_run.bat
+    .\scripts\build.bat
     ```
 
 4. Clean the project:
@@ -132,7 +132,7 @@ Linux:
 3. Build and run the project:
 
     ```bash
-    sh ./scripts/build_and_run.sh
+    sh ./scripts/build.sh
     ```
 
 4. Clean the project:
