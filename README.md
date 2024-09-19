@@ -5,7 +5,7 @@ A minimalistic command-line password generator with customizable settings.
 ## Requirements
 
  - Cmake v3.30.2
- - MinGW-w64 v4.4.1 (Windows)
+ - MSVC2019_64 (Windows)
  - GCC v14.2 (Linux)
  - Qt6 v6.7.2
  - GTest v1.12.1
@@ -46,17 +46,10 @@ Windows:
     vcpkg install gtest
     ```
 
-3. [Install MinGW-w64 via MSYS2](https://code.visualstudio.com/docs/cpp/config-mingw).
+2. [Install Qt6 via Qt Online Installer](https://doc.qt.io/qt-6/qt-online-installation.html).
+Also install MSVC2019_64 (Qt Maintenance Tool -> Add or remove components -> Qt -> Qt 6.7.2 -> MSVC 2019 64-bit).
 
-4. Add the MinGW install location to PATH:
-
-    ```powershell
-    $env:PATH = "C:\msys64\ucrt64\bin;$env:PATH"
-    ```
-
-5. [Install Qt6 via Qt Online Installer](https://doc.qt.io/qt-6/qt-online-installation.html): 
-
-6. Add the Qt6 install location to PATH:
+3. Add the Qt6 install location to PATH:
 
     ```powershell
     $env:PATH = "C:\Qt\6.7.2\mingw_64\bin;$env:PATH"
