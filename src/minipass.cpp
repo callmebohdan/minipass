@@ -8,7 +8,21 @@
 #include <unordered_set>
 #include <vector>
 #include "minipass.hpp"
+#include "ui_minipass.h"
 #include "utils.hpp"
+
+MiniPass::MiniPass(QWidget* parent)
+	: QMainWindow(parent)
+	, ui(new Ui::MiniPass)
+{
+	ui->setupUi(this);
+}
+
+MiniPass::~MiniPass()
+{
+	delete ui;
+	ui = nullptr;
+}
 
 MiniPass::MiniPass()
 	: passwordLength(16)
@@ -138,9 +152,9 @@ std::string MiniPass::GetCurrentTime() const {
 	std::time_t now = std::time(nullptr);
 	char currentTime[26];
 	std::tm* tmNow = std::localtime(&now); // Convert to local time
-    if (std::strftime(currentTime, sizeof(currentTime), "%Y-%m-%d %H:%M:%S", tmNow) == 0) {
-        return "";
-    }
+	if (std::strftime(currentTime, sizeof(currentTime), "%Y-%m-%d %H:%M:%S", tmNow) == 0) {
+		return "";
+	}
 	return currentTime;
 }
 

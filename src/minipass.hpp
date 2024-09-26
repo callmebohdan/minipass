@@ -2,12 +2,22 @@
 #define MINIPASS_HPP
 
 #include <cstdint>
+#include <qmainwindow.h>
+#include <qtmetamacros.h>
+#include <qwidget.h>
 #include <string>
 #include "utils.hpp"
 
-class MiniPass
+namespace Ui {
+	class MiniPass;
+}
+
+class MiniPass : public QMainWindow
 {
+	Q_OBJECT
+
 private:
+	Ui::MiniPass* ui;
 	std::string password;
 	uint32_t passwordLength;
 	bool removeNumbers;
@@ -20,9 +30,9 @@ private:
 	std::string mnemonicPhrase;
 	std::string keepHistoryFilePath;
 public:
+	explicit MiniPass(QWidget* parent = nullptr);
+	~MiniPass();
 	// Constructors
-	MiniPass();
-	~MiniPass() = default;
 	MiniPass(const PasswordSettings& passwordSettings);
 	MiniPass(const MiniPass& newCopy);
 	MiniPass& operator=(const MiniPass& other);
