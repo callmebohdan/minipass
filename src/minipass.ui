@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>MainWindow</class>
- <widget class="QMainWindow" name="MainWindow">
+ <class>MiniPass</class>
+ <widget class="QMainWindow" name="MiniPass">
   <property name="enabled">
    <bool>true</bool>
   </property>
@@ -17,7 +17,7 @@
    <string notr="true">minipass</string>
   </property>
   <property name="toolButtonStyle">
-   <enum>Qt::ToolButtonIconOnly</enum>
+   <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
   </property>
   <property name="animated">
    <bool>true</bool>
@@ -52,7 +52,7 @@
      </property>
      <layout class="QFormLayout" name="formLayout">
       <property name="rowWrapPolicy">
-       <enum>QFormLayout::DontWrapRows</enum>
+       <enum>QFormLayout::RowWrapPolicy::DontWrapRows</enum>
       </property>
       <item row="0" column="0">
        <widget class="QLabel" name="LabelRemoveCustomCharacters">
@@ -76,7 +76,7 @@
          </size>
         </property>
         <property name="contextMenuPolicy">
-         <enum>Qt::NoContextMenu</enum>
+         <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
@@ -349,14 +349,13 @@
   </widget>
   <action name="actionExit">
    <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::ApplicationExit">
-     <normaloff>.</normaloff>.</iconset>
+    <iconset theme="QIcon::ThemeIcon::ApplicationExit"/>
    </property>
    <property name="text">
     <string>Exit</string>
    </property>
    <property name="menuRole">
-    <enum>QAction::NoRole</enum>
+    <enum>QAction::MenuRole::NoRole</enum>
    </property>
   </action>
  </widget>
