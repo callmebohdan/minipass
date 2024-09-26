@@ -24,16 +24,6 @@ MiniPass::~MiniPass()
 	ui = nullptr;
 }
 
-MiniPass::MiniPass()
-	: passwordLength(16)
-	, removeNumbers(false)
-	, removeLowercaseLetters(false)
-	, removeUppercaseLetters(false)
-	, removeSpecialCharacters(false)
-	, makeMnemonic(false)
-	, keepHistory(false)
-	, removeCustomCharacters() {}
-
 MiniPass::MiniPass(const PasswordSettings& passwordSettings)
 	: passwordLength(passwordSettings.passwordLength)
 	, removeNumbers(passwordSettings.removeNumbers)
