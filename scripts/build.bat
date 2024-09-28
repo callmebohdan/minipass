@@ -66,13 +66,13 @@ if exist "%BUILD_DIR%\src\Release\minipass.exe" (
     echo Error: minipass.exe was not created.
 )
 
-if exist "%BUILD_DIR%\test\Release\" (
-    echo Copying the tests into the bin directory...
-    copy "%BUILD_DIR%\test\Release\TestMinipass.exe" "%BIN_DIR%"
-    copy "%BUILD_DIR%\test\Release\TestUtils.exe" "%BIN_DIR%"
-) else (
-    echo Error: tests were not created.
-)
+@REM if exist "%BUILD_DIR%\test\Release\" (
+@REM     echo Copying the tests into the bin directory...
+@REM     copy "%BUILD_DIR%\test\Release\TestMinipass.exe" "%BIN_DIR%"
+@REM     copy "%BUILD_DIR%\test\Release\TestUtils.exe" "%BIN_DIR%"
+@REM ) else (
+@REM     echo Error: tests were not created.
+@REM )
 
 endlocal
 
