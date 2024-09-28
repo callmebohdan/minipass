@@ -9,6 +9,7 @@ set(UI_FILES minipass.ui)
 # add_library(minipass_lib minipass.cpp)
 
 qt_add_executable(minipass ${SOURCE_FILES} ${HEADER_FILES} ${UI_FILES} ${ASSET_FILES})
+qt_add_executable(minipass WIN32 ${SOURCE_FILES} ${HEADER_FILES} ${UI_HEADERS} ${ASSET_FILES})
 
 target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
 
