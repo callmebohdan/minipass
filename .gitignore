@@ -39,3 +39,6 @@
 out/
 build/
 bin/
+
+# CSV files
+*.csv
