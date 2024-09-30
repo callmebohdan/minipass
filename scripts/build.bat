@@ -53,15 +53,15 @@ if exist "%QT_PATH%\bin\windeployqt.exe" (
 if exist "%BUILD_DIR%\src\Release\minipass.exe" (
     echo Copying the application into the bin directory...
     mkdir "%BIN_DIR%"
-    echo d | xcopy /s /e /y "%BUILD_DIR%\src\Release\minipass.exe" "%BIN_DIR%"
-    echo d | xcopy /s /e /y "%BUILD_DIR%\src\Release\*.dll" "%BIN_DIR%"
-    echo d | xcopy /s /e /y "%BUILD_DIR%\src\Release\generic" "%BIN_DIR%\generic"
-    echo d | xcopy /s /e /y "%BUILD_DIR%\src\Release\iconengines" "%BIN_DIR%\iconengines"
-    echo d | xcopy /s /e /y "%BUILD_DIR%\src\Release\imageformats" "%BIN_DIR%\imageformats"
-    echo d | xcopy /s /e /y "%BUILD_DIR%\src\Release\networkinformation" "%BIN_DIR%\networkinformation"
-    echo d | xcopy /s /e /y "%BUILD_DIR%\src\Release\platforms" "%BIN_DIR%\platforms"
-    echo d | xcopy /s /e /y "%BUILD_DIR%\src\Release\styles" "%BIN_DIR%\styles"
-    echo d | xcopy /s /e /y "%BUILD_DIR%\src\Release\tls" "%BIN_DIR%\tls"
+    xcopy /s /e /y /I "%BUILD_DIR%\src\Release\minipass.exe" "%BIN_DIR%"
+    xcopy /s /e /y /I "%BUILD_DIR%\src\Release\*.dll" "%BIN_DIR%"
+    xcopy /s /e /y /I "%BUILD_DIR%\src\Release\generic" "%BIN_DIR%\generic"
+    xcopy /s /e /y /I "%BUILD_DIR%\src\Release\iconengines" "%BIN_DIR%\iconengines"
+    xcopy /s /e /y /I "%BUILD_DIR%\src\Release\imageformats" "%BIN_DIR%\imageformats"
+    xcopy /s /e /y /I "%BUILD_DIR%\src\Release\networkinformation" "%BIN_DIR%\networkinformation"
+    xcopy /s /e /y /I "%BUILD_DIR%\src\Release\platforms" "%BIN_DIR%\platforms"
+    xcopy /s /e /y /I "%BUILD_DIR%\src\Release\styles" "%BIN_DIR%\styles"
+    xcopy /s /e /y /I "%BUILD_DIR%\src\Release\tls" "%BIN_DIR%\tls"
 ) else (
     echo Error: minipass.exe was not created.
 )
