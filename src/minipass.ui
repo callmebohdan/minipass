@@ -55,14 +55,14 @@
        <enum>QFormLayout::RowWrapPolicy::DontWrapRows</enum>
       </property>
       <item row="0" column="0">
-       <widget class="QLabel" name="LabelRemoveCustomCharacters">
+       <widget class="QLabel" name="removeCustomCharactersLabel">
         <property name="text">
          <string>Remove Custom Characters</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="LineEditPasswordLength">
+       <widget class="QLineEdit" name="removeCustomCharacters">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -84,112 +84,112 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QLabel" name="LabelMakeMnemonic">
+       <widget class="QLabel" name="makeMnemonicLabel">
         <property name="text">
          <string>Make Mnemonic</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QCheckBox" name="checkBoxMakeMnemonic">
+       <widget class="QCheckBox" name="makeMnemonic">
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QLabel" name="LabelKeepHistory">
+       <widget class="QLabel" name="keepHistoryLabel">
         <property name="text">
          <string>Keep History</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QCheckBox" name="checkBoxKeepHistory">
+       <widget class="QCheckBox" name="keepHistory">
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="LabelRemoveSpecialCharacters">
+       <widget class="QLabel" name="removeSpecialCharactersLabel">
         <property name="text">
          <string>Remove Special Characters</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QCheckBox" name="checkBoxRemoveSpecialCharacters">
+       <widget class="QCheckBox" name="removeSpecialCharacters">
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QLabel" name="LabelRemoveUppercaseLetters">
+       <widget class="QLabel" name="removeUppercaseLettersLabel">
         <property name="text">
          <string>Remove Uppercase Letters</string>
         </property>
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QCheckBox" name="checkBoxRemoveUppercaseLetters">
+       <widget class="QCheckBox" name="removeUppercaseLetters">
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="QLabel" name="LabelRemoveLowercaseLetters">
+       <widget class="QLabel" name="removeLowercaseLettersLabel">
         <property name="text">
          <string>Remove Lowercase Letters</string>
         </property>
        </widget>
       </item>
       <item row="5" column="1">
-       <widget class="QCheckBox" name="checkBoxRemoveLowercaseLetters">
+       <widget class="QCheckBox" name="removeLowercaseLetters">
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
       <item row="6" column="0">
-       <widget class="QLabel" name="LabelRemoveNumbers">
+       <widget class="QLabel" name="removeNumbersLabel">
         <property name="text">
          <string>Remove Numbers</string>
         </property>
        </widget>
       </item>
       <item row="6" column="1">
-       <widget class="QCheckBox" name="checkBoxRemoveNumbers">
+       <widget class="QCheckBox" name="removeNumbers">
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
       <item row="7" column="0">
-       <widget class="QLabel" name="LabelDefaultOptions">
+       <widget class="QLabel" name="defaultOptionsLabel">
         <property name="text">
          <string>Default Options</string>
         </property>
        </widget>
       </item>
       <item row="7" column="1">
-       <widget class="QCheckBox" name="checkBoxDefaultOptions">
+       <widget class="QCheckBox" name="defaultOptions">
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
       <item row="8" column="0">
-       <widget class="QLabel" name="LabelPasswordLength">
+       <widget class="QLabel" name="passwordLengthLabel">
         <property name="text">
          <string>Password Length</string>
         </property>
        </widget>
       </item>
       <item row="8" column="1">
-       <widget class="QLineEdit" name="LineEditRemoveCustomCharacters">
+       <widget class="QLineEdit" name="passwordLength">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -222,17 +222,17 @@
     <property name="title">
      <string>Output</string>
     </property>
-    <widget class="QPlainTextEdit" name="plainTextEditRandomPassword">
+    <widget class="QPlainTextEdit" name="randomPassword">
      <property name="geometry">
       <rect>
-       <x>150</x>
+       <x>120</x>
        <y>30</y>
-       <width>411</width>
+       <width>381</width>
        <height>21</height>
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="labelRandomPassword">
+    <widget class="QLabel" name="randomPasswordLabel">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -245,7 +245,7 @@
       <string>Random Password</string>
      </property>
     </widget>
-    <widget class="QLabel" name="labelLogMessage">
+    <widget class="QLabel" name="logMessageLabel">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -258,12 +258,12 @@
       <string>Log Message</string>
      </property>
     </widget>
-    <widget class="QPlainTextEdit" name="plainTextEditLogMessage">
+    <widget class="QPlainTextEdit" name="logMessage">
      <property name="geometry">
       <rect>
-       <x>150</x>
+       <x>120</x>
        <y>60</y>
-       <width>411</width>
+       <width>381</width>
        <height>21</height>
       </rect>
      </property>
@@ -281,7 +281,7 @@
     <property name="title">
      <string>Actions</string>
     </property>
-    <widget class="QToolButton" name="toolButtonGenerate">
+    <widget class="QToolButton" name="generatePassword">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -294,7 +294,7 @@
       <string>Generate Password</string>
      </property>
     </widget>
-    <widget class="QToolButton" name="toolButtonReset">
+    <widget class="QToolButton" name="resetOptions">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -307,7 +307,7 @@
       <string>Reset Options</string>
      </property>
     </widget>
-    <widget class="QToolButton" name="toolButtonExit">
+    <widget class="QToolButton" name="exitMinipass">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -320,7 +320,7 @@
       <string>Close Application</string>
      </property>
     </widget>
-    <widget class="QToolButton" name="toolButtonOpenPasswordsHistory">
+    <widget class="QToolButton" name="openPasswordsHistory">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -334,18 +334,6 @@
      </property>
     </widget>
    </widget>
-  </widget>
-  <widget class="QToolBar" name="toolBar">
-   <property name="windowTitle">
-    <string>toolBar</string>
-   </property>
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
-   <addaction name="separator"/>
   </widget>
   <action name="actionExit">
    <property name="icon">
