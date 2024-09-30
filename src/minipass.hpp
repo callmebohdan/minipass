@@ -2,9 +2,8 @@
 #define MINIPASS_HPP
 
 #include <cstdint>
-#include <qmainwindow.h>
-#include <qtmetamacros.h>
-#include <qwidget.h>
+#include <QMainWindow>
+#include <QWidget>
 #include <string>
 #include "utils.hpp"
 
@@ -32,6 +31,8 @@ private slots:
 	void ClickOpenPasswordsHistory();
 	void ClickResetOptions();
 	void ClickExitMinipass();
+	// User output
+	std::string ReturnGeneratedPasswordFromUI();
 private:
 	Ui::MiniPass* ui;
 	std::string password;
@@ -79,6 +80,7 @@ public:
 	// UI getters
 	void HandleUserOptions();
 	void HandleUserActions();
+	void HandleUserOutput();
 };
 
 #endif  // MINIPASS_HPP

@@ -30,6 +30,9 @@ MiniPass::MiniPass(QWidget* parent)
 	ui->setupUi(this);
 	HandleUserOptions();
 	HandleUserActions();
+	HandleUserOutput();
+}
+
 void MiniPass::HandleUserOptions() {
 	connect(ui->removeCustomCharacters, &QLineEdit::textChanged, this, &MiniPass::SetUserCustomCharacters);
 	connect(ui->makeMnemonic, &QCheckBox::toggled, this, &MiniPass::ToggleMakeMnemonic);
@@ -302,8 +305,7 @@ void MiniPass::PrintPassword(const std::string& password) const {
 	}
 }
 
-void MiniPass::ReturnGeneratedPassword()
-{
+void MiniPass::ReturnGeneratedPassword() {
 	std::string generatedPassword = GenerateRandomPassword();
 
 	if (makeMnemonic) {
@@ -315,4 +317,18 @@ void MiniPass::ReturnGeneratedPassword()
 	}
 
 	PrintPassword(generatedPassword);
+}
+
+std::string MiniPass::ReturnGeneratedPasswordFromUI() {
+	std::string generatedPassword = GenerateRandomPassword();
+
+	if (makeMnemonic) {
+		ApplyMnemonicFilter(generatedPassword);
+	}
+
+	if (keepHistory) {
+		KeepHistory(generatedPassword);
+	}
+
+	return generatedPassword;
 }
