@@ -16,6 +16,62 @@ MiniPass::MiniPass(QWidget* parent)
 	, ui(new Ui::MiniPass)
 {
 	ui->setupUi(this);
+	HandleUserOptions();
+void MiniPass::HandleUserOptions() {
+	connect(ui->removeCustomCharacters, &QLineEdit::textChanged, this, &MiniPass::SetUserCustomCharacters);
+	connect(ui->makeMnemonic, &QCheckBox::toggled, this, &MiniPass::ToggleMakeMnemonic);
+	connect(ui->keepHistory, &QCheckBox::toggled, this, &MiniPass::ToggleKeepHistory);
+	connect(ui->removeSpecialCharacters, &QCheckBox::toggled, this, &MiniPass::ToggleRemoveSpecialCharacters);
+	connect(ui->removeUppercaseLetters, &QCheckBox::toggled, this, &MiniPass::ToggleRemoveUppercaseLetters);
+	connect(ui->removeLowercaseLetters, &QCheckBox::toggled, this, &MiniPass::ToggleRemoveLowercaseLetters);
+	connect(ui->removeNumbers, &QCheckBox::toggled, this, &MiniPass::ToggleRemoveNumbers);
+	connect(ui->defaultOptions, &QCheckBox::toggled, this, &MiniPass::ToggleDefaultOptions);
+	connect(ui->passwordLength, &QLineEdit::textChanged, this, &MiniPass::SetPasswordLength);
+}
+
+void MiniPass::SetUserCustomCharacters(const QString& _customCharacters) {
+	removeCustomCharacters = _customCharacters.toStdString();
+}
+void MiniPass::ToggleMakeMnemonic(bool checked) {
+	makeMnemonic = checked ? true : false;
+}
+
+void MiniPass::ToggleKeepHistory(bool checked) {
+	keepHistory = checked ? true : false;
+}
+
+void MiniPass::ToggleRemoveSpecialCharacters(bool checked) {
+	removeSpecialCharacters = checked ? true : false;
+}
+
+void MiniPass::ToggleRemoveUppercaseLetters(bool checked) {
+	removeUppercaseLetters = checked ? true : false;
+}
+
+void MiniPass::ToggleRemoveLowercaseLetters(bool checked) {
+	removeLowercaseLetters = checked ? true : false;
+}
+
+void MiniPass::ToggleRemoveNumbers(bool checked) {
+	removeNumbers = checked ? true : false;
+}
+
+void MiniPass::ToggleDefaultOptions() {
+	ui->makeMnemonic->setChecked(false);
+	ui->keepHistory->setChecked(false);
+	ui->removeSpecialCharacters->setChecked(false);
+	ui->removeUppercaseLetters->setChecked(false);
+	ui->removeLowercaseLetters->setChecked(false);
+	ui->removeNumbers->setChecked(false);
+	ui->passwordLength->setText("16");
+	ui->removeCustomCharacters->setText("");
+}
+
+void MiniPass::SetPasswordLength(const QString& _passwordLength) {
+	passwordLength = _passwordLength.toInt();
+}
+
+void MiniPass::HandleUserActions() {
 }
 
 MiniPass::~MiniPass()

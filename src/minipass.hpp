@@ -16,6 +16,17 @@ class MiniPass : public QMainWindow
 {
 	Q_OBJECT
 
+private slots:
+	// User options
+	void SetUserCustomCharacters(const QString& customCharacters);
+	void ToggleMakeMnemonic(bool checked);
+	void ToggleKeepHistory(bool checked);
+	void ToggleRemoveSpecialCharacters(bool checked);
+	void ToggleRemoveUppercaseLetters(bool checked);
+	void ToggleRemoveLowercaseLetters(bool checked);
+	void ToggleRemoveNumbers(bool checked);
+	void ToggleDefaultOptions();
+	void SetPasswordLength(const QString& passwordLength);
 private:
 	Ui::MiniPass* ui;
 	std::string password;
@@ -59,6 +70,9 @@ public:
 	std::string GetRemoveCustomCharacters() const { return removeCustomCharacters; };
 	std::string GetMnemonicPhrase() const { return mnemonicPhrase; };
 	std::string GetKeepHistoryFilePath() const { return keepHistoryFilePath; };
+
+	// UI getters
+	void HandleUserOptions();
 };
 
 #endif  // MINIPASS_HPP
