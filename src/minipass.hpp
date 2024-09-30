@@ -27,6 +27,11 @@ private slots:
 	void ToggleRemoveNumbers(bool checked);
 	void ToggleDefaultOptions();
 	void SetPasswordLength(const QString& passwordLength);
+	// User actions
+	void ClickGeneratePassword();
+	void ClickOpenPasswordsHistory();
+	void ClickResetOptions();
+	void ClickExitMinipass();
 private:
 	Ui::MiniPass* ui;
 	std::string password;
@@ -73,6 +78,7 @@ public:
 
 	// UI getters
 	void HandleUserOptions();
+	void HandleUserActions();
 };
 
 #endif  // MINIPASS_HPP

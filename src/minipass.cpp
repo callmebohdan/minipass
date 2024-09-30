@@ -4,6 +4,18 @@
 #include <fstream>
 #include <iosfwd>
 #include <iostream>
+#include <qaction.h>
+#include <qcheckbox.h>
+#include <qevent.h>
+#include <qfile.h>
+#include <qlineedit.h>
+#include <qlogging.h>
+#include <qmainwindow.h>
+#include <qmessagebox.h>
+#include <qnamespace.h>
+#include <qobject.h>
+#include <qtextstream.h>
+#include <qwidget.h>
 #include <string>
 #include <unordered_set>
 #include <vector>
@@ -17,6 +29,7 @@ MiniPass::MiniPass(QWidget* parent)
 {
 	ui->setupUi(this);
 	HandleUserOptions();
+	HandleUserActions();
 void MiniPass::HandleUserOptions() {
 	connect(ui->removeCustomCharacters, &QLineEdit::textChanged, this, &MiniPass::SetUserCustomCharacters);
 	connect(ui->makeMnemonic, &QCheckBox::toggled, this, &MiniPass::ToggleMakeMnemonic);
@@ -72,10 +85,56 @@ void MiniPass::SetPasswordLength(const QString& _passwordLength) {
 }
 
 void MiniPass::HandleUserActions() {
+	connect(ui->generatePassword, &QToolButton::clicked, this, &MiniPass::ClickGeneratePassword);
+	connect(ui->openPasswordsHistory, &QToolButton::clicked, this, &MiniPass::ClickOpenPasswordsHistory);
+	connect(ui->resetOptions, &QToolButton::clicked, this, &MiniPass::ClickResetOptions);
+	connect(ui->exitMinipass, &QToolButton::clicked, this, &QMainWindow::ClickExitMinipass);
 }
 
-MiniPass::~MiniPass()
-{
+void MiniPass::HandleUserOutput() {
+	// TBD
+}
+
+void MiniPass::ClickGeneratePassword() {
+	std::string generatedPassword = ReturnGeneratedPasswordFromUI();
+	ui->randomPassword->setPlainText(QString::fromStdString(generatedPassword));
+}
+
+void MiniPass::ClickOpenPasswordsHistory() {
+	std::string executableDir = std::filesystem::current_path().string();
+#if defined(__linux__)
+	keepHistoryFilePath = executableDir + "//PasswordsHistory.csv";
+#elif defined (_WIN32) || defined(_WIN64)
+	keepHistoryFilePath = executableDir + "\\PasswordsHistory.csv";
+#endif
+	QFile file(QString::fromStdString(keepHistoryFilePath));
+
+	if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {}
+}
+
+void MiniPass::ClickResetOptions() {
+	ui->makeMnemonic->setChecked(false);
+	ui->keepHistory->setChecked(false);
+	ui->removeSpecialCharacters->setChecked(false);
+	ui->removeUppercaseLetters->setChecked(false);
+	ui->removeLowercaseLetters->setChecked(false);
+	ui->removeNumbers->setChecked(false);
+	ui->passwordLength->setText("16");
+	ui->passwordLength->setText("");
+}
+
+void MiniPass::ClickExitMinipass() {
+	ui->makeMnemonic->setChecked(false);
+	ui->keepHistory->setChecked(false);
+	ui->removeSpecialCharacters->setChecked(false);
+	ui->removeUppercaseLetters->setChecked(false);
+	ui->removeLowercaseLetters->setChecked(false);
+	ui->removeNumbers->setChecked(false);
+	ui->passwordLength->setText("16");
+	ui->passwordLength->setText("");
+}
+
+MiniPass::~MiniPass() {
 	delete ui;
 	ui = nullptr;
 }
