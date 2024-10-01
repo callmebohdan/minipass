@@ -48,8 +48,8 @@ public:
     QCheckBox *removeNumbers;
     QLabel *defaultOptionsLabel;
     QCheckBox *defaultOptions;
-    QLabel *passwordLengthLabel;
     QLineEdit *passwordLength;
+    QLabel *passwordLengthLabel;
     QGroupBox *groupBoxOutput;
     QPlainTextEdit *randomPassword;
     QLabel *randomPasswordLabel;
@@ -66,7 +66,7 @@ public:
         if (MiniPass->objectName().isEmpty())
             MiniPass->setObjectName("MiniPass");
         MiniPass->setEnabled(true);
-        MiniPass->resize(529, 365);
+        MiniPass->resize(529, 352);
         MiniPass->setWindowTitle(QString::fromUtf8("minipass"));
         MiniPass->setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonIconOnly);
         MiniPass->setAnimated(true);
@@ -177,11 +177,6 @@ public:
 
         formLayout->setWidget(7, QFormLayout::FieldRole, defaultOptions);
 
-        passwordLengthLabel = new QLabel(formLayoutWidget);
-        passwordLengthLabel->setObjectName("passwordLengthLabel");
-
-        formLayout->setWidget(8, QFormLayout::LabelRole, passwordLengthLabel);
-
         passwordLength = new QLineEdit(formLayoutWidget);
         passwordLength->setObjectName("passwordLength");
         QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
@@ -194,21 +189,26 @@ public:
 
         formLayout->setWidget(8, QFormLayout::FieldRole, passwordLength);
 
+        passwordLengthLabel = new QLabel(formLayoutWidget);
+        passwordLengthLabel->setObjectName("passwordLengthLabel");
+
+        formLayout->setWidget(8, QFormLayout::LabelRole, passwordLengthLabel);
+
         groupBoxOutput = new QGroupBox(centralwidget);
         groupBoxOutput->setObjectName("groupBoxOutput");
         groupBoxOutput->setGeometry(QRect(10, 250, 511, 91));
         randomPassword = new QPlainTextEdit(groupBoxOutput);
         randomPassword->setObjectName("randomPassword");
-        randomPassword->setGeometry(QRect(120, 30, 381, 21));
+        randomPassword->setGeometry(QRect(120, 10, 381, 31));
         randomPasswordLabel = new QLabel(groupBoxOutput);
         randomPasswordLabel->setObjectName("randomPasswordLabel");
-        randomPasswordLabel->setGeometry(QRect(10, 30, 131, 16));
+        randomPasswordLabel->setGeometry(QRect(10, 15, 111, 21));
         logMessageLabel = new QLabel(groupBoxOutput);
         logMessageLabel->setObjectName("logMessageLabel");
-        logMessageLabel->setGeometry(QRect(10, 60, 131, 16));
+        logMessageLabel->setGeometry(QRect(10, 55, 111, 21));
         logMessage = new QPlainTextEdit(groupBoxOutput);
         logMessage->setObjectName("logMessage");
-        logMessage->setGeometry(QRect(120, 60, 381, 21));
+        logMessage->setGeometry(QRect(120, 50, 381, 31));
         groupBoxActions = new QGroupBox(centralwidget);
         groupBoxActions->setObjectName("groupBoxActions");
         groupBoxActions->setGeometry(QRect(300, 10, 221, 241));
