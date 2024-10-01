@@ -125,14 +125,7 @@ void MiniPass::ClickResetOptions() {
 }
 
 void MiniPass::ClickExitMinipass() {
-	ui->makeMnemonic->setChecked(false);
-	ui->keepHistory->setChecked(false);
-	ui->removeSpecialCharacters->setChecked(false);
-	ui->removeUppercaseLetters->setChecked(false);
-	ui->removeLowercaseLetters->setChecked(false);
-	ui->removeNumbers->setChecked(false);
-	ui->passwordLength->setText("16");
-	ui->passwordLength->setText("");
+	close();
 }
 
 MiniPass::~MiniPass() {
