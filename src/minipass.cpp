@@ -71,6 +71,7 @@ void MiniPass::ToggleRemoveNumbers(bool checked) {
 }
 
 void MiniPass::ToggleDefaultOptions() {
+	ui->removeCustomCharacters->clear();
 	ui->makeMnemonic->setChecked(false);
 	ui->keepHistory->setChecked(false);
 	ui->removeSpecialCharacters->setChecked(false);
@@ -78,7 +79,6 @@ void MiniPass::ToggleDefaultOptions() {
 	ui->removeLowercaseLetters->setChecked(false);
 	ui->removeNumbers->setChecked(false);
 	ui->passwordLength->setText("16");
-	ui->removeCustomCharacters->setText("");
 }
 
 void MiniPass::SetPasswordLength(const QString& _passwordLength) {
