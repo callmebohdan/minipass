@@ -2,8 +2,10 @@
 #define MINIPASS_HPP
 
 #include <cstdint>
-#include <QMainWindow>
-#include <QWidget>
+#include <qmainwindow.h>
+#include <qstring.h>
+#include <qtmetamacros.h>
+#include <qwidget.h>
 #include <string>
 #include "utils.hpp"
 

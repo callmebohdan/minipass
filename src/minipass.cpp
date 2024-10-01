@@ -1,20 +1,18 @@
-#include <cstring> 
+#include <corecrt.h>
 #include <ctime>
 #include <filesystem>
 #include <fstream>
 #include <iosfwd>
 #include <iostream>
-#include <qaction.h>
 #include <qcheckbox.h>
-#include <qevent.h>
 #include <qfile.h>
+#include <qiodevice.h>
+#include <qiodevicebase.h>
 #include <qlineedit.h>
-#include <qlogging.h>
 #include <qmainwindow.h>
-#include <qmessagebox.h>
-#include <qnamespace.h>
 #include <qobject.h>
-#include <qtextstream.h>
+#include <qstring.h>
+#include <qtoolbutton.h>
 #include <qwidget.h>
 #include <string>
 #include <unordered_set>
@@ -91,7 +89,7 @@ void MiniPass::HandleUserActions() {
 	connect(ui->generatePassword, &QToolButton::clicked, this, &MiniPass::ClickGeneratePassword);
 	connect(ui->openPasswordsHistory, &QToolButton::clicked, this, &MiniPass::ClickOpenPasswordsHistory);
 	connect(ui->resetOptions, &QToolButton::clicked, this, &MiniPass::ClickResetOptions);
-	connect(ui->exitMinipass, &QToolButton::clicked, this, &QMainWindow::ClickExitMinipass);
+	connect(ui->exitMinipass, &QToolButton::clicked, this, &MiniPass::ClickExitMinipass);
 }
 
 void MiniPass::HandleUserOutput() {
