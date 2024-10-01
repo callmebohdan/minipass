@@ -97,8 +97,10 @@ void MiniPass::HandleUserOutput() {
 }
 
 void MiniPass::ClickGeneratePassword() {
-	std::string generatedPassword = ReturnGeneratedPasswordFromUI();
-	ui->randomPassword->setPlainText(QString::fromStdString(generatedPassword));
+	ui->randomPassword->clear();
+	HandleUserOptions();
+	std::string randomPassword = ReturnGeneratedPasswordFromUI();
+	ui->randomPassword->setPlainText(QString::fromStdString(randomPassword));
 }
 
 void MiniPass::ClickOpenPasswordsHistory() {
