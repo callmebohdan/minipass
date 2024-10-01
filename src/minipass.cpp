@@ -114,14 +114,19 @@ void MiniPass::ClickOpenPasswordsHistory() {
 }
 
 void MiniPass::ClickResetOptions() {
+	//checkboxes
+	ui->removeCustomCharacters->clear();
 	ui->makeMnemonic->setChecked(false);
 	ui->keepHistory->setChecked(false);
 	ui->removeSpecialCharacters->setChecked(false);
 	ui->removeUppercaseLetters->setChecked(false);
 	ui->removeLowercaseLetters->setChecked(false);
 	ui->removeNumbers->setChecked(false);
-	ui->passwordLength->setText("16");
-	ui->passwordLength->setText("");
+	ui->defaultOptions->setChecked(false);
+	ui->passwordLength->clear();
+	//output
+	ui->randomPassword->clear();
+	ui->logMessage->clear();
 }
 
 void MiniPass::ClickExitMinipass() {
