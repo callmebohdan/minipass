@@ -82,7 +82,6 @@ public:
 	// UI getters
 	void HandleUserOptions();
 	void HandleUserActions();
-	void HandleUserOutput();
 };
 
 #endif  // MINIPASS_HPP

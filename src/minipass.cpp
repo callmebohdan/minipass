@@ -28,7 +28,6 @@ MiniPass::MiniPass(QWidget* parent)
 	ui->setupUi(this);
 	HandleUserOptions();
 	HandleUserActions();
-	HandleUserOutput();
 }
 
 void MiniPass::HandleUserOptions() {
@@ -90,10 +89,6 @@ void MiniPass::HandleUserActions() {
 	connect(ui->openPasswordsHistory, &QToolButton::clicked, this, &MiniPass::ClickOpenPasswordsHistory);
 	connect(ui->resetOptions, &QToolButton::clicked, this, &MiniPass::ClickResetOptions);
 	connect(ui->exitMinipass, &QToolButton::clicked, this, &MiniPass::ClickExitMinipass);
-}
-
-void MiniPass::HandleUserOutput() {
-	// TBD
 }
 
 void MiniPass::ClickGeneratePassword() {
