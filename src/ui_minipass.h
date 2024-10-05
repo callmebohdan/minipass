@@ -53,8 +53,6 @@ public:
     QGroupBox *groupBoxOutput;
     QPlainTextEdit *randomPassword;
     QLabel *randomPasswordLabel;
-    QLabel *logMessageLabel;
-    QPlainTextEdit *logMessage;
     QGroupBox *groupBoxActions;
     QToolButton *generatePassword;
     QToolButton *resetOptions;
@@ -66,7 +64,7 @@ public:
         if (MiniPass->objectName().isEmpty())
             MiniPass->setObjectName("MiniPass");
         MiniPass->setEnabled(true);
-        MiniPass->resize(529, 352);
+        MiniPass->resize(529, 309);
         MiniPass->setWindowTitle(QString::fromUtf8("minipass"));
         MiniPass->setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonIconOnly);
         MiniPass->setAnimated(true);
@@ -196,19 +194,13 @@ public:
 
         groupBoxOutput = new QGroupBox(centralwidget);
         groupBoxOutput->setObjectName("groupBoxOutput");
-        groupBoxOutput->setGeometry(QRect(10, 250, 511, 91));
+        groupBoxOutput->setGeometry(QRect(10, 250, 511, 51));
         randomPassword = new QPlainTextEdit(groupBoxOutput);
         randomPassword->setObjectName("randomPassword");
         randomPassword->setGeometry(QRect(120, 10, 381, 31));
         randomPasswordLabel = new QLabel(groupBoxOutput);
         randomPasswordLabel->setObjectName("randomPasswordLabel");
         randomPasswordLabel->setGeometry(QRect(10, 15, 111, 21));
-        logMessageLabel = new QLabel(groupBoxOutput);
-        logMessageLabel->setObjectName("logMessageLabel");
-        logMessageLabel->setGeometry(QRect(10, 55, 111, 21));
-        logMessage = new QPlainTextEdit(groupBoxOutput);
-        logMessage->setObjectName("logMessage");
-        logMessage->setGeometry(QRect(120, 50, 381, 31));
         groupBoxActions = new QGroupBox(centralwidget);
         groupBoxActions->setObjectName("groupBoxActions");
         groupBoxActions->setGeometry(QRect(300, 10, 221, 241));
@@ -253,7 +245,6 @@ public:
         passwordLengthLabel->setText(QCoreApplication::translate("MiniPass", "Password Length", nullptr));
         groupBoxOutput->setTitle(QCoreApplication::translate("MiniPass", "Output", nullptr));
         randomPasswordLabel->setText(QCoreApplication::translate("MiniPass", "Random Password", nullptr));
-        logMessageLabel->setText(QCoreApplication::translate("MiniPass", "Log Message", nullptr));
         groupBoxActions->setTitle(QCoreApplication::translate("MiniPass", "Actions", nullptr));
         generatePassword->setText(QCoreApplication::translate("MiniPass", "Generate Password", nullptr));
         resetOptions->setText(QCoreApplication::translate("MiniPass", "Reset Options", nullptr));

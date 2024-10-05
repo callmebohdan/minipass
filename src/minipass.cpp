@@ -123,7 +123,6 @@ void MiniPass::ClickResetOptions() {
 	ui->passwordLength->clear();
 	//output
 	ui->randomPassword->clear();
-	ui->logMessage->clear();
 }
 
 void MiniPass::ClickExitMinipass() {
