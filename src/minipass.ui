@@ -9,8 +9,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>529</width>
-    <height>309</height>
+    <width>431</width>
+    <height>251</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -33,8 +33,8 @@
     <property name="geometry">
      <rect>
       <x>10</x>
-      <y>10</y>
-      <width>281</width>
+      <y>0</y>
+      <width>241</width>
       <height>241</height>
      </rect>
     </property>
@@ -45,9 +45,9 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
-       <width>261</width>
-       <height>211</height>
+       <y>30</y>
+       <width>221</width>
+       <height>201</height>
       </rect>
      </property>
      <layout class="QFormLayout" name="formLayout">
@@ -92,6 +92,9 @@
       </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="makeMnemonic">
+        <property name="layoutDirection">
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -106,6 +109,9 @@
       </item>
       <item row="2" column="1">
        <widget class="QCheckBox" name="keepHistory">
+        <property name="layoutDirection">
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -120,20 +126,19 @@
       </item>
       <item row="3" column="1">
        <widget class="QCheckBox" name="removeSpecialCharacters">
+        <property name="layoutDirection">
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="removeUppercaseLettersLabel">
-        <property name="text">
-         <string>Remove Uppercase Letters</string>
-        </property>
-       </widget>
-      </item>
       <item row="4" column="1">
        <widget class="QCheckBox" name="removeUppercaseLetters">
+        <property name="layoutDirection">
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -148,6 +153,9 @@
       </item>
       <item row="5" column="1">
        <widget class="QCheckBox" name="removeLowercaseLetters">
+        <property name="layoutDirection">
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -162,6 +170,9 @@
       </item>
       <item row="6" column="1">
        <widget class="QCheckBox" name="removeNumbers">
+        <property name="layoutDirection">
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
+        </property>
         <property name="text">
          <string/>
         </property>
@@ -176,8 +187,18 @@
       </item>
       <item row="7" column="1">
        <widget class="QCheckBox" name="defaultOptions">
+        <property name="layoutDirection">
+         <enum>Qt::LayoutDirection::LeftToRight</enum>
+        </property>
         <property name="text">
          <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="8" column="0">
+       <widget class="QLabel" name="passwordLengthLabel">
+        <property name="text">
+         <string>Password Length</string>
         </property>
        </widget>
       </item>
@@ -200,10 +221,10 @@
         </property>
        </widget>
       </item>
-      <item row="8" column="0">
-       <widget class="QLabel" name="passwordLengthLabel">
+      <item row="4" column="0">
+       <widget class="QLabel" name="removeUppercaseLettersLabel">
         <property name="text">
-         <string>Password Length</string>
+         <string>Remove Uppercase Letters</string>
         </property>
        </widget>
       </item>
@@ -213,10 +234,10 @@
    <widget class="QGroupBox" name="groupBoxOutput">
     <property name="geometry">
      <rect>
-      <x>10</x>
-      <y>250</y>
-      <width>511</width>
-      <height>51</height>
+      <x>260</x>
+      <y>150</y>
+      <width>161</width>
+      <height>91</height>
      </rect>
     </property>
     <property name="title">
@@ -225,34 +246,47 @@
     <widget class="QPlainTextEdit" name="randomPassword">
      <property name="geometry">
       <rect>
-       <x>120</x>
-       <y>10</y>
-       <width>381</width>
+       <x>10</x>
+       <y>50</y>
+       <width>141</width>
        <height>31</height>
       </rect>
      </property>
     </widget>
-    <widget class="QLabel" name="randomPasswordLabel">
+    <widget class="QPushButton" name="copyPassword">
      <property name="geometry">
       <rect>
-       <x>10</x>
-       <y>15</y>
-       <width>111</width>
+       <x>90</x>
+       <y>20</y>
+       <width>41</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>Random Password</string>
+      <string>Copy</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clearPassword">
+     <property name="geometry">
+      <rect>
+       <x>30</x>
+       <y>20</y>
+       <width>41</width>
+       <height>21</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clear</string>
      </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBoxActions">
     <property name="geometry">
      <rect>
-      <x>300</x>
-      <y>10</y>
-      <width>221</width>
-      <height>241</height>
+      <x>260</x>
+      <y>0</y>
+      <width>161</width>
+      <height>151</height>
      </rect>
     </property>
     <property name="title">
@@ -262,8 +296,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>30</y>
-       <width>201</width>
+       <y>20</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
@@ -275,8 +309,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>90</y>
-       <width>201</width>
+       <y>80</y>
+       <width>141</width>
        <height>22</height>
       </rect>
      </property>
@@ -288,8 +322,8 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>120</y>
-       <width>201</width>
+       <y>110</y>
+       <width>141</width>
        <height>22</height>
       </rect>
      </property>
@@ -301,28 +335,17 @@
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>60</y>
-       <width>201</width>
+       <y>50</y>
+       <width>141</width>
        <height>21</height>
       </rect>
      </property>
      <property name="text">
-      <string>Open PasswordsHistory.csv</string>
+      <string>Open Passwords History</string>
      </property>
     </widget>
    </widget>
   </widget>
-  <action name="actionExit">
-   <property name="icon">
-    <iconset theme="QIcon::ThemeIcon::ApplicationExit"/>
-   </property>
-   <property name="text">
-    <string>Exit</string>
-   </property>
-   <property name="menuRole">
-    <enum>QAction::MenuRole::NoRole</enum>
-   </property>
-  </action>
  </widget>
  <resources/>
  <connections/>

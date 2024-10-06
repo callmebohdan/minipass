@@ -10,7 +10,6 @@
 #define UI_MINIPASS_H
 
 #include <QtCore/QVariant>
-#include <QtGui/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QCheckBox>
 #include <QtWidgets/QFormLayout>
@@ -19,6 +18,7 @@
 #include <QtWidgets/QLineEdit>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QPlainTextEdit>
+#include <QtWidgets/QPushButton>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
@@ -27,7 +27,6 @@ QT_BEGIN_NAMESPACE
 class Ui_MiniPass
 {
 public:
-    QAction *actionExit;
     QWidget *centralwidget;
     QGroupBox *groupBoxOptions;
     QWidget *formLayoutWidget;
@@ -40,7 +39,6 @@ public:
     QCheckBox *keepHistory;
     QLabel *removeSpecialCharactersLabel;
     QCheckBox *removeSpecialCharacters;
-    QLabel *removeUppercaseLettersLabel;
     QCheckBox *removeUppercaseLetters;
     QLabel *removeLowercaseLettersLabel;
     QCheckBox *removeLowercaseLetters;
@@ -48,11 +46,13 @@ public:
     QCheckBox *removeNumbers;
     QLabel *defaultOptionsLabel;
     QCheckBox *defaultOptions;
-    QLineEdit *passwordLength;
     QLabel *passwordLengthLabel;
+    QLineEdit *passwordLength;
+    QLabel *removeUppercaseLettersLabel;
     QGroupBox *groupBoxOutput;
     QPlainTextEdit *randomPassword;
-    QLabel *randomPasswordLabel;
+    QPushButton *copyPassword;
+    QPushButton *clearPassword;
     QGroupBox *groupBoxActions;
     QToolButton *generatePassword;
     QToolButton *resetOptions;
@@ -64,25 +64,20 @@ public:
         if (MiniPass->objectName().isEmpty())
             MiniPass->setObjectName("MiniPass");
         MiniPass->setEnabled(true);
-        MiniPass->resize(529, 309);
+        MiniPass->resize(431, 251);
         MiniPass->setWindowTitle(QString::fromUtf8("minipass"));
         MiniPass->setToolButtonStyle(Qt::ToolButtonStyle::ToolButtonIconOnly);
         MiniPass->setAnimated(true);
         MiniPass->setDocumentMode(false);
         MiniPass->setUnifiedTitleAndToolBarOnMac(false);
-        actionExit = new QAction(MiniPass);
-        actionExit->setObjectName("actionExit");
-        QIcon icon(QIcon::fromTheme(QIcon::ThemeIcon::ApplicationExit));
-        actionExit->setIcon(icon);
-        actionExit->setMenuRole(QAction::MenuRole::NoRole);
         centralwidget = new QWidget(MiniPass);
         centralwidget->setObjectName("centralwidget");
         groupBoxOptions = new QGroupBox(centralwidget);
         groupBoxOptions->setObjectName("groupBoxOptions");
-        groupBoxOptions->setGeometry(QRect(10, 10, 281, 241));
+        groupBoxOptions->setGeometry(QRect(10, 0, 241, 241));
         formLayoutWidget = new QWidget(groupBoxOptions);
         formLayoutWidget->setObjectName("formLayoutWidget");
-        formLayoutWidget->setGeometry(QRect(10, 20, 261, 211));
+        formLayoutWidget->setGeometry(QRect(10, 30, 221, 201));
         formLayout = new QFormLayout(formLayoutWidget);
         formLayout->setObjectName("formLayout");
         formLayout->setRowWrapPolicy(QFormLayout::RowWrapPolicy::DontWrapRows);
@@ -112,6 +107,7 @@ public:
 
         makeMnemonic = new QCheckBox(formLayoutWidget);
         makeMnemonic->setObjectName("makeMnemonic");
+        makeMnemonic->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
         formLayout->setWidget(1, QFormLayout::FieldRole, makeMnemonic);
 
@@ -122,6 +118,7 @@ public:
 
         keepHistory = new QCheckBox(formLayoutWidget);
         keepHistory->setObjectName("keepHistory");
+        keepHistory->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
         formLayout->setWidget(2, QFormLayout::FieldRole, keepHistory);
 
@@ -132,16 +129,13 @@ public:
 
         removeSpecialCharacters = new QCheckBox(formLayoutWidget);
         removeSpecialCharacters->setObjectName("removeSpecialCharacters");
+        removeSpecialCharacters->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
         formLayout->setWidget(3, QFormLayout::FieldRole, removeSpecialCharacters);
 
-        removeUppercaseLettersLabel = new QLabel(formLayoutWidget);
-        removeUppercaseLettersLabel->setObjectName("removeUppercaseLettersLabel");
-
-        formLayout->setWidget(4, QFormLayout::LabelRole, removeUppercaseLettersLabel);
-
         removeUppercaseLetters = new QCheckBox(formLayoutWidget);
         removeUppercaseLetters->setObjectName("removeUppercaseLetters");
+        removeUppercaseLetters->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
         formLayout->setWidget(4, QFormLayout::FieldRole, removeUppercaseLetters);
 
@@ -152,6 +146,7 @@ public:
 
         removeLowercaseLetters = new QCheckBox(formLayoutWidget);
         removeLowercaseLetters->setObjectName("removeLowercaseLetters");
+        removeLowercaseLetters->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
         formLayout->setWidget(5, QFormLayout::FieldRole, removeLowercaseLetters);
 
@@ -162,6 +157,7 @@ public:
 
         removeNumbers = new QCheckBox(formLayoutWidget);
         removeNumbers->setObjectName("removeNumbers");
+        removeNumbers->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
         formLayout->setWidget(6, QFormLayout::FieldRole, removeNumbers);
 
@@ -172,8 +168,14 @@ public:
 
         defaultOptions = new QCheckBox(formLayoutWidget);
         defaultOptions->setObjectName("defaultOptions");
+        defaultOptions->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
         formLayout->setWidget(7, QFormLayout::FieldRole, defaultOptions);
+
+        passwordLengthLabel = new QLabel(formLayoutWidget);
+        passwordLengthLabel->setObjectName("passwordLengthLabel");
+
+        formLayout->setWidget(8, QFormLayout::LabelRole, passwordLengthLabel);
 
         passwordLength = new QLineEdit(formLayoutWidget);
         passwordLength->setObjectName("passwordLength");
@@ -187,35 +189,38 @@ public:
 
         formLayout->setWidget(8, QFormLayout::FieldRole, passwordLength);
 
-        passwordLengthLabel = new QLabel(formLayoutWidget);
-        passwordLengthLabel->setObjectName("passwordLengthLabel");
+        removeUppercaseLettersLabel = new QLabel(formLayoutWidget);
+        removeUppercaseLettersLabel->setObjectName("removeUppercaseLettersLabel");
 
-        formLayout->setWidget(8, QFormLayout::LabelRole, passwordLengthLabel);
+        formLayout->setWidget(4, QFormLayout::LabelRole, removeUppercaseLettersLabel);
 
         groupBoxOutput = new QGroupBox(centralwidget);
         groupBoxOutput->setObjectName("groupBoxOutput");
-        groupBoxOutput->setGeometry(QRect(10, 250, 511, 51));
+        groupBoxOutput->setGeometry(QRect(260, 150, 161, 91));
         randomPassword = new QPlainTextEdit(groupBoxOutput);
         randomPassword->setObjectName("randomPassword");
-        randomPassword->setGeometry(QRect(120, 10, 381, 31));
-        randomPasswordLabel = new QLabel(groupBoxOutput);
-        randomPasswordLabel->setObjectName("randomPasswordLabel");
-        randomPasswordLabel->setGeometry(QRect(10, 15, 111, 21));
+        randomPassword->setGeometry(QRect(10, 50, 141, 31));
+        copyPassword = new QPushButton(groupBoxOutput);
+        copyPassword->setObjectName("copyPassword");
+        copyPassword->setGeometry(QRect(90, 20, 41, 21));
+        clearPassword = new QPushButton(groupBoxOutput);
+        clearPassword->setObjectName("clearPassword");
+        clearPassword->setGeometry(QRect(30, 20, 41, 21));
         groupBoxActions = new QGroupBox(centralwidget);
         groupBoxActions->setObjectName("groupBoxActions");
-        groupBoxActions->setGeometry(QRect(300, 10, 221, 241));
+        groupBoxActions->setGeometry(QRect(260, 0, 161, 151));
         generatePassword = new QToolButton(groupBoxActions);
         generatePassword->setObjectName("generatePassword");
-        generatePassword->setGeometry(QRect(10, 30, 201, 21));
+        generatePassword->setGeometry(QRect(10, 20, 141, 21));
         resetOptions = new QToolButton(groupBoxActions);
         resetOptions->setObjectName("resetOptions");
-        resetOptions->setGeometry(QRect(10, 90, 201, 22));
+        resetOptions->setGeometry(QRect(10, 80, 141, 22));
         exitMinipass = new QToolButton(groupBoxActions);
         exitMinipass->setObjectName("exitMinipass");
-        exitMinipass->setGeometry(QRect(10, 120, 201, 22));
+        exitMinipass->setGeometry(QRect(10, 110, 141, 22));
         openPasswordsHistory = new QToolButton(groupBoxActions);
         openPasswordsHistory->setObjectName("openPasswordsHistory");
-        openPasswordsHistory->setGeometry(QRect(10, 60, 201, 21));
+        openPasswordsHistory->setGeometry(QRect(10, 50, 141, 21));
         MiniPass->setCentralWidget(centralwidget);
 
         retranslateUi(MiniPass);
@@ -225,7 +230,6 @@ public:
 
     void retranslateUi(QMainWindow *MiniPass)
     {
-        actionExit->setText(QCoreApplication::translate("MiniPass", "Exit", nullptr));
         groupBoxOptions->setTitle(QCoreApplication::translate("MiniPass", "Options", nullptr));
         removeCustomCharactersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Custom Characters", nullptr));
         makeMnemonicLabel->setText(QCoreApplication::translate("MiniPass", "Make Mnemonic", nullptr));
@@ -234,7 +238,6 @@ public:
         keepHistory->setText(QString());
         removeSpecialCharactersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Special Characters", nullptr));
         removeSpecialCharacters->setText(QString());
-        removeUppercaseLettersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Uppercase Letters", nullptr));
         removeUppercaseLetters->setText(QString());
         removeLowercaseLettersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Lowercase Letters", nullptr));
         removeLowercaseLetters->setText(QString());
@@ -243,13 +246,15 @@ public:
         defaultOptionsLabel->setText(QCoreApplication::translate("MiniPass", "Default Options", nullptr));
         defaultOptions->setText(QString());
         passwordLengthLabel->setText(QCoreApplication::translate("MiniPass", "Password Length", nullptr));
+        removeUppercaseLettersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Uppercase Letters", nullptr));
         groupBoxOutput->setTitle(QCoreApplication::translate("MiniPass", "Output", nullptr));
-        randomPasswordLabel->setText(QCoreApplication::translate("MiniPass", "Random Password", nullptr));
+        copyPassword->setText(QCoreApplication::translate("MiniPass", "Copy", nullptr));
+        clearPassword->setText(QCoreApplication::translate("MiniPass", "Clear", nullptr));
         groupBoxActions->setTitle(QCoreApplication::translate("MiniPass", "Actions", nullptr));
         generatePassword->setText(QCoreApplication::translate("MiniPass", "Generate Password", nullptr));
         resetOptions->setText(QCoreApplication::translate("MiniPass", "Reset Options", nullptr));
         exitMinipass->setText(QCoreApplication::translate("MiniPass", "Close Application", nullptr));
-        openPasswordsHistory->setText(QCoreApplication::translate("MiniPass", "Open PasswordsHistory.csv", nullptr));
+        openPasswordsHistory->setText(QCoreApplication::translate("MiniPass", "Open Passwords History", nullptr));
         (void)MiniPass;
     } // retranslateUi
 
