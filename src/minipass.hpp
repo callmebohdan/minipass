@@ -35,6 +35,8 @@ private slots:
 	void ClickExitMinipass();
 	// User output
 	std::string ReturnGeneratedPasswordFromUI();
+	void ClearPassword();
+	void CopyPassword();
 private:
 	Ui::MiniPass* ui;
 	std::string password;
@@ -82,6 +84,7 @@ public:
 	// UI getters
 	void HandleUserOptions();
 	void HandleUserActions();
+	void HandleUserOutput();
 };
 
 #endif  // MINIPASS_HPP

@@ -28,6 +28,7 @@ MiniPass::MiniPass(QWidget* parent)
 	ui->setupUi(this);
 	HandleUserOptions();
 	HandleUserActions();
+	HandleUserOutput();
 }
 
 void MiniPass::HandleUserOptions() {
@@ -89,6 +90,21 @@ void MiniPass::HandleUserActions() {
 	connect(ui->openPasswordsHistory, &QToolButton::clicked, this, &MiniPass::ClickOpenPasswordsHistory);
 	connect(ui->resetOptions, &QToolButton::clicked, this, &MiniPass::ClickResetOptions);
 	connect(ui->exitMinipass, &QToolButton::clicked, this, &MiniPass::ClickExitMinipass);
+}
+
+void MiniPass::HandleUserOutput()
+{
+	connect(ui->clearPassword, &QPushButton::clicked, this, &MiniPass::ClearPassword);
+	connect(ui->copyPassword, &QToolButton::clicked, this, &MiniPass::CopyPassword);
+}
+
+void MiniPass::ClearPassword() {
+	ui->randomPassword->clear();
+}
+
+void MiniPass::CopyPassword() {
+	QClipboard* clipboard = QApplication::clipboard();
+	clipboard->setText(ui->randomPassword->toPlainText());
 }
 
 void MiniPass::ClickGeneratePassword() {
