@@ -149,25 +149,13 @@ Linux:
 
 ## Usage
 
-Windows GUI:
-
-```powershell
-.\bin\minipassGUI.exe
-```
-
-Windows CLI:
+Windows:
 
 ```powershell
 .\bin\minipassCLI.exe [options]
 ```
 
-Linux GUI:
-
-```bash
-./bin/minipassGUI
-```
-
-Linux CLI:
+Linux
 
 ```bash
 ./bin/minipassCLI [options]
@@ -225,4 +213,3 @@ Linux:
     ```bash
     ./bin/TestUtils
     ```
-
