@@ -145,6 +145,16 @@ void MiniPass::ClickExitMinipass() {
 	close();
 }
 
+MiniPass::MiniPass()
+	: passwordLength(16)
+	, removeNumbers(false)
+	, removeLowercaseLetters(false)
+	, removeUppercaseLetters(false)
+	, removeSpecialCharacters(false)
+	, makeMnemonic(false)
+	, keepHistory(false)
+	, removeCustomCharacters() {}
+
 MiniPass::~MiniPass() {
 	delete ui;
 	ui = nullptr;
