@@ -68,6 +68,7 @@ public:
 	void KeepHistory(const std::string& str);
 	void PrintPassword(const std::string& str) const;
 	void ReturnGeneratedPassword();
+	void HandleCombinedShortOptions(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
 
 	// Getters
 	uint32_t GetPasswordLength() const { return passwordLength; };

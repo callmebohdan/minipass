@@ -350,3 +350,25 @@ std::string MiniPass::ReturnGeneratedPasswordFromUI() {
 
 	return generatedPassword;
 }
+
+void MiniPass::HandleCombinedShortOptions(int& index, int argc, char* argv[], PasswordSettings& passwordSettings) {
+	std::string arg = argv[index];
+	for (size_t j = 1; j < arg.size(); j++) {
+		if (arg[j] == 'l' || arg[j] == 'c') {
+			std::cerr << "Error: '-" << arg[j] << "' cannot be combined with other options. Use it separately." << std::endl;
+			return;
+		}
+		switch (arg[j]) {
+		case 'h': PrintHelp(); break;
+		case 'd': passwordSettings = PasswordSettings(); break;
+		case 'n': passwordSettings.removeNumbers = true; break;
+		case 'o': passwordSettings.removeLowercaseLetters = true; break;
+		case 's': passwordSettings.removeSpecialCharacters = true; break;
+		case 'u': passwordSettings.removeUppercaseLetters = true; break;
+		case 'k': passwordSettings.keepHistory = true; break;
+		case 'm': passwordSettings.makeMnemonic = true; break;
+		default:
+			std::cerr << "Error: Entered unknown option: '-" << arg[j] << "'. Skipping it." << std::endl;
+		}
+	}
+}
