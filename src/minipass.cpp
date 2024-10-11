@@ -372,3 +372,61 @@ void MiniPass::HandleCombinedShortOptions(int& index, int argc, char* argv[], Pa
 		}
 	}
 }
+
+void MiniPass::HandleLongOptions(int& index, int argc, char* argv[], PasswordSettings& passwordSettings) {
+	std::string arg = argv[index];
+	if (arg == "--help") {
+		PrintHelp();
+		exit(0);
+	}
+	else if (arg == "--default") {
+		passwordSettings = PasswordSettings();
+	}
+	else if (arg == "--length") {
+		if (index + 1 < argc) {
+			std::string nextValue{argv[++index]};
+			bool isNumeric = !nextValue.empty() && std::all_of(nextValue.begin(), nextValue.end(), ::isdigit);
+			if (isNumeric) {
+				passwordSettings.passwordLength = std::stoi(nextValue);
+			}
+			else
+			{
+				std::cerr << "Error: " << arg << " requires a numeric value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+			}
+		}
+		else
+		{
+			std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+		}
+	}
+	else if (arg == "--custom") {
+		if (index + 1 < argc) {
+			passwordSettings.removeCustomCharacters = argv[++index];
+		}
+		else
+		{
+			std::cerr << "Error: " << arg << " requires a value. Default value ('" << passwordSettings.removeCustomCharacters << "') will be used instead." << std::endl;
+		}
+	}
+	else if (arg == "--numbers") {
+		passwordSettings.removeNumbers = true;
+	}
+	else if (arg == "--lower") {
+		passwordSettings.removeLowercaseLetters = true;
+	}
+	else if (arg == "--upper") {
+		passwordSettings.removeUppercaseLetters = true;
+	}
+	else if (arg == "--special") {
+		passwordSettings.removeSpecialCharacters = true;
+	}
+	else if (arg == "--history") {
+		passwordSettings.keepHistory = true;
+	}
+	else if (arg == "--mnemonic") {
+		passwordSettings.makeMnemonic = true;
+	}
+	else {
+		std::cerr << "Error: Entered unknown option: '" << arg << "'. Default value will be used instead." << std::endl;
+	}
+}
