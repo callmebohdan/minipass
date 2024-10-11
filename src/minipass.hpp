@@ -55,6 +55,7 @@ private:
 	std::string keepHistoryFilePath;
 public:
 	explicit MiniPass(QWidget* parent = nullptr);
+	MiniPass();
 	~MiniPass();
 	// Constructors
 	MiniPass(const PasswordSettings& passwordSettings);
