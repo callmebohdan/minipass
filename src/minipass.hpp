@@ -12,6 +12,18 @@
 #include <string>
 #include "utils.hpp"
 
+struct PasswordSettings {
+	uint32_t passwordLength = 16;
+	bool defaultSettings = true;
+	bool removeNumbers = false;
+	bool removeLowercaseLetters = false;
+	bool removeUppercaseLetters = false;
+	bool removeSpecialCharacters = false;
+	bool makeMnemonic = false;
+	bool keepHistory = false;
+	std::string removeCustomCharacters = "";
+};
+
 namespace Ui {
 	class MiniPass;
 }
