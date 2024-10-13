@@ -86,6 +86,7 @@ public:
 	void ReturnGeneratedPassword();
 	void HandleCombinedShortOptions(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
 	void HandleLongOptions(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
+	void HandleShortOptionsWithInputValue(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
 
 	// Getters
 	uint32_t GetPasswordLength() const { return passwordLength; };
