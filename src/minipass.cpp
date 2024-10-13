@@ -487,3 +487,13 @@ void MiniPass::HandleShortOptionsWithInputValue(int& index, int argc, char* argv
 	else if (arg == "-k") {
 		passwordSettings.keepHistory = true;
 }
+	else if (arg == "-m") {
+		passwordSettings.makeMnemonic = true;
+	}
+	else
+	{
+		std::cerr << "Error: " << arg << " requires a value. Default value (" << passwordSettings.passwordLength << ") will be used instead." << std::endl;
+	}
+}
+
+}
