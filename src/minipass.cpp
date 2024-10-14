@@ -496,6 +496,32 @@ void MiniPass::HandleShortOptionsWithInputValue(int& index, int argc, char* argv
 	}
 }
 
+PasswordSettings MiniPass::ParseCommandLineArguments(int argc, char* argv[]) {
+	PasswordSettings passwordSettings;
+
+	if (argc == 1) {
+		passwordSettings.defaultSettings = true;
+	}
+	else {
+		for (int i = 1; i < argc; i++) {
+			std::string arg = argv[i];
+			if (arg.substr(0, 2) == "--") {
+				HandleLongOptions(i, argc, argv, passwordSettings);
+			}
+			else if (arg[0] == '-' && arg[1] != '-' && arg.size() == 2) {
+				HandleShortOptionsWithInputValue(i, argc, argv, passwordSettings);
+			}
+			else if (arg[0] == '-' && arg[1] != '-' && arg.size() > 2) {
+				HandleCombinedShortOptions(i, argc, argv, passwordSettings);
+			}
+			else {
+				std::cerr << "Error: Entered unknown option: '" << arg << "'" << std::endl;
+			}
+		}
+	}
+	return passwordSettings;
+}
+
 void MiniPass::PrintHelp() {
 	std::cout << std::endl;
 

@@ -104,6 +104,10 @@ public:
 	void HandleUserOptions();
 	void HandleUserActions();
 	void HandleUserOutput();
+
+
+	PasswordSettings ParseCommandLineArguments(int argc, char* argv[]);
+
 	void PrintHelp();
 };
 
