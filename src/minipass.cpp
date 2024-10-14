@@ -25,7 +25,6 @@
 #include <vector>
 #include "minipass.hpp"
 #include "ui_minipass.h"
-#include "utils.hpp"
 
 MiniPass::MiniPass(QWidget* parent)
 	: QMainWindow(parent)

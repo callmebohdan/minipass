@@ -10,7 +10,6 @@
 #include <random>
 #include <stdexcept>
 #include <string>
-#include "utils.hpp"
 
 struct PasswordSettings {
 	uint32_t passwordLength = 16;
