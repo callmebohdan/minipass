@@ -104,6 +104,7 @@ public:
 	void HandleUserOptions();
 	void HandleUserActions();
 	void HandleUserOutput();
+	void PrintHelp();
 };
 
 #endif  // MINIPASS_HPP
