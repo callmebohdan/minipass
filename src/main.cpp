@@ -1,20 +1,19 @@
 #include <qapplication.h>
+#include <qwindowdefs.h>
 #include "minipass.hpp"
 
 int main(int argc, char* argv[])
 {
-	QApplication application(argc, argv);
-
-	MiniPass miniPass{};
-
 	if (argc > 1) {
-		miniPass = ParseCommandLineArguments(argc, argv);
+		MiniPass miniPass{nullptr};
+		miniPass.ParseCommandLineArguments(argc, argv);
 		miniPass.ReturnGeneratedPassword();
+		return 0;
 	}
-	else
-	{
+	else {
+		QApplication app(argc, argv);
+		MiniPass miniPass{nullptr};
 		miniPass.show();
+		return app.exec();
 	}
-
-	return application.exec();
 }
