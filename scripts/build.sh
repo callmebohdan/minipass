@@ -60,7 +60,6 @@ fi
 if [ -f "$BUILD_DIR/test/TestMinipass" ]; then
     echo "Copying the tests into the bin/ directory..."
     cp "$BUILD_DIR/test/TestMinipass" "$BIN_DIR"
-    cp "$BUILD_DIR/test/TestUtils" "$BIN_DIR"
 else
     echo "Error: tests were not created."
     exit 1
