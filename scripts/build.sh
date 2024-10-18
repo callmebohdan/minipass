@@ -4,7 +4,6 @@ set -e
 export QT_QPA_PLATFORM=xcb
 
 SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
-
 cd "$SCRIPT_DIR/.."
 PROJECT_DIR=$(pwd)
 
