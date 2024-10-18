@@ -2,6 +2,8 @@
 
 set -e
 
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+cd "$SCRIPT_DIR/.."
 PROJECT_DIR=$(pwd)
 
 BUILD_DIR="$PROJECT_DIR/build"
