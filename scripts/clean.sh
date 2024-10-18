@@ -6,17 +6,21 @@ SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
 cd "$SCRIPT_DIR/.."
 PROJECT_DIR=$(pwd)
 
-BUILD_DIR="$PROJECT_DIR/build"
 BIN_DIR="$PROJECT_DIR/bin"
+BUILD_DIR="$PROJECT_DIR/build"
+OUT_DIR="$PROJECT_DIR/out"
 
-# Clean previous build if exists
+if [ -d "$BIN_DIR" ]; then
+    echo "Cleaning bin/ directory..."
+    rm -rf "$BIN_DIR"
+fi
+
 if [ -d "$BUILD_DIR" ]; then
-    echo "Cleaning previous build..."
+    echo "Cleaning build/ directory..."
     rm -rf "$BUILD_DIR"
 fi
 
-# Clean previous build bin directory if exists
-if [ -d "$BIN_DIR" ]; then
-    echo "Cleaning previous build bin/..."
-    rm -rf "$BIN_DIR"
+if [ -d "OUT_DIR" ]; then
+    echo "Cleaning out/ directory..."
+    rm -rf "$BUILD_DIR"
 fi
