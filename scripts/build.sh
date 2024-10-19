@@ -13,16 +13,16 @@ QT_PATH="/usr/lib/x86_64-linux-gnu/cmake/Qt6"
 QT_LIB_PATH="/usr/lib/x86_64-linux-gnu"
 
 if [ -d "$BIN_DIR" ]; then
-    echo "Cleaning previous build bin/..."
+    echo "Cleaning bin/ directory..."
     rm -rf "$BIN_DIR"
 fi
 
 if [ -d "$BUILD_DIR" ]; then
-    echo "Cleaning previous build..."
+    echo "Cleaning build/ directory..."
     rm -rf "$BUILD_DIR"
 fi
 
-echo "Creating build directory..."
+echo "Creating build/ directory..."
 mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR"
 
