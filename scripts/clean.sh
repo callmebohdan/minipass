@@ -20,5 +20,5 @@ fi
 
 if [ -d "OUT_DIR" ]; then
     echo "Cleaning out/ directory..."
-    rm -rf "$BUILD_DIR"
+    rm -rf "$OUT_DIR"
 fi
