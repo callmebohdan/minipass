@@ -7,6 +7,7 @@ PROJECT_DIR=$(pwd)
 BIN_DIR="$PROJECT_DIR/bin"
 BUILD_DIR="$PROJECT_DIR/build"
 OUT_DIR="$PROJECT_DIR/out"
+SRC_DIR="$PROJECT_DIR/src"
 
 if [ -d "$BIN_DIR" ]; then
     echo "Cleaning bin/ directory..."
