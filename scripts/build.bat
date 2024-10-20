@@ -51,7 +51,7 @@ if exist "%QT_PATH%\bin\windeployqt.exe" (
 )
 
 if exist "%BUILD_DIR%\src\Release\minipass.exe" (
-    echo Copying the application into the bin directory...
+    echo Copying the application into the bin/ directory...
     mkdir "%BIN_DIR%"
     xcopy /s /e /y /I "%BUILD_DIR%\src\Release" "%BIN_DIR%"
 ) else (
