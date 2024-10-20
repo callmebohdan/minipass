@@ -66,5 +66,3 @@ if exist "%BUILD_DIR%\src\Release\minipass.exe" (
 @REM )
 
 endlocal
-
-pause
