@@ -22,3 +22,8 @@ if [ -d "$OUT_DIR" ]; then
     echo "Cleaning out/ directory..."
     rm -rf "$OUT_DIR"
 fi
+
+if [ -d "$SRC_DIR/ui_minipass.h" ]; then
+    echo "Deleting ui_minipass.h..."
+    rm -f "$BIN_DIR/ui_minipass.h"
+fi
