@@ -10,6 +10,10 @@ set(CMAKE_AUTOMOC ON)
 set(CMAKE_AUTORCC ON)
 set(CMAKE_AUTOUIC ON)
 
+if (MSVC)
+    add_compile_options(/Zc:__cplusplus)
+endif()
+
 enable_testing()
 
 add_subdirectory(src)
