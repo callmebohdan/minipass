@@ -1,7 +1,7 @@
 ﻿find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
 
 set(ASSET_FILES ../assets/icon/minipass.rc)
-set(HEADER_FILES utils.hpp minipass.hpp)
+set(HEADER_FILES minipass.hpp)
 set(SOURCE_FILES main.cpp minipass.cpp)
 set(UI_FILES minipass.ui)
 

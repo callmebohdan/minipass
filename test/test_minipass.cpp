@@ -4,7 +4,6 @@
 #include <string>
 #include <vector>
 #include "../src/minipass.hpp"
-#include "../src/utils.hpp"
 
 TEST(TestMiniPass, DefaultConstructor) {
 	MiniPass minipass;
