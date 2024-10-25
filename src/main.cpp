@@ -4,16 +4,16 @@
 
 int main(int argc, char* argv[])
 {
+	QApplication app(argc, argv);
+
+	MiniPass miniPass{nullptr};
+
 	if (argc > 1) {
-		MiniPass miniPass{nullptr};
 		miniPass.ParseCommandLineArguments(argc, argv);
 		miniPass.ReturnGeneratedPassword();
 		return 0;
 	}
-	else {
-		QApplication app(argc, argv);
-		MiniPass miniPass{nullptr};
-		miniPass.show();
-		return app.exec();
-	}
+
+	miniPass.show();
+	return app.exec();
 }
