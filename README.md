@@ -152,13 +152,13 @@ Linux:
 Windows:
 
 ```powershell
-.\bin\minipassCLI.exe [options]
+.\bin\minipass.exe [options]
 ```
 
 Linux
 
 ```bash
-./bin/minipassCLI [options]
+./bin/minipass [options]
 ```
 
 ## Options
