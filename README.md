@@ -197,19 +197,9 @@ Windows:
     .\bin\TestMinipass.exe
     ```
 
-2. Test utils.cpp:
-    ```powershell
-    .\bin\TestUtils.exe
-    ```
-
 Linux:
 
 1. Test minipass.cpp:
     ```bash
     ./bin/TestMinipass
-    ```
-
-2. Test utils.cpp:
-    ```bash
-    ./bin/TestUtils
     ```
