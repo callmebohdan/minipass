@@ -16,7 +16,16 @@ Windows:
 
 1. [Install Cmake](https://cmake.org/download).
 
-2. [Install GTest](https://github.com/google/googletest/blob/main/googletest/README.md):
+2. [Install Qt6 via Qt Online Installer](https://doc.qt.io/qt-6/qt-online-installation.html).
+Also install MSVC2019_64 (Qt Maintenance Tool -> Add or remove components -> Qt -> Qt 6.7.2 -> MSVC 2019 64-bit).
+
+3. Add the Qt6 install location to PATH:
+
+    ```powershell
+    $env:PATH = "C:\Qt\6.7.2\mingw_64\bin;$env:PATH"
+    ```
+
+4. [Install GTest](https://github.com/google/googletest/blob/main/googletest/README.md):
 
     ```powershell
     cd C:\Program Files
@@ -46,15 +55,6 @@ Windows:
     vcpkg install gtest
     ```
 
-2. [Install Qt6 via Qt Online Installer](https://doc.qt.io/qt-6/qt-online-installation.html).
-Also install MSVC2019_64 (Qt Maintenance Tool -> Add or remove components -> Qt -> Qt 6.7.2 -> MSVC 2019 64-bit).
-
-3. Add the Qt6 install location to PATH:
-
-    ```powershell
-    $env:PATH = "C:\Qt\6.7.2\mingw_64\bin;$env:PATH"
-    ```
-
 Linux:
 
 1. Install Cmake:
@@ -62,8 +62,20 @@ Linux:
     ```bash
     sudo apt-get -y install cmake
     ```
+  
+2. Install gcc:
 
-2. Install GTest:
+    ```bash
+    sudo apt-get -y install build-essential
+    ```
+
+3. Install Qt6:
+
+    ```bash
+    sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev qt6-base-dev qt6-base-dev-tools libxcb-cursor0
+    ```
+
+4. Install GTest:
 
     ```bash
     sudo apt-get -y install libgtest-dev
@@ -73,18 +85,6 @@ Linux:
    
     ```bash
     cd /usr/src/gtest && sudo cmake . && sudo make && sudo mv libg* /usr/lib/ && cd -
-    ```
-   
-3. Install gcc:
-
-    ```bash
-    sudo apt-get -y install build-essential
-    ```
-
-4. Install Qt6:
-
-    ```bash
-    sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev qt6-base-dev qt6-base-dev-tools libxcb-cursor0
     ```
 
 ## Build
@@ -103,13 +103,19 @@ Windows:
     cd minipass
     ```
 
-3. Build and run the project:
+3. Build the project:
 
     ```powershell
     .\scripts\build.bat
     ```
 
-4. Clean the project:
+4. Run minipass:
+
+    ```powershell
+    .\bin\minipass.exe
+    ```
+
+5. Clean previous builds:
 
     ```powershell
     .\scripts\clean.bat
@@ -129,13 +135,19 @@ Linux:
     cd minipass
     ```
 
-3. Build and run the project:
+3. Build the project:
 
     ```bash
     sh ./scripts/build.sh
     ```
 
-4. Clean the project:
+4. Run minipass:
+
+    ```bash
+    ./bin/minipass
+    ```
+
+5. Clean previous builds:
 
     ```bash
     sh ./scripts/clean.sh
