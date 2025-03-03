@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'minipass.ui'
 **
-** Created by: Qt User Interface Compiler version 6.7.2
+** Created by: Qt User Interface Compiler version 6.4.2
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -89,7 +89,7 @@ public:
 
         removeCustomCharacters = new QLineEdit(formLayoutWidget);
         removeCustomCharacters->setObjectName("removeCustomCharacters");
-        QSizePolicy sizePolicy(QSizePolicy::Policy::Expanding, QSizePolicy::Policy::Fixed);
+        QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
         sizePolicy.setHeightForWidth(removeCustomCharacters->sizePolicy().hasHeightForWidth());
@@ -179,7 +179,7 @@ public:
 
         passwordLength = new QLineEdit(formLayoutWidget);
         passwordLength->setObjectName("passwordLength");
-        QSizePolicy sizePolicy1(QSizePolicy::Policy::Fixed, QSizePolicy::Policy::Fixed);
+        QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
         sizePolicy1.setHorizontalStretch(0);
         sizePolicy1.setVerticalStretch(0);
         sizePolicy1.setHeightForWidth(passwordLength->sizePolicy().hasHeightForWidth());
