@@ -1,4 +1,4 @@
-﻿cmake_minimum_required (VERSION 3.22)
+cmake_minimum_required (VERSION 3.22)
 
 project (minipass LANGUAGES CXX)
 
@@ -16,6 +16,8 @@ endif()
 
 add_subdirectory(src)
 
-# enable_testing()
-
-# add_subdirectory(test)
+option(ENABLE_TESTS "Enable test suite" OFF)
+if (ENABLE_TESTS)
+    enable_testing()
+    add_subdirectory(test)
+endif()
