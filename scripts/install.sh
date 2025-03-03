@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Install Cmake:
+# Install CMake
 sudo apt-get -y install cmake
 
 # Install gcc
