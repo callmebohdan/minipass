@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <cctype>
 #ifdef _WIN32
-#include <corecrt.h>
+    #include <corecrt.h>
 #elif defined(__linux__)
     #include <unistd.h>
 #endif
