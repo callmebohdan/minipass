@@ -1,6 +1,10 @@
 #include <algorithm>
 #include <cctype>
+#ifdef _WIN32
 #include <corecrt.h>
+#elif defined(__linux__)
+    #include <unistd.h>
+#endif
 #include <cstdlib>
 #include <ctime>
 #include <filesystem>
