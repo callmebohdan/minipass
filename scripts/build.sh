@@ -15,7 +15,6 @@ OUT_DIR="$PROJECT_DIR/out"
 SRC_DIR="$PROJECT_DIR/src"
 
 QT_PATH="/usr/lib/x86_64-linux-gnu/cmake/Qt6"
-QT_BIN_PATH="/usr/lib/qt6/bin"
 QT_LIB_PATH="/usr/lib/qt6/libexec"
 
 echo "Cleaning directories..."
@@ -33,6 +32,7 @@ echo "Generating ui_minipass.h..."
 
 # Verbose build output
 make VERBOSE=1
+
 if [ -f "$BUILD_DIR/src/minipass" ]; then
     mkdir -p "$BIN_DIR"
     echo "Copying the application into bin/..."
