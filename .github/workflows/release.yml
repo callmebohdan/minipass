@@ -2,11 +2,8 @@ name: Release MiniPass
 
 on:
   push:
-    branches: [ main ]
-    paths-ignore:
-      - README.md
-      - .gitignore
-  pull_request:
+    tags:
+      - 'v*'  # Only trigger on tags starting with 'v'
     branches: [ main ]
     paths-ignore:
       - README.md
