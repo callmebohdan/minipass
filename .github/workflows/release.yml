@@ -56,9 +56,18 @@ jobs:
             exit 1
           fi
 
+      - name: Create Git Tag
+        run: |
+          TAG_NAME="v$(date +'%Y.%m.%d')"
+          git config --global user.name "github-actions"
+          git config --global user.email "github-actions@github.com"
+          git tag $TAG_NAME
+          git push origin $TAG_NAME
+
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
+          tag_name: ${{ github.ref_name }}
           files: minipass.tar.gz
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
