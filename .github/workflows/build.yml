@@ -20,22 +20,53 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Install dependencies
+      # Install dependencies
+      - name: Install Dependencies
         run: |
-          sudo apt update
-          sudo apt install -y libboost-all-dev libgtest-dev sqlite3 libsqlite3-dev cmake g++
+          sudo apt-get -y update
+          sudo apt-get -y install cmake build-essential libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev libxcb-cursor0 qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-tools-dev-tools qt6ct qt6-multimedia-dev libgtest-dev libxkbcommon-dev
+          cd /usr/src/gtest && sudo cmake . && sudo make && sudo mv lib* /usr/lib/ && cd -
 
+      # Set up the build environment and configure CMake
       - name: Configure CMake
-        run: cmake -S . -B build
+        run: |
+          export QT_QPA_PLATFORM=xcb
+          export PATH="/usr/lib/qt6/bin:$PATH"
+          QT_PATH="/usr/lib/x86_64-linux-gnu/cmake/Qt6"
+          QT_LIB_PATH="/usr/lib/qt6/libexec"
+          
+          echo "Cleaning directories..."
+          rm -rf "$GITHUB_WORKSPACE/bin" "$GITHUB_WORKSPACE/build" "$GITHUB_WORKSPACE/out"
+          
+          echo "Creating build/ directory..."
+          mkdir -p "$GITHUB_WORKSPACE/build"
+          cd "$GITHUB_WORKSPACE/build"
+          
+          echo "Running CMake configuration..."
+          cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH="$QT_PATH" "$GITHUB_WORKSPACE"
+          
+          echo "Generating ui_minipass.h..."
+          "$QT_LIB_PATH/uic" "$GITHUB_WORKSPACE/src/minipass.ui" -o "$GITHUB_WORKSPACE/src/ui_minipass.h"
 
-      - name: Build project
-        run: cmake --build build
+      # Build the project
+      - name: Build the project
+        run: |
+          cd "$GITHUB_WORKSPACE/build"
+          make VERBOSE=1
 
+      # Copy binaries
+      - name: Copy build artifacts
+        run: |
+          if [ -f "$GITHUB_WORKSPACE/build/src/minipass" ]; then
+            mkdir -p "$GITHUB_WORKSPACE/bin"
+            cp "$GITHUB_WORKSPACE/build/src/minipass" "$GITHUB_WORKSPACE/bin"
+          else
+            echo "Error: minipass build was not successful."
+            exit 1
+          fi
+
+      # Run tests if they exist
       - name: Run tests
-        run: cd build && ctest --output-on-failure
-
-      - name: Upload built binary
-        uses: actions/upload-artifact@v4
-        with:
-          name: minipass-binary
-          path: build/src/minipass
+        run: |
+          cd "$GITHUB_WORKSPACE/build"
+          ctest --output-on-failure
