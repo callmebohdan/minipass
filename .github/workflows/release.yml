@@ -57,8 +57,8 @@ jobs:
           fi
 
       - name: Upload Release Asset
-        uses: softprops/action-gh-release
+        uses: softprops/action-gh-release@v1
         with:
           files: minipass.tar.gz
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}11111
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
