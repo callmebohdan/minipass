@@ -56,7 +56,7 @@ jobs:
         run: |
           git push https://github.com/${{ github.repository }}.git $TAG_NAME
         env:
-          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
       - name: Copy build artifacts
         run: |
