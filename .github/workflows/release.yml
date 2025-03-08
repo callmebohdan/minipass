@@ -3,7 +3,7 @@ name: Release MiniPass
 on:
   push:
     tags:
-      - 'v*'  # Only trigger on tags starting with 'v'
+      - 'v*'
     branches: [ main ]
     paths-ignore:
       - README.md
@@ -52,9 +52,13 @@ jobs:
           TAG_NAME="v$(date +'%Y.%m.%d')"
           git tag $TAG_NAME
 
+      - name: Set remote URL for push
+        run: |
+          git remote set-url origin https://github-actions:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+
       - name: Push Git Tag
         run: |
-          git push https://github.com/${{ github.repository }}.git $TAG_NAME
+          git push origin $TAG_NAME
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
