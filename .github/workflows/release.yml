@@ -42,7 +42,23 @@ jobs:
           cd "$GITHUB_WORKSPACE/build"
           cmake --build . --config Release
 
-      - name: Archive build
+      - name: Set up Git for pushing tags
+        run: |
+            git config --global user.name "github-actions"
+            git config --global user.email "github-actions@github.com"
+
+      - name: Create Git Tag
+        run: |
+          TAG_NAME="v$(date +'%Y.%m.%d')"
+          git tag $TAG_NAME
+
+      - name: Push Git Tag
+        run: |
+          git push https://github.com/${{ github.repository }}.git $TAG_NAME
+        env:
+          GITHUB_TOKEN: ${{ secrets.PAT_TOKEN }}
+
+      - name: Copy build artifacts
         run: |
           if [ -f "$GITHUB_WORKSPACE/build/src/minipass" ]; then
             mkdir -p "$GITHUB_WORKSPACE/release"
@@ -53,18 +69,10 @@ jobs:
             exit 1
           fi
 
-      - name: Create Git Tag
-        run: |
-          TAG_NAME="v$(date +'%Y.%m.%d')"
-          git config --global user.name "github-actions"
-          git config --global user.email "github-actions@github.com"
-          git tag $TAG_NAME
-          git push origin $TAG_NAME
-
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
           files: minipass.tar.gz
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
