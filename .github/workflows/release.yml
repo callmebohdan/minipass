@@ -1,0 +1,64 @@
+name: Build MiniPass
+
+on:
+  push:
+    branches: [ main ]
+    paths-ignore:
+      - README.md
+      - .gitignore
+  pull_request:
+    branches: [ main ]
+    paths-ignore:
+      - README.md
+      - .gitignore
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        run: |
+          sudo apt-get -y update
+          sudo apt-get -y install cmake build-essential libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev \
+              mesa-common-dev libxcb-cursor0 qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-tools-dev-tools \
+              qt6ct qt6-multimedia-dev libgtest-dev libxkbcommon-dev
+          cd /usr/src/gtest && sudo cmake . && sudo make && sudo mv lib* /usr/lib/ && cd -
+
+      - name: Configure CMake
+        run: |
+          export QT_QPA_PLATFORM=xcb
+          export PATH="/usr/lib/qt6/bin:$PATH"
+          QT_PATH="/usr/lib/x86_64-linux-gnu/cmake/Qt6"
+          QT_LIB_PATH="/usr/lib/qt6/libexec"
+          rm -rf "$GITHUB_WORKSPACE/bin" "$GITHUB_WORKSPACE/build" "$GITHUB_WORKSPACE/out"
+          mkdir -p "$GITHUB_WORKSPACE/build"
+          cd "$GITHUB_WORKSPACE/build"
+          cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH="$QT_PATH" "$GITHUB_WORKSPACE"
+          "$QT_LIB_PATH/uic" "$GITHUB_WORKSPACE/src/minipass.ui" -o "$GITHUB_WORKSPACE/src/ui_minipass.h"
+
+      - name: Build the project
+        run: |
+          cd "$GITHUB_WORKSPACE/build"
+          cmake --build . --config Release
+
+      - name: Archive build
+        run: |
+          if [ -f "$GITHUB_WORKSPACE/build/src/minipass" ]; then
+            mkdir -p "$GITHUB_WORKSPACE/release"
+            cp "$GITHUB_WORKSPACE/build/src/minipass" "$GITHUB_WORKSPACE/release"
+            tar -czvf minipass.tar.gz -C release minipass
+          else
+            echo "Error: minipass build was not successful."
+            exit 1
+          fi
+
+      - name: Upload Release Asset
+        uses: softprops/action-gh-release
+        with:
+          files: minipass.tar.gz
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}11111
