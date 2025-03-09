@@ -42,45 +42,49 @@ jobs:
           cd "$GITHUB_WORKSPACE/build"
           cmake --build . --config Release
 
-      - name: Get stable version from version.json
-        run: |
-          version=$(jq -r '.stable' "$GITHUB_WORKSPACE/version.json")
-          echo "VERSION=$version" >> $GITHUB_ENV
-
+          - name: Get stable version and description from version.json
+          run: |
+            version=$(cat version.json | grep '"stable"' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
+            description=$(cat version.json | jq -r --arg version "$version" '.changelog[] | select(.version == $version) | .description')
+            echo "version=$version" >> $GITHUB_ENV
+            echo "description=$description" >> $GITHUB_ENV
+  
       - name: Set up Git for pushing tags
         run: |
-            git config --global user.name "github-actions"
-            git config --global user.email "github-actions@github.com"
-
+              git config --global user.name "github-actions"
+              git config --global user.email "github-actions@github.com"
+  
       - name: Create Git Tag
         run: |
-          git tag ${{ env.VERSION }}
-
+            git tag "v$version"
+  
       - name: Set remote URL for push
         run: |
-          git remote set-url origin https://github-actions:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
-
+            git remote set-url origin https://github-actions:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
+  
       - name: Push Git Tag
         run: |
-          git push origin ${{ env.VERSION }}
+            git push origin "v$version"
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
-
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+  
       - name: Copy build artifacts
         run: |
-          if [ -f "$GITHUB_WORKSPACE/build/src/minipass" ]; then
-            mkdir -p "$GITHUB_WORKSPACE/release"
-            cp "$GITHUB_WORKSPACE/build/src/minipass" "$GITHUB_WORKSPACE/release"
-            tar -czvf minipass.tar.gz -C release minipass
-          else
-            echo "Error: minipass build was not successful."
-            exit 1
-          fi
-
+            if [ -f "$GITHUB_WORKSPACE/build/src/minipass" ]; then
+              mkdir -p "$GITHUB_WORKSPACE/release"
+              cp "$GITHUB_WORKSPACE/build/src/minipass" "$GITHUB_WORKSPACE/release"
+              tar -czvf minipass.tar.gz -C release minipass
+            else
+              echo "Error: minipass build was not successful."
+              exit 1
+            fi
+  
       - name: Upload Release Asset
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: ${{ github.ref_name }}
-          files: minipass.tar.gz
+            tag_name: ${{ github.ref_name }}
+            files: minipass.tar.gz
+            name: "MiniPass $version"
+            body: ${{ env.description }}
         env:
-          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
