@@ -41,52 +41,52 @@ MiniPass::MiniPass(QWidget* parent)
 }
 
 void MiniPass::HandleUserOptions() {
-	connect(ui->removeCustomCharacters, &QLineEdit::textChanged, this, &MiniPass::SetUserCustomCharacters);
+	connect(ui->useCustom, &QLineEdit::textChanged, this, &MiniPass::SetUserCustomCharacters);
 	connect(ui->makeMnemonic, &QCheckBox::toggled, this, &MiniPass::ToggleMakeMnemonic);
 	connect(ui->keepHistory, &QCheckBox::toggled, this, &MiniPass::ToggleKeepHistory);
-	connect(ui->removeSpecialCharacters, &QCheckBox::toggled, this, &MiniPass::ToggleRemoveSpecialCharacters);
-	connect(ui->removeUppercaseLetters, &QCheckBox::toggled, this, &MiniPass::ToggleRemoveUppercaseLetters);
-	connect(ui->removeLowercaseLetters, &QCheckBox::toggled, this, &MiniPass::ToggleRemoveLowercaseLetters);
-	connect(ui->removeNumbers, &QCheckBox::toggled, this, &MiniPass::ToggleRemoveNumbers);
+	connect(ui->useSpecial, &QCheckBox::toggled, this, &MiniPass::ToggleUseSpecial);
+	connect(ui->useUppercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseUppercase);
+	connect(ui->useLowercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseLowercase);
+	connect(ui->useNumbers, &QCheckBox::toggled, this, &MiniPass::ToggleUseNumbers);
 	connect(ui->defaultOptions, &QCheckBox::toggled, this, &MiniPass::ToggleDefaultOptions);
 	connect(ui->passwordLength, &QLineEdit::textChanged, this, &MiniPass::SetPasswordLength);
 }
 
 void MiniPass::SetUserCustomCharacters(const QString& _customCharacters) {
-	removeCustomCharacters = _customCharacters.toStdString();
+	useCustom = _customCharacters.toStdString();
 }
 void MiniPass::ToggleMakeMnemonic(bool checked) {
-	makeMnemonic = checked ? true : false;
+	makeMnemonic = checked;
 }
 
 void MiniPass::ToggleKeepHistory(bool checked) {
-	keepHistory = checked ? true : false;
+	keepHistory = checked;
 }
 
-void MiniPass::ToggleRemoveSpecialCharacters(bool checked) {
-	removeSpecialCharacters = checked ? true : false;
+void MiniPass::ToggleUseSpecial(bool checked) {
+	useSpecial = checked;
 }
 
-void MiniPass::ToggleRemoveUppercaseLetters(bool checked) {
-	removeUppercaseLetters = checked ? true : false;
+void MiniPass::ToggleUseUppercase(bool checked) {
+	useUppercase = checked;
 }
 
-void MiniPass::ToggleRemoveLowercaseLetters(bool checked) {
-	removeLowercaseLetters = checked ? true : false;
+void MiniPass::ToggleUseLowercase(bool checked) {
+	useLowercase = checked;
 }
 
-void MiniPass::ToggleRemoveNumbers(bool checked) {
-	removeNumbers = checked ? true : false;
+void MiniPass::ToggleUseNumbers(bool checked) {
+	useNumbers = checked;
 }
 
 void MiniPass::ToggleDefaultOptions() {
-	ui->removeCustomCharacters->clear();
+	ui->useCustom->clear();
 	ui->makeMnemonic->setChecked(false);
 	ui->keepHistory->setChecked(false);
-	ui->removeSpecialCharacters->setChecked(false);
-	ui->removeUppercaseLetters->setChecked(false);
-	ui->removeLowercaseLetters->setChecked(false);
-	ui->removeNumbers->setChecked(false);
+	ui->useSpecial->setChecked(false);
+	ui->useUppercase->setChecked(false);
+	ui->useLowercase->setChecked(false);
+	ui->useNumbers->setChecked(false);
 	ui->passwordLength->setText("16");
 }
 
@@ -137,13 +137,13 @@ void MiniPass::ClickOpenPasswordsHistory() {
 
 void MiniPass::ClickResetOptions() {
 	//checkboxes
-	ui->removeCustomCharacters->clear();
+	ui->useCustom->clear();
 	ui->makeMnemonic->setChecked(false);
 	ui->keepHistory->setChecked(false);
-	ui->removeSpecialCharacters->setChecked(false);
-	ui->removeUppercaseLetters->setChecked(false);
-	ui->removeLowercaseLetters->setChecked(false);
-	ui->removeNumbers->setChecked(false);
+	ui->useSpecial->setChecked(false);
+	ui->useUppercase->setChecked(false);
+	ui->useLowercase->setChecked(false);
+	ui->useNumbers->setChecked(false);
 	ui->defaultOptions->setChecked(false);
 	ui->passwordLength->clear();
 	//output
@@ -156,13 +156,13 @@ void MiniPass::ClickExitMinipass() {
 
 MiniPass::MiniPass()
 	: passwordLength(16)
-	, removeNumbers(false)
-	, removeLowercaseLetters(false)
-	, removeUppercaseLetters(false)
-	, removeSpecialCharacters(false)
+	, useNumbers(false)
+	, useLowercase(false)
+	, useUppercase(false)
+	, useSpecial(false)
 	, makeMnemonic(false)
 	, keepHistory(false)
-	, removeCustomCharacters() {}
+	, useCustom() {}
 
 MiniPass::~MiniPass() {
 	delete ui;
@@ -171,50 +171,50 @@ MiniPass::~MiniPass() {
 
 MiniPass::MiniPass(const PasswordSettings& passwordSettings)
 	: passwordLength(passwordSettings.passwordLength)
-	, removeNumbers(passwordSettings.removeNumbers)
-	, removeLowercaseLetters(passwordSettings.removeLowercaseLetters)
-	, removeUppercaseLetters(passwordSettings.removeUppercaseLetters)
-	, removeSpecialCharacters(passwordSettings.removeSpecialCharacters)
+	, useNumbers(passwordSettings.useNumbers)
+	, useLowercase(passwordSettings.useLowercase)
+	, useUppercase(passwordSettings.useUppercase)
+	, useSpecial(passwordSettings.useSpecial)
 	, makeMnemonic(passwordSettings.makeMnemonic)
 	, keepHistory(passwordSettings.keepHistory)
-	, removeCustomCharacters(passwordSettings.removeCustomCharacters) {}
+	, useCustom(passwordSettings.useCustom) {}
 
 MiniPass::MiniPass(const MiniPass& newCopy)
 	: passwordLength(newCopy.passwordLength)
-	, removeNumbers(newCopy.removeNumbers)
-	, removeLowercaseLetters(newCopy.removeLowercaseLetters)
-	, removeUppercaseLetters(newCopy.removeUppercaseLetters)
-	, removeSpecialCharacters(newCopy.removeSpecialCharacters)
+	, useNumbers(newCopy.useNumbers)
+	, useLowercase(newCopy.useLowercase)
+	, useUppercase(newCopy.useUppercase)
+	, useSpecial(newCopy.useSpecial)
 	, makeMnemonic(newCopy.makeMnemonic)
 	, keepHistory(newCopy.keepHistory)
-	, removeCustomCharacters(newCopy.removeCustomCharacters) {}
+	, useCustom(newCopy.useCustom) {}
 
 MiniPass& MiniPass::operator=(const MiniPass& other) {
 	if (this != &other) {
 		passwordLength = other.passwordLength;
-		removeNumbers = other.removeNumbers;
-		removeLowercaseLetters = other.removeLowercaseLetters;
-		removeUppercaseLetters = other.removeUppercaseLetters;
-		removeSpecialCharacters = other.removeSpecialCharacters;
+		useNumbers = other.useNumbers;
+		useLowercase = other.useLowercase;
+		useUppercase = other.useUppercase;
+		useSpecial = other.useSpecial;
 		makeMnemonic = other.makeMnemonic;
 		keepHistory = other.keepHistory;
-		removeCustomCharacters = other.removeCustomCharacters;
+		useCustom = other.useCustom;
 	}
 	return *this;
 }
 
 std::string MiniPass::AllowedCharacters() const {
 	std::string allowedCharacters;
-	if (!removeNumbers && !makeMnemonic) allowedCharacters += "0123456789";
-	if (!removeLowercaseLetters) allowedCharacters += "abcdefghijklmnopqrstuvwxyz";
-	if (!removeUppercaseLetters && !makeMnemonic) allowedCharacters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	if (!removeSpecialCharacters && !makeMnemonic) allowedCharacters += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+	if (useNumbers && !makeMnemonic) allowedCharacters += "0123456789";
+	if (useLowercase) allowedCharacters += "abcdefghijklmnopqrstuvwxyz";
+	if (useUppercase && !makeMnemonic) allowedCharacters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	if (useSpecial && !makeMnemonic) allowedCharacters += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
-	std::unordered_set<char> unorderedSetCustomCharacters(removeCustomCharacters.begin(), removeCustomCharacters.end());
+	std::unordered_set<char> customCharacters(useCustom.begin(), useCustom.end());
 	std::string filteredCharacters;
 
 	for (char c : allowedCharacters) {
-		if (unorderedSetCustomCharacters.find(c) == unorderedSetCustomCharacters.end()) {
+		if (customCharacters.find(c) == customCharacters.end()) {
 			filteredCharacters += c;
 		}
 	}
@@ -370,10 +370,10 @@ void MiniPass::HandleCombinedShortOptions(int& index, int argc, char* argv[], Pa
 		switch (arg[j]) {
 		case 'h': PrintHelp(); break;
 		case 'd': passwordSettings = PasswordSettings(); break;
-		case 'n': passwordSettings.removeNumbers = true; break;
-		case 'o': passwordSettings.removeLowercaseLetters = true; break;
-		case 's': passwordSettings.removeSpecialCharacters = true; break;
-		case 'u': passwordSettings.removeUppercaseLetters = true; break;
+		case 'n': passwordSettings.useNumbers = true; break;
+		case 'o': passwordSettings.useLowercase = true; break;
+		case 's': passwordSettings.useSpecial = true; break;
+		case 'u': passwordSettings.useUppercase = true; break;
 		case 'k': passwordSettings.keepHistory = true; break;
 		case 'm': passwordSettings.makeMnemonic = true; break;
 		default:
@@ -410,24 +410,24 @@ void MiniPass::HandleLongOptions(int& index, int argc, char* argv[], PasswordSet
 	}
 	else if (arg == "--custom") {
 		if (index + 1 < argc) {
-			passwordSettings.removeCustomCharacters = argv[++index];
+			passwordSettings.useCustom = argv[++index];
 		}
 		else
 		{
-			std::cerr << "Error: " << arg << " requires a value. Default value ('" << passwordSettings.removeCustomCharacters << "') will be used instead." << std::endl;
+			std::cerr << "Error: " << arg << " requires a value. Default value ('" << passwordSettings.useCustom << "') will be used instead." << std::endl;
 		}
 	}
 	else if (arg == "--numbers") {
-		passwordSettings.removeNumbers = true;
+		passwordSettings.useNumbers = true;
 	}
 	else if (arg == "--lower") {
-		passwordSettings.removeLowercaseLetters = true;
+		passwordSettings.useLowercase = true;
 	}
 	else if (arg == "--upper") {
-		passwordSettings.removeUppercaseLetters = true;
+		passwordSettings.useUppercase = true;
 	}
 	else if (arg == "--special") {
-		passwordSettings.removeSpecialCharacters = true;
+		passwordSettings.useSpecial = true;
 	}
 	else if (arg == "--history") {
 		passwordSettings.keepHistory = true;
@@ -461,7 +461,7 @@ void MiniPass::HandleShortOptionsWithInputValue(int& index, int argc, char* argv
 	}
 	else if (arg == "-c") {
 		if (index + 1 < argc) {
-			passwordSettings.removeCustomCharacters = argv[++index];
+			passwordSettings.useCustom = argv[++index];
 		}
 		else
 		{
@@ -476,16 +476,16 @@ void MiniPass::HandleShortOptionsWithInputValue(int& index, int argc, char* argv
 		passwordSettings = PasswordSettings();
 	}
 	else if (arg == "-n") {
-		passwordSettings.removeNumbers = true;
+		passwordSettings.useNumbers = true;
 	}
 	else if (arg == "-o") {
-		passwordSettings.removeLowercaseLetters = true;
+		passwordSettings.useLowercase = true;
 	}
 	else if (arg == "-u") {
-		passwordSettings.removeUppercaseLetters = true;
+		passwordSettings.useUppercase = true;
 	}
 	else if (arg == "-s") {
-		passwordSettings.removeSpecialCharacters = true;
+		passwordSettings.useSpecial = true;
 	}
 	else if (arg == "-k") {
 		passwordSettings.keepHistory = true;

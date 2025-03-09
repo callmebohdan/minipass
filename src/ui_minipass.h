@@ -31,24 +31,24 @@ public:
     QGroupBox *groupBoxOptions;
     QWidget *formLayoutWidget;
     QFormLayout *formLayout;
-    QLabel *removeCustomCharactersLabel;
-    QLineEdit *removeCustomCharacters;
+    QLabel *useCustomLabel;
+    QLineEdit *useCustom;
     QLabel *makeMnemonicLabel;
     QCheckBox *makeMnemonic;
     QLabel *keepHistoryLabel;
     QCheckBox *keepHistory;
-    QLabel *removeSpecialCharactersLabel;
-    QCheckBox *removeSpecialCharacters;
-    QCheckBox *removeUppercaseLetters;
-    QLabel *removeLowercaseLettersLabel;
-    QCheckBox *removeLowercaseLetters;
-    QLabel *removeNumbersLabel;
-    QCheckBox *removeNumbers;
+    QLabel *useSpecialLabel;
+    QCheckBox *useSpecial;
+    QCheckBox *useUppercase;
+    QLabel *useLowercaseLabel;
+    QCheckBox *useLowercase;
+    QLabel *useNumbersLabel;
+    QCheckBox *useNumbers;
     QLabel *defaultOptionsLabel;
     QCheckBox *defaultOptions;
     QLabel *passwordLengthLabel;
     QLineEdit *passwordLength;
-    QLabel *removeUppercaseLettersLabel;
+    QLabel *useUppercaseLabel;
     QGroupBox *groupBoxOutput;
     QPlainTextEdit *randomPassword;
     QPushButton *copyPassword;
@@ -82,23 +82,23 @@ public:
         formLayout->setObjectName("formLayout");
         formLayout->setRowWrapPolicy(QFormLayout::RowWrapPolicy::DontWrapRows);
         formLayout->setContentsMargins(0, 0, 0, 0);
-        removeCustomCharactersLabel = new QLabel(formLayoutWidget);
-        removeCustomCharactersLabel->setObjectName("removeCustomCharactersLabel");
+        useCustomLabel = new QLabel(formLayoutWidget);
+        useCustomLabel->setObjectName("useCustomLabel");
 
-        formLayout->setWidget(0, QFormLayout::LabelRole, removeCustomCharactersLabel);
+        formLayout->setWidget(0, QFormLayout::LabelRole, useCustomLabel);
 
-        removeCustomCharacters = new QLineEdit(formLayoutWidget);
-        removeCustomCharacters->setObjectName("removeCustomCharacters");
+        useCustom = new QLineEdit(formLayoutWidget);
+        useCustom->setObjectName("useCustom");
         QSizePolicy sizePolicy(QSizePolicy::Expanding, QSizePolicy::Fixed);
         sizePolicy.setHorizontalStretch(0);
         sizePolicy.setVerticalStretch(0);
-        sizePolicy.setHeightForWidth(removeCustomCharacters->sizePolicy().hasHeightForWidth());
-        removeCustomCharacters->setSizePolicy(sizePolicy);
-        removeCustomCharacters->setMaximumSize(QSize(60, 20));
-        removeCustomCharacters->setContextMenuPolicy(Qt::ContextMenuPolicy::NoContextMenu);
-        removeCustomCharacters->setAutoFillBackground(true);
+        sizePolicy.setHeightForWidth(useCustom->sizePolicy().hasHeightForWidth());
+        useCustom->setSizePolicy(sizePolicy);
+        useCustom->setMaximumSize(QSize(60, 20));
+        useCustom->setContextMenuPolicy(Qt::ContextMenuPolicy::NoContextMenu);
+        useCustom->setAutoFillBackground(true);
 
-        formLayout->setWidget(0, QFormLayout::FieldRole, removeCustomCharacters);
+        formLayout->setWidget(0, QFormLayout::FieldRole, useCustom);
 
         makeMnemonicLabel = new QLabel(formLayoutWidget);
         makeMnemonicLabel->setObjectName("makeMnemonicLabel");
@@ -122,44 +122,44 @@ public:
 
         formLayout->setWidget(2, QFormLayout::FieldRole, keepHistory);
 
-        removeSpecialCharactersLabel = new QLabel(formLayoutWidget);
-        removeSpecialCharactersLabel->setObjectName("removeSpecialCharactersLabel");
+        useSpecialLabel = new QLabel(formLayoutWidget);
+        useSpecialLabel->setObjectName("useSpecialLabel");
 
-        formLayout->setWidget(3, QFormLayout::LabelRole, removeSpecialCharactersLabel);
+        formLayout->setWidget(3, QFormLayout::LabelRole, useSpecialLabel);
 
-        removeSpecialCharacters = new QCheckBox(formLayoutWidget);
-        removeSpecialCharacters->setObjectName("removeSpecialCharacters");
-        removeSpecialCharacters->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+        useSpecial = new QCheckBox(formLayoutWidget);
+        useSpecial->setObjectName("useSpecial");
+        useSpecial->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
-        formLayout->setWidget(3, QFormLayout::FieldRole, removeSpecialCharacters);
+        formLayout->setWidget(3, QFormLayout::FieldRole, useSpecial);
 
-        removeUppercaseLetters = new QCheckBox(formLayoutWidget);
-        removeUppercaseLetters->setObjectName("removeUppercaseLetters");
-        removeUppercaseLetters->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+        useUppercase = new QCheckBox(formLayoutWidget);
+        useUppercase->setObjectName("useUppercase");
+        useUppercase->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
-        formLayout->setWidget(4, QFormLayout::FieldRole, removeUppercaseLetters);
+        formLayout->setWidget(4, QFormLayout::FieldRole, useUppercase);
 
-        removeLowercaseLettersLabel = new QLabel(formLayoutWidget);
-        removeLowercaseLettersLabel->setObjectName("removeLowercaseLettersLabel");
+        useLowercaseLabel = new QLabel(formLayoutWidget);
+        useLowercaseLabel->setObjectName("useLowercaseLabel");
 
-        formLayout->setWidget(5, QFormLayout::LabelRole, removeLowercaseLettersLabel);
+        formLayout->setWidget(5, QFormLayout::LabelRole, useLowercaseLabel);
 
-        removeLowercaseLetters = new QCheckBox(formLayoutWidget);
-        removeLowercaseLetters->setObjectName("removeLowercaseLetters");
-        removeLowercaseLetters->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+        useLowercase = new QCheckBox(formLayoutWidget);
+        useLowercase->setObjectName("useLowercase");
+        useLowercase->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
-        formLayout->setWidget(5, QFormLayout::FieldRole, removeLowercaseLetters);
+        formLayout->setWidget(5, QFormLayout::FieldRole, useLowercase);
 
-        removeNumbersLabel = new QLabel(formLayoutWidget);
-        removeNumbersLabel->setObjectName("removeNumbersLabel");
+        useNumbersLabel = new QLabel(formLayoutWidget);
+        useNumbersLabel->setObjectName("useNumbersLabel");
 
-        formLayout->setWidget(6, QFormLayout::LabelRole, removeNumbersLabel);
+        formLayout->setWidget(6, QFormLayout::LabelRole, useNumbersLabel);
 
-        removeNumbers = new QCheckBox(formLayoutWidget);
-        removeNumbers->setObjectName("removeNumbers");
-        removeNumbers->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
+        useNumbers = new QCheckBox(formLayoutWidget);
+        useNumbers->setObjectName("useNumbers");
+        useNumbers->setLayoutDirection(Qt::LayoutDirection::LeftToRight);
 
-        formLayout->setWidget(6, QFormLayout::FieldRole, removeNumbers);
+        formLayout->setWidget(6, QFormLayout::FieldRole, useNumbers);
 
         defaultOptionsLabel = new QLabel(formLayoutWidget);
         defaultOptionsLabel->setObjectName("defaultOptionsLabel");
@@ -189,10 +189,10 @@ public:
 
         formLayout->setWidget(8, QFormLayout::FieldRole, passwordLength);
 
-        removeUppercaseLettersLabel = new QLabel(formLayoutWidget);
-        removeUppercaseLettersLabel->setObjectName("removeUppercaseLettersLabel");
+        useUppercaseLabel = new QLabel(formLayoutWidget);
+        useUppercaseLabel->setObjectName("useUppercaseLabel");
 
-        formLayout->setWidget(4, QFormLayout::LabelRole, removeUppercaseLettersLabel);
+        formLayout->setWidget(4, QFormLayout::LabelRole, useUppercaseLabel);
 
         groupBoxOutput = new QGroupBox(centralwidget);
         groupBoxOutput->setObjectName("groupBoxOutput");
@@ -231,22 +231,22 @@ public:
     void retranslateUi(QMainWindow *MiniPass)
     {
         groupBoxOptions->setTitle(QCoreApplication::translate("MiniPass", "Options", nullptr));
-        removeCustomCharactersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Custom Characters", nullptr));
+        useCustomLabel->setText(QCoreApplication::translate("MiniPass", "Remove Custom Characters", nullptr));
         makeMnemonicLabel->setText(QCoreApplication::translate("MiniPass", "Make Mnemonic", nullptr));
         makeMnemonic->setText(QString());
         keepHistoryLabel->setText(QCoreApplication::translate("MiniPass", "Keep History", nullptr));
         keepHistory->setText(QString());
-        removeSpecialCharactersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Special Characters", nullptr));
-        removeSpecialCharacters->setText(QString());
-        removeUppercaseLetters->setText(QString());
-        removeLowercaseLettersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Lowercase Letters", nullptr));
-        removeLowercaseLetters->setText(QString());
-        removeNumbersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Numbers", nullptr));
-        removeNumbers->setText(QString());
+        useSpecialLabel->setText(QCoreApplication::translate("MiniPass", "Remove Special Characters", nullptr));
+        useSpecial->setText(QString());
+        useUppercase->setText(QString());
+        useLowercaseLabel->setText(QCoreApplication::translate("MiniPass", "Remove Lowercase Letters", nullptr));
+        useLowercase->setText(QString());
+        useNumbersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Numbers", nullptr));
+        useNumbers->setText(QString());
         defaultOptionsLabel->setText(QCoreApplication::translate("MiniPass", "Default Options", nullptr));
         defaultOptions->setText(QString());
         passwordLengthLabel->setText(QCoreApplication::translate("MiniPass", "Password Length", nullptr));
-        removeUppercaseLettersLabel->setText(QCoreApplication::translate("MiniPass", "Remove Uppercase Letters", nullptr));
+        useUppercaseLabel->setText(QCoreApplication::translate("MiniPass", "Remove Uppercase Letters", nullptr));
         groupBoxOutput->setTitle(QCoreApplication::translate("MiniPass", "Output", nullptr));
         copyPassword->setText(QCoreApplication::translate("MiniPass", "Copy", nullptr));
         clearPassword->setText(QCoreApplication::translate("MiniPass", "Clear", nullptr));

@@ -12,15 +12,15 @@
 #include <string>
 
 struct PasswordSettings {
-	uint32_t passwordLength = 16;
+	uint32_t passwordLength{16};
 	bool defaultSettings = true;
-	bool removeNumbers = false;
-	bool removeLowercaseLetters = false;
-	bool removeUppercaseLetters = false;
-	bool removeSpecialCharacters = false;
+	bool useNumbers = false;
+	bool useLowercase = false;
+	bool useUppercase = false;
+	bool useSpecial = false;
 	bool makeMnemonic = false;
 	bool keepHistory = false;
-	std::string removeCustomCharacters = "";
+	std::string useCustom{};
 };
 
 namespace Ui {
@@ -36,10 +36,10 @@ private slots:
 	void SetUserCustomCharacters(const QString& customCharacters);
 	void ToggleMakeMnemonic(bool checked);
 	void ToggleKeepHistory(bool checked);
-	void ToggleRemoveSpecialCharacters(bool checked);
-	void ToggleRemoveUppercaseLetters(bool checked);
-	void ToggleRemoveLowercaseLetters(bool checked);
-	void ToggleRemoveNumbers(bool checked);
+	void ToggleUseSpecial(bool checked);
+	void ToggleUseUppercase(bool checked);
+	void ToggleUseLowercase(bool checked);
+	void ToggleUseNumbers(bool checked);
 	void ToggleDefaultOptions();
 	void SetPasswordLength(const QString& passwordLength);
 	// User actions
@@ -55,13 +55,13 @@ private:
 	Ui::MiniPass* ui;
 	std::string password;
 	uint32_t passwordLength;
-	bool removeNumbers;
-	bool removeLowercaseLetters;
-	bool removeUppercaseLetters;
-	bool removeSpecialCharacters;
+	bool useNumbers;
+	bool useLowercase;
+	bool useUppercase;
+	bool useSpecial;
 	bool makeMnemonic;
 	bool keepHistory;
-	std::string removeCustomCharacters;
+	std::string useCustom;
 	std::string mnemonicPhrase;
 	std::string keepHistoryFilePath;
 public:
@@ -89,13 +89,13 @@ public:
 
 	// Getters
 	uint32_t GetPasswordLength() const { return passwordLength; };
-	bool IsRemoveNumbers() const { return removeNumbers; };
-	bool IsRemoveLowercaseLetters() const { return removeLowercaseLetters; };
-	bool IsRemoveUppercaseLetters() const { return removeUppercaseLetters; };
-	bool IsRemoveSpecialCharacters() const { return removeSpecialCharacters; };
+	bool IsUseNumbers() const { return useNumbers; };
+	bool IsUseLowercase() const { return useLowercase; };
+	bool IsUseUppercase() const { return useUppercase; };
+	bool IsUseSpecial() const { return useSpecial; };
 	bool IsMakeMnemonic() const { return makeMnemonic; };
 	bool IsKeepHistory() const { return keepHistory; };
-	std::string GetRemoveCustomCharacters() const { return removeCustomCharacters; };
+	std::string GetUseCustom() const { return useCustom; };
 	std::string GetMnemonicPhrase() const { return mnemonicPhrase; };
 	std::string GetKeepHistoryFilePath() const { return keepHistoryFilePath; };
 

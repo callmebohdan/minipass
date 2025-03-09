@@ -55,14 +55,14 @@
        <enum>QFormLayout::RowWrapPolicy::DontWrapRows</enum>
       </property>
       <item row="0" column="0">
-       <widget class="QLabel" name="removeCustomCharactersLabel">
+       <widget class="QLabel" name="useCustomLabel">
         <property name="text">
          <string>Remove Custom Characters</string>
         </property>
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLineEdit" name="removeCustomCharacters">
+       <widget class="QLineEdit" name="useCustom">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
           <horstretch>0</horstretch>
@@ -118,14 +118,14 @@
        </widget>
       </item>
       <item row="3" column="0">
-       <widget class="QLabel" name="removeSpecialCharactersLabel">
+       <widget class="QLabel" name="useSpecialLabel">
         <property name="text">
          <string>Remove Special Characters</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QCheckBox" name="removeSpecialCharacters">
+       <widget class="QCheckBox" name="useSpecial">
         <property name="layoutDirection">
          <enum>Qt::LayoutDirection::LeftToRight</enum>
         </property>
@@ -135,7 +135,7 @@
        </widget>
       </item>
       <item row="4" column="1">
-       <widget class="QCheckBox" name="removeUppercaseLetters">
+       <widget class="QCheckBox" name="useUppercase">
         <property name="layoutDirection">
          <enum>Qt::LayoutDirection::LeftToRight</enum>
         </property>
@@ -145,14 +145,14 @@
        </widget>
       </item>
       <item row="5" column="0">
-       <widget class="QLabel" name="removeLowercaseLettersLabel">
+       <widget class="QLabel" name="useLowercaseLabel">
         <property name="text">
          <string>Remove Lowercase Letters</string>
         </property>
        </widget>
       </item>
       <item row="5" column="1">
-       <widget class="QCheckBox" name="removeLowercaseLetters">
+       <widget class="QCheckBox" name="useLowercase">
         <property name="layoutDirection">
          <enum>Qt::LayoutDirection::LeftToRight</enum>
         </property>
@@ -162,14 +162,14 @@
        </widget>
       </item>
       <item row="6" column="0">
-       <widget class="QLabel" name="removeNumbersLabel">
+       <widget class="QLabel" name="useNumbersLabel">
         <property name="text">
          <string>Remove Numbers</string>
         </property>
        </widget>
       </item>
       <item row="6" column="1">
-       <widget class="QCheckBox" name="removeNumbers">
+       <widget class="QCheckBox" name="useNumbers">
         <property name="layoutDirection">
          <enum>Qt::LayoutDirection::LeftToRight</enum>
         </property>
@@ -222,7 +222,7 @@
        </widget>
       </item>
       <item row="4" column="0">
-       <widget class="QLabel" name="removeUppercaseLettersLabel">
+       <widget class="QLabel" name="useUppercaseLabel">
         <property name="text">
          <string>Remove Uppercase Letters</string>
         </property>

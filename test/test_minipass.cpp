@@ -8,83 +8,83 @@
 TEST(TestMiniPass, DefaultConstructor) {
 	MiniPass minipass;
 	ASSERT_EQ(minipass.GetPasswordLength(), 16);
-	ASSERT_FALSE(minipass.IsRemoveNumbers());
-	ASSERT_FALSE(minipass.IsRemoveLowercaseLetters());
-	ASSERT_FALSE(minipass.IsRemoveUppercaseLetters());
-	ASSERT_FALSE(minipass.IsRemoveSpecialCharacters());
+	ASSERT_FALSE(minipass.IsUseNumbers());
+	ASSERT_FALSE(minipass.IsUseLowercase());
+	ASSERT_FALSE(minipass.IsUseUppercase());
+	ASSERT_FALSE(minipass.IsUseSpecial());
 	ASSERT_FALSE(minipass.IsMakeMnemonic());
 	ASSERT_FALSE(minipass.IsKeepHistory());
-	ASSERT_EQ(minipass.GetRemoveCustomCharacters(), "");
+	ASSERT_EQ(minipass.GetUseCustom(), "");
 }
 
 TEST(TestMiniPass, ParametrizedConstructor) {
 	PasswordSettings settings;
 	settings.passwordLength = 32;
-	settings.removeNumbers = true;
-	settings.removeLowercaseLetters = true;
-	settings.removeUppercaseLetters = true;
-	settings.removeSpecialCharacters = true;
+	settings.useNumbers = true;
+	settings.useLowercase = true;
+	settings.useUppercase = true;
+	settings.useSpecial = true;
 	settings.makeMnemonic = true;
 	settings.keepHistory = true;
-	settings.removeCustomCharacters = "true";
+	settings.useCustom = "true";
 
 	MiniPass minipass(settings);
 
 	ASSERT_EQ(minipass.GetPasswordLength(), settings.passwordLength);
-	ASSERT_EQ(minipass.IsRemoveNumbers(), settings.removeNumbers);
-	ASSERT_EQ(minipass.IsRemoveLowercaseLetters(), settings.removeLowercaseLetters);
-	ASSERT_EQ(minipass.IsRemoveUppercaseLetters(), settings.removeUppercaseLetters);
-	ASSERT_EQ(minipass.IsRemoveSpecialCharacters(), settings.removeSpecialCharacters);
+	ASSERT_EQ(minipass.IsUseNumbers(), settings.useNumbers);
+	ASSERT_EQ(minipass.IsUseLowercase(), settings.useLowercase);
+	ASSERT_EQ(minipass.IsUseUppercase(), settings.useUppercase);
+	ASSERT_EQ(minipass.IsUseSpecial(), settings.useSpecial);
 	ASSERT_EQ(minipass.IsMakeMnemonic(), settings.makeMnemonic);
 	ASSERT_EQ(minipass.IsKeepHistory(), settings.keepHistory);
-	ASSERT_EQ(minipass.GetRemoveCustomCharacters(), settings.removeCustomCharacters);
+	ASSERT_EQ(minipass.GetUseCustom(), settings.useCustom);
 }
 
 TEST(TestMiniPass, CopyConstructor) {
 	PasswordSettings minipassOriginal;
 	minipassOriginal.passwordLength = 32;
-	minipassOriginal.removeNumbers = true;
-	minipassOriginal.removeLowercaseLetters = true;
-	minipassOriginal.removeUppercaseLetters = true;
-	minipassOriginal.removeSpecialCharacters = true;
+	minipassOriginal.useNumbers = true;
+	minipassOriginal.useLowercase = true;
+	minipassOriginal.useUppercase = true;
+	minipassOriginal.useSpecial = true;
 	minipassOriginal.makeMnemonic = true;
 	minipassOriginal.keepHistory = true;
-	minipassOriginal.removeCustomCharacters = "true";
+	minipassOriginal.useCustom = "true";
 
 	MiniPass minipassCopy(minipassOriginal);
 
 	ASSERT_EQ(minipassCopy.GetPasswordLength(), minipassOriginal.passwordLength);
-	ASSERT_EQ(minipassCopy.IsRemoveNumbers(), minipassOriginal.removeNumbers);
-	ASSERT_EQ(minipassCopy.IsRemoveLowercaseLetters(), minipassOriginal.removeLowercaseLetters);
-	ASSERT_EQ(minipassCopy.IsRemoveUppercaseLetters(), minipassOriginal.removeUppercaseLetters);
-	ASSERT_EQ(minipassCopy.IsRemoveSpecialCharacters(), minipassOriginal.removeSpecialCharacters);
+	ASSERT_EQ(minipassCopy.IsUseNumbers(), minipassOriginal.useNumbers);
+	ASSERT_EQ(minipassCopy.IsUseLowercase(), minipassOriginal.useLowercase);
+	ASSERT_EQ(minipassCopy.IsUseUppercase(), minipassOriginal.useUppercase);
+	ASSERT_EQ(minipassCopy.IsUseSpecial(), minipassOriginal.useSpecial);
 	ASSERT_EQ(minipassCopy.IsMakeMnemonic(), minipassOriginal.makeMnemonic);
 	ASSERT_EQ(minipassCopy.IsKeepHistory(), minipassOriginal.keepHistory);
-	ASSERT_EQ(minipassCopy.GetRemoveCustomCharacters(), minipassOriginal.removeCustomCharacters);
+	ASSERT_EQ(minipassCopy.GetUseCustom(), minipassOriginal.useCustom);
 }
 
 TEST(TestMiniPass, AssignmentOperator) {
 	PasswordSettings minipassOriginal;
 	minipassOriginal.passwordLength = 32;
-	minipassOriginal.removeNumbers = true;
-	minipassOriginal.removeLowercaseLetters = true;
-	minipassOriginal.removeUppercaseLetters = true;
-	minipassOriginal.removeSpecialCharacters = true;
+	minipassOriginal.useNumbers = true;
+	minipassOriginal.useLowercase = true;
+	minipassOriginal.useUppercase = true;
+	minipassOriginal.useSpecial = true;
 	minipassOriginal.makeMnemonic = true;
 	minipassOriginal.keepHistory = true;
-	minipassOriginal.removeCustomCharacters = "true";
+	minipassOriginal.useCustom = "true";
 
 	MiniPass minipassOther;
 	minipassOther = minipassOriginal;
 
 	ASSERT_EQ(minipassOther.GetPasswordLength(), minipassOriginal.passwordLength);
-	ASSERT_EQ(minipassOther.IsRemoveNumbers(), minipassOriginal.removeNumbers);
-	ASSERT_EQ(minipassOther.IsRemoveLowercaseLetters(), minipassOriginal.removeLowercaseLetters);
-	ASSERT_EQ(minipassOther.IsRemoveUppercaseLetters(), minipassOriginal.removeUppercaseLetters);
-	ASSERT_EQ(minipassOther.IsRemoveSpecialCharacters(), minipassOriginal.removeSpecialCharacters);
+	ASSERT_EQ(minipassOther.IsUseNumbers(), minipassOriginal.useNumbers);
+	ASSERT_EQ(minipassOther.IsUseLowercase(), minipassOriginal.useLowercase);
+	ASSERT_EQ(minipassOther.IsUseUppercase(), minipassOriginal.useUppercase);
+	ASSERT_EQ(minipassOther.IsUseSpecial(), minipassOriginal.useSpecial);
 	ASSERT_EQ(minipassOther.IsMakeMnemonic(), minipassOriginal.makeMnemonic);
 	ASSERT_EQ(minipassOther.IsKeepHistory(), minipassOriginal.keepHistory);
-	ASSERT_EQ(minipassOther.GetRemoveCustomCharacters(), minipassOriginal.removeCustomCharacters);
+	ASSERT_EQ(minipassOther.GetUseCustom(), minipassOriginal.useCustom);
 }
 
 TEST(TestMiniPass, GenerateRandomIndex_EmptySet)
@@ -165,13 +165,13 @@ TEST(TestMiniPass, ParseCommandLineArguments_DefaultSettings) {
 
 	EXPECT_TRUE(settings.defaultSettings);
 	EXPECT_EQ(settings.passwordLength, 16);
-	EXPECT_FALSE(settings.removeNumbers);
-	EXPECT_FALSE(settings.removeLowercaseLetters);
-	EXPECT_FALSE(settings.removeUppercaseLetters);
-	EXPECT_FALSE(settings.removeSpecialCharacters);
+	EXPECT_FALSE(settings.useNumbers);
+	EXPECT_FALSE(settings.useLowercase);
+	EXPECT_FALSE(settings.useUppercase);
+	EXPECT_FALSE(settings.useSpecial);
 	EXPECT_FALSE(settings.makeMnemonic);
 	EXPECT_FALSE(settings.keepHistory);
-	EXPECT_EQ(settings.removeCustomCharacters, "");
+	EXPECT_EQ(settings.useCustom, "");
 }
 
 TEST(TestMiniPass, ParseCommandLineArguments_DefaultSettingsOption) {
@@ -182,13 +182,13 @@ TEST(TestMiniPass, ParseCommandLineArguments_DefaultSettingsOption) {
 
 	EXPECT_TRUE(settings.defaultSettings);
 	EXPECT_EQ(settings.passwordLength, 16);
-	EXPECT_FALSE(settings.removeNumbers);
-	EXPECT_FALSE(settings.removeLowercaseLetters);
-	EXPECT_FALSE(settings.removeUppercaseLetters);
-	EXPECT_FALSE(settings.removeSpecialCharacters);
+	EXPECT_FALSE(settings.useNumbers);
+	EXPECT_FALSE(settings.useLowercase);
+	EXPECT_FALSE(settings.useUppercase);
+	EXPECT_FALSE(settings.useSpecial);
 	EXPECT_FALSE(settings.makeMnemonic);
 	EXPECT_FALSE(settings.keepHistory);
-	EXPECT_EQ(settings.removeCustomCharacters, "");
+	EXPECT_EQ(settings.useCustom, "");
 }
 
 TEST(TestMiniPass, ParseCommandLineArguments_PasswordLengthWithoutNumber) {
@@ -227,76 +227,76 @@ TEST(TestMiniPass, ParseCommandLineArguments_PasswordLengthIsSpecialCharacter) {
 	EXPECT_EQ(settings.passwordLength, 16);
 }
 
-TEST(TestMiniPass, ParseCommandLineArguments_RemoveNumbersShort) {
+TEST(TestMiniPass, ParseCommandLineArguments_useNumbersShort) {
 	char* argv[] = {"./minipass.exe", "-n"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.removeNumbers, true);
+	EXPECT_EQ(settings.useNumbers, true);
 }
 
-TEST(TestMiniPass, ParseCommandLineArguments_RemoveNumbersLong) {
+TEST(TestMiniPass, ParseCommandLineArguments_useNumbersLong) {
 	char* argv[] = {"./minipass.exe", "--numbers"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.removeNumbers, true);
+	EXPECT_EQ(settings.useNumbers, true);
 }
 
-TEST(TestMiniPass, ParseCommandLineArguments_RemoveLowercaseLettersShort) {
+TEST(TestMiniPass, ParseCommandLineArguments_useLowercaseShort) {
 	char* argv[] = {"./minipass.exe", "-o"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.removeLowercaseLetters, true);
+	EXPECT_EQ(settings.useLowercase, true);
 }
 
-TEST(TestMiniPass, ParseCommandLineArguments_RemoveLowercaseLettersLong) {
+TEST(TestMiniPass, ParseCommandLineArguments_useLowercaseLong) {
 	char* argv[] = {"./minipass.exe", "--lower"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.removeLowercaseLetters, true);
+	EXPECT_EQ(settings.useLowercase, true);
 }
 
-TEST(TestMiniPass, ParseCommandLineArguments_RemoveUppercaseLettersShort) {
+TEST(TestMiniPass, ParseCommandLineArguments_useUppercaseShort) {
 	char* argv[] = {"./minipass.exe", "-u"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.removeUppercaseLetters, true);
+	EXPECT_EQ(settings.useUppercase, true);
 }
 
-TEST(TestMiniPass, ParseCommandLineArguments_RemoveUppercaseLettersLong) {
+TEST(TestMiniPass, ParseCommandLineArguments_useUppercaseLong) {
 	char* argv[] = {"./minipass.exe", "--upper"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.removeUppercaseLetters, true);
+	EXPECT_EQ(settings.useUppercase, true);
 }
 
-TEST(TestMiniPass, ParseCommandLineArguments_RemoveSpecialCharactersShort) {
+TEST(TestMiniPass, ParseCommandLineArguments_useSpecialShort) {
 	char* argv[] = {"./minipass.exe", "-s"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.removeSpecialCharacters, true);
+	EXPECT_EQ(settings.useSpecial, true);
 }
 
-TEST(TestMiniPass, ParseCommandLineArguments_RemoveSpecialCharactersLong) {
+TEST(TestMiniPass, ParseCommandLineArguments_useSpecialLong) {
 	char* argv[] = {"./minipass.exe", "--special"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.removeSpecialCharacters, true);
+	EXPECT_EQ(settings.useSpecial, true);
 }
 
 TEST(TestMiniPass, ParseCommandLineArguments_KeepHistoryShort) {
@@ -342,10 +342,10 @@ TEST(TestMiniPass, ParseCommandLineArguments_MultipleShortOptions) {
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
 	EXPECT_EQ(settings.defaultSettings, true);
-	EXPECT_EQ(settings.removeNumbers, true);
-	EXPECT_EQ(settings.removeLowercaseLetters, true);
-	EXPECT_EQ(settings.removeUppercaseLetters, true);
-	EXPECT_EQ(settings.removeSpecialCharacters, true);
+	EXPECT_EQ(settings.useNumbers, true);
+	EXPECT_EQ(settings.useLowercase, true);
+	EXPECT_EQ(settings.useUppercase, true);
+	EXPECT_EQ(settings.useSpecial, true);
 	EXPECT_EQ(settings.keepHistory, true);
 	EXPECT_EQ(settings.makeMnemonic, true);
 }
@@ -356,11 +356,11 @@ TEST(TestMiniPass, ParseCommandLineArguments_MultipleShortOptionsWithLengthAndCu
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.removeNumbers, true);
-	EXPECT_EQ(settings.removeUppercaseLetters, true);
-	EXPECT_EQ(settings.removeSpecialCharacters, true);
+	EXPECT_EQ(settings.useNumbers, true);
+	EXPECT_EQ(settings.useUppercase, true);
+	EXPECT_EQ(settings.useSpecial, true);
 	EXPECT_EQ(settings.keepHistory, true);
 	EXPECT_EQ(settings.makeMnemonic, true);
 	EXPECT_EQ(settings.passwordLength, 16);
-	EXPECT_EQ(settings.removeCustomCharacters, "");
+	EXPECT_EQ(settings.useCustom, "");
 }
