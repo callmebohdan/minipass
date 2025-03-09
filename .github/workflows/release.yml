@@ -44,8 +44,8 @@ jobs:
 
       - name: Get stable version and description from version.json
         run: |
-            version=$(cat version.json | grep '"stable"' | grep -Eo '[0-9]+\.[0-9]+\.[0-9]+')
-            description=$(cat version.json | jq -r --arg version "$version" '.changelog[] | select(.version == $version) | .description')
+            version=$(jq -r '.stable' version.json)
+            description=$(jq -r --arg version "$version" '.changelog[] | select(.version == $version) | .description' version.json)
             echo "version=$version" >> $GITHUB_ENV
             echo "description=$description" >> $GITHUB_ENV
   
