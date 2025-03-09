@@ -141,3 +141,28 @@ Linux:
     export QT_QPA_PLATFORM=xcb
     ```
 
+## Release
+
+1. Update version.json with the new version and description:
+
+    ```bash
+    git add version.json
+    ```
+
+2. Commit the changes to version.json:
+
+    ```bash
+    git commit -m "Update version to v0.1.0"
+    ```
+
+3. Create the tag:
+
+    ```bash
+    git tag v0.1.0
+    ```
+
+4. Push the tag:
+
+    ```bash
+    git push origin v0.1.0
+    ```
