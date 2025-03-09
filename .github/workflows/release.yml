@@ -48,6 +48,7 @@ jobs:
             description=$(jq -r --arg version "$version" '.changelog[] | select(.version == $version) | .description' version.json)
             echo "version=$version" >> $GITHUB_ENV
             echo "description=$description" >> $GITHUB_ENV
+        shell: /usr/bin/bash -e {0}
   
       - name: Set up Git for pushing tags
         run: |
@@ -56,17 +57,8 @@ jobs:
   
       - name: Create Git Tag
         run: |
-            git tag "v$version"
-  
-      - name: Set remote URL for push
-        run: |
-            git remote set-url origin https://github-actions:${{ secrets.GH_TOKEN }}@github.com/${{ github.repository }}.git
-  
-      - name: Push Git Tag
-        run: |
-            git push origin "v$version"
-        env:
-            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+              git tag "v$version"
+              git push origin "v$version"
   
       - name: Copy build artifacts
         run: |
@@ -84,7 +76,7 @@ jobs:
         with:
             tag_name: ${{ github.ref_name }}
             files: minipass.tar.gz
-            name: "MiniPass $version"
+            name: "minipass $version"
             body: ${{ env.description }}
         env:
             GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
