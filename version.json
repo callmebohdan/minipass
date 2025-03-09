@@ -1,0 +1,10 @@
+{
+    "stable": "0.1.0",
+    "stable_url": "https://github.com/callmebohdan/minipass/releases/tag/v0.1",
+    "releases": [
+        "0.1.0"
+    ],
+    "changelog": [
+        { "version": "0.1.0", "description": "Initial pre-release" }
+    ]
+}
