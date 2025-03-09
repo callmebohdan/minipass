@@ -42,6 +42,11 @@ jobs:
           cd "$GITHUB_WORKSPACE/build"
           cmake --build . --config Release
 
+      - name: Get stable version from version.json
+        run: |
+          version=$(jq -r '.stable' "$GITHUB_WORKSPACE/version.json")
+          echo "VERSION=$version" >> $GITHUB_ENV
+
       - name: Set up Git for pushing tags
         run: |
             git config --global user.name "github-actions"
@@ -49,8 +54,7 @@ jobs:
 
       - name: Create Git Tag
         run: |
-          TAG_NAME="v$(date +'%Y.%m.%d')"
-          git tag $TAG_NAME
+          git tag ${{ env.VERSION }}
 
       - name: Set remote URL for push
         run: |
@@ -58,7 +62,7 @@ jobs:
 
       - name: Push Git Tag
         run: |
-          git push origin $TAG_NAME
+          git push origin ${{ env.VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
 
