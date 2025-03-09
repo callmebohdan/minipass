@@ -25,4 +25,4 @@ sudo apt-get -y install libgtest-dev
 cd /usr/src/gtest && sudo cmake . && sudo make && sudo mv lib* /usr/lib/ && cd -
 
 # Install XKB library
-sudo apt install libxkbcommon-dev
+sudo apt-get -y install libxkbcommon-dev
