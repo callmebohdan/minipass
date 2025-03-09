@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Retrieve new lists of packages
+sudo apt-get update
+
+# Perform an upgrade
+sudo apt-get -y upgrade
+
 # Install CMake
 sudo apt-get -y install cmake
 
