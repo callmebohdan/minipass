@@ -75,13 +75,7 @@ Linux:
 5. Clean previous builds:
 
     ```bash
-    sh ./scripts/clean.sh
-    ```
-
-5. To fix the **Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway** run:
-
-    ```bash
-    export QT_QPA_PLATFORM=xcb
+    bash ./scripts/clean.sh
     ```
 
 ## Usage
@@ -138,3 +132,12 @@ Linux:
     ```bash
     ./bin/TestMinipass
     ```
+
+## Troubleshooting
+
+1. To fix the **Warning: Ignoring XDG_SESSION_TYPE=wayland on Gnome. Use QT_QPA_PLATFORM=wayland to run on Wayland anyway** run:
+
+    ```bash
+    export QT_QPA_PLATFORM=xcb
+    ```
+
