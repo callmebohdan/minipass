@@ -77,12 +77,11 @@ jobs:
               exit 1
             fi
   
-      - name: Upload Release Asset
+      - name: Create Release
         uses: softprops/action-gh-release@v1
         with:
-            tag_name: ${{ github.ref_name }}
-            files: minipass.tar.gz
-            name: "minipass $version"
-            body: ${{ env.description }}
+          tag_name: "v${{ env.version }}"
+          release_name: "minipass v${{ env.version }}"
+          body: "Release description for minipass v${{ env.version }}"
         env:
-            GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
