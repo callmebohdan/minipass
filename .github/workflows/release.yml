@@ -56,8 +56,18 @@ jobs:
   
       - name: Create Git Tag
         run: |
-              git tag "v$version"
-              git push origin "v$version"
+          base_version=$(jq -r '.stable' version.json)
+          version=$base_version
+
+          while git rev-parse "v$version" >/dev/null 2>&1; do
+            IFS='.' read -r major minor patch <<< "$version"
+            patch=$((patch + 1))
+            version="$major.$minor.$patch"
+          done
+
+          git tag "v$version"
+          git push origin "v$version"
+          echo "version=$version" >> $GITHUB_ENV
   
       - name: Copy build artifacts
         run: |
