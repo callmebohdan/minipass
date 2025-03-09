@@ -2,92 +2,29 @@
 
 A minimalistic command-line password generator with customizable settings.
 
-## Requirements
+## Dependencies
 
- - Cmake v3.30.2
  - MSVC2019_64 (Windows)
  - GCC v14.2 (Linux)
- - Qt6 v6.7.2
- - GTest v1.12.1
+ - Cmake v3.30.2 (Windows, Linux)
+ - Qt6 v6.7.2 (Windows, Linux)
+ - GTest v1.12.1 (Windows, Linux)
 
-## Requirements installation
+## Install dependencies
 
 Windows:
 
-1. [Install Cmake](https://cmake.org/download).
-
-2. [Install Qt6 via Qt Online Installer](https://doc.qt.io/qt-6/qt-online-installation.html).
-Also install MSVC2019_64 (Qt Maintenance Tool -> Add or remove components -> Qt -> Qt 6.7.2 -> MSVC 2019 64-bit).
-
-3. Add the Qt6 install location to PATH:
-
-    ```powershell
-    $env:PATH = "C:\Qt\6.7.2\mingw_64\bin;$env:PATH"
-    ```
-
-4. [Install GTest](https://github.com/google/googletest/blob/main/googletest/README.md):
-
-    ```powershell
-    cd C:\Program Files
-    ```
-    
-    ```powershell
-    git clone https://github.com/microsoft/vcpkg.git
-    ```
-    
-    ```powershell
-    cd vcpkg
-    ```
-
-    ```powershell
-    .\bootstrap-vcpkg.bat
-    ```
-    
-    ```powershell
-    $env:VCPKG_ROOT = "C:\Program Files\vcpkg"
-    ```
-
-    ```powershell
-    $env:PATH = "$env:VCPKG_ROOT;$env:PATH"
-    ```
-
-    ```powershell
-    vcpkg install gtest
-    ```
+```powershell
+.\scripts\install.bat
+```
 
 Linux:
 
-1. Install Cmake:
+```bash
+bash scripts/install.sh
+```
 
-    ```bash
-    sudo apt-get -y install cmake
-    ```
-  
-2. Install gcc:
-
-    ```bash
-    sudo apt-get -y install build-essential
-    ```
-
-3. Install Qt6:
-
-    ```bash
-    sudo apt-get -y install libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev qt6-base-dev qt6-base-dev-tools libxcb-cursor0
-    ```
-
-4. Install GTest:
-
-    ```bash
-    sudo apt-get -y install libgtest-dev
-    ```
-
-   Build and install static libraries:
-   
-    ```bash
-    cd /usr/src/gtest && sudo cmake . && sudo make && sudo mv libg* /usr/lib/ && cd -
-    ```
-
-## Build
+## Build the project
 
 Windows:
 
@@ -109,13 +46,7 @@ Windows:
     .\scripts\build.bat
     ```
 
-4. Run minipass:
-
-    ```powershell
-    .\bin\minipass.exe
-    ```
-
-5. Clean previous builds:
+4. Clean previous builds:
 
     ```powershell
     .\scripts\clean.bat
@@ -135,16 +66,10 @@ Linux:
     cd minipass
     ```
 
-3. Build the project:
+4. Build the project:
 
     ```bash
-    sh ./scripts/build.sh
-    ```
-
-4. Run minipass:
-
-    ```bash
-    ./bin/minipass
+    bash ./scripts/build.sh
     ```
 
 5. Clean previous builds:
