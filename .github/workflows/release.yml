@@ -81,7 +81,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: "v${{ env.version }}"
-          release_name: "minipass v${{ env.version }}"
+          name: "minipass v${{ env.version }}"
           body: "Release description for minipass v${{ env.version }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GH_TOKEN }}
