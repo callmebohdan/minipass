@@ -15,6 +15,6 @@ FetchContent_Declare(
 
 FetchContent_MakeAvailable(googletest)
 
-add_executable(TestMinipass test_minipass.cpp)
+add_executable(GoogleTestMinipass googletest_minipass.cpp)
 
-target_link_libraries(TestMinipass PRIVATE gtest gtest_main minipass_lib)
+target_link_libraries(GoogleTestMinipass PRIVATE gtest gtest_main minipass_lib)
