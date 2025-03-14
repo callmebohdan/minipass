@@ -60,7 +60,7 @@ if exist "%BUILD_DIR%\src\Release\minipass.exe" (
 
 @REM if exist "%BUILD_DIR%\test\Release\" (
 @REM     echo Copying the tests into the bin directory...
-@REM     copy "%BUILD_DIR%\test\Release\TestMinipass.exe" "%BIN_DIR%"
+@REM     copy "%BUILD_DIR%\test\Release\GoogleTestMinipass.exe" "%BIN_DIR%"
 @REM ) else (
 @REM     echo Error: tests were not created.
 @REM )

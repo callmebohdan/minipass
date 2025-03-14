@@ -31,7 +31,7 @@ echo "Generating ui_minipass.h..."
 "$QT_LIB_PATH/uic" "$SRC_DIR/minipass.ui" -o "$SRC_DIR/ui_minipass.h"
 
 # Verbose build output
-make VERBOSE=1
+make VERBOSE=0
 
 if [ -f "$BUILD_DIR/src/minipass" ]; then
     mkdir -p "$BIN_DIR"
@@ -41,9 +41,9 @@ else
     echo "Error: minipass build was not successfull."
 fi
 
-# if [ -f "$BUILD_DIR/test/TestMinipass" ]; then
+# if [ -f "$BUILD_DIR/test/GoogleTestMinipass" ]; then
 #     echo "Copying tests into bin/..."
-#     cp "$BUILD_DIR/test/TestMinipass" "$BIN_DIR"
+#     cp "$BUILD_DIR/test/GoogleTestMinipass" "$BIN_DIR"
 # else
 #     echo "No tests found. Skipping."
 # fi

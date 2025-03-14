@@ -123,14 +123,14 @@ Windows:
 
 1. Test minipass.cpp:
     ```powershell
-    .\bin\TestMinipass.exe
+    .\bin\GoogleTestMinipass.exe
     ```
 
 Linux:
 
 1. Test minipass.cpp:
     ```bash
-    ./bin/TestMinipass
+    ./bin/GoogleTestMinipass
     ```
 
 ## Troubleshooting
