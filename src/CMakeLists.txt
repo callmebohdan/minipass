@@ -1,4 +1,5 @@
 ﻿find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Boost REQUIRED COMPONENTS program_options)
 
 set(ASSET_FILES ../assets/icon/minipass.rc)
 set(HEADER_FILES minipass.hpp)
@@ -15,6 +16,6 @@ else()
     qt_add_executable(minipass ${SOURCE_FILES} ${HEADER_FILES} ${UI_HEADERS} ${ASSET_FILES})
 endif()
 
-target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets)
+target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Boost::program_options)
 
 # target_link_libraries(minipass_lib Qt6::Core Qt6::Gui Qt6::Multimedia Qt6::Widgets Qt6::MultimediaWidgets)
