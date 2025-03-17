@@ -9,15 +9,15 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>431</width>
-    <height>251</height>
+    <width>359</width>
+    <height>227</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string notr="true">minipass</string>
   </property>
   <property name="toolButtonStyle">
-   <enum>Qt::ToolButtonStyle::ToolButtonIconOnly</enum>
+   <enum>Qt::ToolButtonIconOnly</enum>
   </property>
   <property name="animated">
    <bool>true</bool>
@@ -34,30 +34,33 @@
      <rect>
       <x>10</x>
       <y>0</y>
-      <width>241</width>
-      <height>241</height>
+      <width>171</width>
+      <height>221</height>
      </rect>
     </property>
     <property name="title">
      <string>Options</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
     </property>
     <widget class="QWidget" name="formLayoutWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>30</y>
-       <width>221</width>
-       <height>201</height>
+       <width>151</width>
+       <height>181</height>
       </rect>
      </property>
      <layout class="QFormLayout" name="formLayout">
       <property name="rowWrapPolicy">
-       <enum>QFormLayout::RowWrapPolicy::DontWrapRows</enum>
+       <enum>QFormLayout::DontWrapRows</enum>
       </property>
       <item row="0" column="0">
        <widget class="QLabel" name="useCustomLabel">
         <property name="text">
-         <string>Remove Custom Characters</string>
+         <string>Custom</string>
         </property>
        </widget>
       </item>
@@ -71,29 +74,22 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>60</width>
+          <width>70</width>
           <height>20</height>
          </size>
         </property>
         <property name="contextMenuPolicy">
-         <enum>Qt::ContextMenuPolicy::NoContextMenu</enum>
+         <enum>Qt::NoContextMenu</enum>
         </property>
         <property name="autoFillBackground">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="makeMnemonicLabel">
-        <property name="text">
-         <string>Make Mnemonic</string>
-        </property>
-       </widget>
-      </item>
       <item row="1" column="1">
        <widget class="QCheckBox" name="makeMnemonic">
         <property name="layoutDirection">
-         <enum>Qt::LayoutDirection::LeftToRight</enum>
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
          <string/>
@@ -103,14 +99,14 @@
       <item row="2" column="0">
        <widget class="QLabel" name="keepHistoryLabel">
         <property name="text">
-         <string>Keep History</string>
+         <string>History</string>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QCheckBox" name="keepHistory">
         <property name="layoutDirection">
-         <enum>Qt::LayoutDirection::LeftToRight</enum>
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
          <string/>
@@ -120,24 +116,31 @@
       <item row="3" column="0">
        <widget class="QLabel" name="useSpecialLabel">
         <property name="text">
-         <string>Remove Special Characters</string>
+         <string>Special</string>
         </property>
        </widget>
       </item>
       <item row="3" column="1">
        <widget class="QCheckBox" name="useSpecial">
         <property name="layoutDirection">
-         <enum>Qt::LayoutDirection::LeftToRight</enum>
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
          <string/>
         </property>
        </widget>
       </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="useUppercaseLabel">
+        <property name="text">
+         <string>Uppercase</string>
+        </property>
+       </widget>
+      </item>
       <item row="4" column="1">
        <widget class="QCheckBox" name="useUppercase">
         <property name="layoutDirection">
-         <enum>Qt::LayoutDirection::LeftToRight</enum>
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
          <string/>
@@ -147,14 +150,14 @@
       <item row="5" column="0">
        <widget class="QLabel" name="useLowercaseLabel">
         <property name="text">
-         <string>Remove Lowercase Letters</string>
+         <string>Lowercase</string>
         </property>
        </widget>
       </item>
       <item row="5" column="1">
        <widget class="QCheckBox" name="useLowercase">
         <property name="layoutDirection">
-         <enum>Qt::LayoutDirection::LeftToRight</enum>
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
          <string/>
@@ -164,14 +167,14 @@
       <item row="6" column="0">
        <widget class="QLabel" name="useNumbersLabel">
         <property name="text">
-         <string>Remove Numbers</string>
+         <string>Numbers</string>
         </property>
        </widget>
       </item>
       <item row="6" column="1">
        <widget class="QCheckBox" name="useNumbers">
         <property name="layoutDirection">
-         <enum>Qt::LayoutDirection::LeftToRight</enum>
+         <enum>Qt::LeftToRight</enum>
         </property>
         <property name="text">
          <string/>
@@ -179,30 +182,13 @@
        </widget>
       </item>
       <item row="7" column="0">
-       <widget class="QLabel" name="defaultOptionsLabel">
+       <widget class="QLabel" name="passwordLengthLabel">
         <property name="text">
-         <string>Default Options</string>
+         <string>Length</string>
         </property>
        </widget>
       </item>
       <item row="7" column="1">
-       <widget class="QCheckBox" name="defaultOptions">
-        <property name="layoutDirection">
-         <enum>Qt::LayoutDirection::LeftToRight</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="0">
-       <widget class="QLabel" name="passwordLengthLabel">
-        <property name="text">
-         <string>Password Length</string>
-        </property>
-       </widget>
-      </item>
-      <item row="8" column="1">
        <widget class="QLineEdit" name="passwordLength">
         <property name="sizePolicy">
          <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
@@ -212,7 +198,7 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>60</width>
+          <width>35</width>
           <height>20</height>
          </size>
         </property>
@@ -221,10 +207,10 @@
         </property>
        </widget>
       </item>
-      <item row="4" column="0">
-       <widget class="QLabel" name="useUppercaseLabel">
+      <item row="1" column="0">
+       <widget class="QLabel" name="makeMnemonicLabel">
         <property name="text">
-         <string>Remove Uppercase Letters</string>
+         <string>Mnemonic</string>
         </property>
        </widget>
       </item>
@@ -234,56 +220,33 @@
    <widget class="QGroupBox" name="groupBoxOutput">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>190</x>
       <y>150</y>
       <width>161</width>
-      <height>91</height>
+      <height>71</height>
      </rect>
     </property>
     <property name="title">
      <string>Output</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
     <widget class="QPlainTextEdit" name="randomPassword">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>50</y>
+       <y>30</y>
        <width>141</width>
        <height>31</height>
       </rect>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="copyPassword">
-     <property name="geometry">
-      <rect>
-       <x>90</x>
-       <y>20</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Copy</string>
-     </property>
-    </widget>
-    <widget class="QPushButton" name="clearPassword">
-     <property name="geometry">
-      <rect>
-       <x>30</x>
-       <y>20</y>
-       <width>41</width>
-       <height>21</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>Clear</string>
      </property>
     </widget>
    </widget>
    <widget class="QGroupBox" name="groupBoxActions">
     <property name="geometry">
      <rect>
-      <x>260</x>
+      <x>190</x>
       <y>0</y>
       <width>161</width>
       <height>151</height>
@@ -292,43 +255,46 @@
     <property name="title">
      <string>Actions</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignCenter</set>
+    </property>
     <widget class="QToolButton" name="generatePassword">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>20</y>
+       <y>30</y>
        <width>141</width>
-       <height>21</height>
+       <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>Generate Password</string>
+      <string>Generate</string>
      </property>
     </widget>
     <widget class="QToolButton" name="resetOptions">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>80</y>
+       <y>70</y>
        <width>141</width>
-       <height>22</height>
+       <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>Reset Options</string>
+      <string>Reset</string>
      </property>
     </widget>
     <widget class="QToolButton" name="exitMinipass">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>110</y>
+       <y>90</y>
        <width>141</width>
-       <height>22</height>
+       <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>Close Application</string>
+      <string>Close</string>
      </property>
     </widget>
     <widget class="QToolButton" name="openPasswordsHistory">
@@ -337,11 +303,37 @@
        <x>10</x>
        <y>50</y>
        <width>141</width>
-       <height>21</height>
+       <height>16</height>
       </rect>
      </property>
      <property name="text">
-      <string>Open Passwords History</string>
+      <string>Open History</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="clearPassword">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>110</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Clear</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="copyPassword">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>130</y>
+       <width>141</width>
+       <height>16</height>
+      </rect>
+     </property>
+     <property name="text">
+      <string>Copy</string>
      </property>
     </widget>
    </widget>
