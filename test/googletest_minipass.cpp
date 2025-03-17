@@ -157,30 +157,12 @@ TEST(GoogleTestMinipass, GenerateRandomIndex_CharSet)
 	}
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_DefaultSettings) {
+TEST(GoogleTestMinipass, ParseNoCommandLineArguments) {
 	char* argv[] = {"./minipass.exe"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_TRUE(settings.defaultSettings);
-	EXPECT_EQ(settings.passwordLength, 16);
-	EXPECT_FALSE(settings.useNumbers);
-	EXPECT_FALSE(settings.useLowercase);
-	EXPECT_FALSE(settings.useUppercase);
-	EXPECT_FALSE(settings.useSpecial);
-	EXPECT_FALSE(settings.makeMnemonic);
-	EXPECT_FALSE(settings.keepHistory);
-	EXPECT_EQ(settings.useCustom, "");
-}
-
-TEST(GoogleTestMinipass, ParseCommandLineArguments_DefaultSettingsOption) {
-	char* argv[] = {"./minipass.exe -d"};
-	int argc = sizeof(argv) / sizeof(argv[0]);
-
-	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_TRUE(settings.defaultSettings);
 	EXPECT_EQ(settings.passwordLength, 16);
 	EXPECT_FALSE(settings.useNumbers);
 	EXPECT_FALSE(settings.useLowercase);
@@ -341,7 +323,6 @@ TEST(GoogleTestMinipass, ParseCommandLineArguments_MultipleShortOptions) {
 
 	PasswordSettings settings = ParseCommandLineArguments(argc, argv);
 
-	EXPECT_EQ(settings.defaultSettings, true);
 	EXPECT_EQ(settings.useNumbers, true);
 	EXPECT_EQ(settings.useLowercase, true);
 	EXPECT_EQ(settings.useUppercase, true);

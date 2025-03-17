@@ -79,16 +79,6 @@ void MiniPass::ToggleUseNumbers(bool checked) {
 	useNumbers = checked;
 }
 
-void MiniPass::ToggleDefaultOptions() {
-	ui->useCustom->clear();
-	ui->makeMnemonic->setChecked(false);
-	ui->keepHistory->setChecked(false);
-	ui->useSpecial->setChecked(false);
-	ui->useUppercase->setChecked(false);
-	ui->useLowercase->setChecked(false);
-	ui->useNumbers->setChecked(false);
-	ui->passwordLength->setText("16");
-}
 
 void MiniPass::SetPasswordLength(const QString& _passwordLength) {
 	passwordLength = _passwordLength.toInt();
@@ -144,7 +134,6 @@ void MiniPass::ClickResetOptions() {
 	ui->useUppercase->setChecked(false);
 	ui->useLowercase->setChecked(false);
 	ui->useNumbers->setChecked(false);
-	ui->defaultOptions->setChecked(false);
 	ui->passwordLength->clear();
 	//output
 	ui->randomPassword->clear();

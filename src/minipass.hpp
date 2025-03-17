@@ -13,7 +13,6 @@
 
 struct PasswordSettings {
 	uint32_t passwordLength{16};
-	bool defaultSettings = true;
 	bool useNumbers = false;
 	bool useLowercase = false;
 	bool useUppercase = false;
