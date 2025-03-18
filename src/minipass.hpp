@@ -4,6 +4,7 @@
 #include <cstdint>
 #include <limits>
 #include <qmainwindow.h>
+#include <QRandomGenerator>
 #include <qstring.h>
 #include <qtmetamacros.h>
 #include <qwidget.h>
@@ -63,14 +64,15 @@ public:
 	MiniPass(const MiniPass& newCopy)=default;
 	MiniPass& operator=(const MiniPass& other)=default;	
 	// Member functions
-	std::string AllowedCharacters() const;
+	std::string AllowedCharacters(const PasswordSettings& passwordSettings) const;
 	void ApplyMnemonicFilter(const std::string& str);
-	std::string GenerateRandomMnemonicSeed(const char& ch);
-	std::string GenerateRandomPassword();
+	char GenerateRandomMnemonicSeed(const char& ch);
+	std::string GenerateRandomPassword(const PasswordSettings& passwordSettings);
 	std::string GetCurrentTime() const;
 	void HandleCommandLineProgramOptions(const PasswordSettings&);
 	std::string HandleUserInterfaceProgramOptions(const PasswordSettings& passwordSettings);
 	std::string EscapeDoubleQuotes(const std::string& str) const;
+    int GenerateRandomIndex(const std::string &inputSet);
 	void KeepHistory(const std::string& str);
 	void PrintPassword(const std::string& str);
 

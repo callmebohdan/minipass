@@ -107,6 +107,7 @@ void MiniPass::CopyPassword() {
 }
 
 void MiniPass::ClickGeneratePassword() {
+	password.clear();
 	ui->randomPassword->clear();
 	HandleUserOptions();
 	std::string randomPassword = HandleUserInterfaceProgramOptions(programOptions);
@@ -135,6 +136,7 @@ void MiniPass::ClickResetOptions() {
 	ui->useNumbers->setChecked(false);
 	ui->passwordLength->clear();
 	ui->randomPassword->clear();
+	password.clear();
 }
 
 void MiniPass::ClickExitMinipass() {
@@ -156,7 +158,7 @@ MiniPass::MiniPass(const PasswordSettings& passwordSettings)
 
 
 
-std::string MiniPass::AllowedCharacters() const {
+std::string MiniPass::AllowedCharacters(const PasswordSettings& passwordSettings) const {
 	std::string allowedCharacters;
 	if (programOptions.useNumbers && !programOptions.makeMnemonic) allowedCharacters += "0123456789";
 	if (programOptions.useLowercase) allowedCharacters += "abcdefghijklmnopqrstuvwxyz";
@@ -181,7 +183,7 @@ void MiniPass::ApplyMnemonicFilter(const std::string& password) {
 	}
 }
 
-std::string MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
+char MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
 	std::string filename = "assets/db/mnemonic-seeds.txt";
 	std::ifstream file(filename);
 
@@ -195,12 +197,12 @@ std::string MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
 		return {};
 	}
 
-	std::vector<std::string> characterNamedSeeds;
+	std::string characterNamedSeeds;
 	std::string line;
 
 	while (std::getline(file, line)) {
 		if (!line.empty() && line[0] == ch) {
-			characterNamedSeeds.push_back(line);
+			characterNamedSeeds.append(line);
 		}
 	}
 
@@ -221,13 +223,14 @@ std::string MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
 	return characterNamedSeeds[randomMnemonicSeedIndex];
 }
 
-std::string MiniPass::GenerateRandomPassword() {
-	std::string allowedCharacters = AllowedCharacters();
+std::string MiniPass::GenerateRandomPassword(const PasswordSettings& passwordSettings) {
+	programOptions = passwordSettings;
+	std::string allowedCharacters = AllowedCharacters(passwordSettings);
 	if (allowedCharacters.size() < 1) {
 		return {};
 	}
 
-	while (password.length() < passwordLength) {
+	while (password.length() < passwordSettings.passwordLength) {
 		auto randomizedCharacter = GenerateRandomIndex(allowedCharacters);
 		password += allowedCharacters[randomizedCharacter];
 	}
@@ -270,7 +273,7 @@ void MiniPass::KeepHistory(const std::string& password) {
 		passwordsDB << "Creation Date,Password,Mnemonic Phrase" << std::endl;
 	}
 	std::string quotedPassword = "\"" + EscapeDoubleQuotes(password) + "\"";
-	passwordsDB << GetCurrentTime() << "," << quotedPassword << "," << GetMnemonicPhrase() << std::endl;
+	passwordsDB << GetCurrentTime() << "," << quotedPassword << "," << mnemonicPhrase << std::endl;
 	passwordsDB.close();
 }
 

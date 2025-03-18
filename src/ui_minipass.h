@@ -33,12 +33,12 @@ public:
     QFormLayout *formLayout;
     QLabel *useCustomLabel;
     QLineEdit *useCustom;
-    QLabel *makeMnemonicLabel;
     QCheckBox *makeMnemonic;
     QLabel *keepHistoryLabel;
     QCheckBox *keepHistory;
     QLabel *useSpecialLabel;
     QCheckBox *useSpecial;
+    QLabel *useUppercaseLabel;
     QCheckBox *useUppercase;
     QLabel *useLowercaseLabel;
     QCheckBox *useLowercase;
@@ -46,16 +46,16 @@ public:
     QCheckBox *useNumbers;
     QLabel *passwordLengthLabel;
     QLineEdit *passwordLength;
-    QLabel *useUppercaseLabel;
+    QLabel *makeMnemonicLabel;
     QGroupBox *groupBoxOutput;
     QPlainTextEdit *randomPassword;
-    QPushButton *copyPassword;
-    QPushButton *clearPassword;
     QGroupBox *groupBoxActions;
     QToolButton *generatePassword;
     QToolButton *resetOptions;
     QToolButton *exitMinipass;
     QToolButton *openPasswordsHistory;
+    QPushButton *clearPassword;
+    QPushButton *copyPassword;
 
     void setupUi(QMainWindow *MiniPass)
     {
@@ -99,11 +99,10 @@ public:
 
         formLayout->setWidget(0, QFormLayout::FieldRole, useCustom);
 
-        makeMnemonicLabel = new QLabel(formLayoutWidget);
-        makeMnemonicLabel->setObjectName("makeMnemonicLabel");
         makeMnemonic = new QCheckBox(formLayoutWidget);
         makeMnemonic->setObjectName("makeMnemonic");
         makeMnemonic->setLayoutDirection(Qt::LeftToRight);
+
         formLayout->setWidget(1, QFormLayout::FieldRole, makeMnemonic);
 
         keepHistoryLabel = new QLabel(formLayoutWidget);
@@ -127,11 +126,18 @@ public:
         useSpecial->setLayoutDirection(Qt::LeftToRight);
 
         formLayout->setWidget(3, QFormLayout::FieldRole, useSpecial);
+
+        useUppercaseLabel = new QLabel(formLayoutWidget);
+        useUppercaseLabel->setObjectName("useUppercaseLabel");
+
         formLayout->setWidget(4, QFormLayout::LabelRole, useUppercaseLabel);
+
         useUppercase = new QCheckBox(formLayoutWidget);
         useUppercase->setObjectName("useUppercase");
         useUppercase->setLayoutDirection(Qt::LeftToRight);
+
         formLayout->setWidget(4, QFormLayout::FieldRole, useUppercase);
+
         useLowercaseLabel = new QLabel(formLayoutWidget);
         useLowercaseLabel->setObjectName("useLowercaseLabel");
 
@@ -140,25 +146,25 @@ public:
         useLowercase = new QCheckBox(formLayoutWidget);
         useLowercase->setObjectName("useLowercase");
         useLowercase->setLayoutDirection(Qt::LeftToRight);
-        
+
         formLayout->setWidget(5, QFormLayout::FieldRole, useLowercase);
-        
+
         useNumbersLabel = new QLabel(formLayoutWidget);
         useNumbersLabel->setObjectName("useNumbersLabel");
-        
+
         formLayout->setWidget(6, QFormLayout::LabelRole, useNumbersLabel);
-        
+
         useNumbers = new QCheckBox(formLayoutWidget);
         useNumbers->setObjectName("useNumbers");
         useNumbers->setLayoutDirection(Qt::LeftToRight);
-        
+
         formLayout->setWidget(6, QFormLayout::FieldRole, useNumbers);
-        
+
         passwordLengthLabel = new QLabel(formLayoutWidget);
         passwordLengthLabel->setObjectName("passwordLengthLabel");
-        
+
         formLayout->setWidget(7, QFormLayout::LabelRole, passwordLengthLabel);
-        
+
         passwordLength = new QLineEdit(formLayoutWidget);
         passwordLength->setObjectName("passwordLength");
         QSizePolicy sizePolicy1(QSizePolicy::Fixed, QSizePolicy::Fixed);
@@ -168,14 +174,14 @@ public:
         passwordLength->setSizePolicy(sizePolicy1);
         passwordLength->setMaximumSize(QSize(35, 20));
         passwordLength->setAutoFillBackground(true);
-        
+
         formLayout->setWidget(7, QFormLayout::FieldRole, passwordLength);
-        
-        useUppercaseLabel = new QLabel(formLayoutWidget);
-        useUppercaseLabel->setObjectName("useUppercaseLabel");
-        
+
+        makeMnemonicLabel = new QLabel(formLayoutWidget);
+        makeMnemonicLabel->setObjectName("makeMnemonicLabel");
+
         formLayout->setWidget(1, QFormLayout::LabelRole, makeMnemonicLabel);
-        
+
         groupBoxOutput = new QGroupBox(centralwidget);
         groupBoxOutput->setObjectName("groupBoxOutput");
         groupBoxOutput->setGeometry(QRect(190, 150, 161, 71));
@@ -183,12 +189,6 @@ public:
         randomPassword = new QPlainTextEdit(groupBoxOutput);
         randomPassword->setObjectName("randomPassword");
         randomPassword->setGeometry(QRect(10, 30, 141, 31));
-        copyPassword = new QPushButton(groupBoxActions);
-        copyPassword->setObjectName("copyPassword");
-        copyPassword->setGeometry(QRect(10, 130, 141, 16));
-        clearPassword = new QPushButton(groupBoxActions);
-        clearPassword->setObjectName("clearPassword");
-        clearPassword->setGeometry(QRect(10, 110, 141, 16));
         groupBoxActions = new QGroupBox(centralwidget);
         groupBoxActions->setObjectName("groupBoxActions");
         groupBoxActions->setGeometry(QRect(190, 0, 161, 151));
@@ -205,38 +205,44 @@ public:
         openPasswordsHistory = new QToolButton(groupBoxActions);
         openPasswordsHistory->setObjectName("openPasswordsHistory");
         openPasswordsHistory->setGeometry(QRect(10, 50, 141, 16));
+        clearPassword = new QPushButton(groupBoxActions);
+        clearPassword->setObjectName("clearPassword");
+        clearPassword->setGeometry(QRect(10, 110, 141, 16));
+        copyPassword = new QPushButton(groupBoxActions);
+        copyPassword->setObjectName("copyPassword");
+        copyPassword->setGeometry(QRect(10, 130, 141, 16));
         MiniPass->setCentralWidget(centralwidget);
-        
+
         retranslateUi(MiniPass);
-        
+
         QMetaObject::connectSlotsByName(MiniPass);
     } // setupUi
-    
+
     void retranslateUi(QMainWindow *MiniPass)
     {
         groupBoxOptions->setTitle(QCoreApplication::translate("MiniPass", "Options", nullptr));
         useCustomLabel->setText(QCoreApplication::translate("MiniPass", "Custom", nullptr));
-        makeMnemonicLabel->setText(QCoreApplication::translate("MiniPass", "Mnemonic", nullptr));
         makeMnemonic->setText(QString());
         keepHistoryLabel->setText(QCoreApplication::translate("MiniPass", "History", nullptr));
         keepHistory->setText(QString());
         useSpecialLabel->setText(QCoreApplication::translate("MiniPass", "Special", nullptr));
         useSpecial->setText(QString());
+        useUppercaseLabel->setText(QCoreApplication::translate("MiniPass", "Uppercase", nullptr));
         useUppercase->setText(QString());
         useLowercaseLabel->setText(QCoreApplication::translate("MiniPass", "Lowercase", nullptr));
         useLowercase->setText(QString());
         useNumbersLabel->setText(QCoreApplication::translate("MiniPass", "Numbers", nullptr));
         useNumbers->setText(QString());
         passwordLengthLabel->setText(QCoreApplication::translate("MiniPass", "Length", nullptr));
-        useUppercaseLabel->setText(QCoreApplication::translate("MiniPass", "Uppercase", nullptr));
+        makeMnemonicLabel->setText(QCoreApplication::translate("MiniPass", "Mnemonic", nullptr));
         groupBoxOutput->setTitle(QCoreApplication::translate("MiniPass", "Output", nullptr));
-        copyPassword->setText(QCoreApplication::translate("MiniPass", "Copy", nullptr));
-        clearPassword->setText(QCoreApplication::translate("MiniPass", "Clear", nullptr));
         groupBoxActions->setTitle(QCoreApplication::translate("MiniPass", "Actions", nullptr));
         generatePassword->setText(QCoreApplication::translate("MiniPass", "Generate", nullptr));
         resetOptions->setText(QCoreApplication::translate("MiniPass", "Reset", nullptr));
         exitMinipass->setText(QCoreApplication::translate("MiniPass", "Close", nullptr));
         openPasswordsHistory->setText(QCoreApplication::translate("MiniPass", "Open History", nullptr));
+        clearPassword->setText(QCoreApplication::translate("MiniPass", "Clear", nullptr));
+        copyPassword->setText(QCoreApplication::translate("MiniPass", "Copy", nullptr));
         (void)MiniPass;
     } // retranslateUi
 
