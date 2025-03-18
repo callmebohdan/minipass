@@ -39,7 +39,6 @@ private slots:
 	void ToggleUseUppercase(bool checked);
 	void ToggleUseLowercase(bool checked);
 	void ToggleUseNumbers(bool checked);
-	void ToggleDefaultOptions();
 	void SetPasswordLength(const QString& passwordLength);
 	// User actions
 	void ClickGeneratePassword();
@@ -47,20 +46,11 @@ private slots:
 	void ClickResetOptions();
 	void ClickExitMinipass();
 	// User output
-	std::string ReturnGeneratedPasswordFromUI();
 	void ClearPassword();
 	void CopyPassword();
 private:
 	Ui::MiniPass* ui;
 	std::string password;
-	uint32_t passwordLength;
-	bool useNumbers;
-	bool useLowercase;
-	bool useUppercase;
-	bool useSpecial;
-	bool makeMnemonic;
-	bool keepHistory;
-	std::string useCustom;
 	std::string mnemonicPhrase;
 	std::string keepHistoryFilePath;
 public:
@@ -79,7 +69,7 @@ public:
 	std::string GetCurrentTime() const;
 	std::string EscapeDoubleQuotes(const std::string& str) const;
 	void KeepHistory(const std::string& str);
-	void PrintPassword(const std::string& str) const;
+	void PrintPassword(const std::string& str);
 	void ReturnGeneratedPassword();
 	void HandleCombinedShortOptions(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
 	void HandleLongOptions(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
@@ -94,8 +84,6 @@ public:
 	bool IsMakeMnemonic() const { return makeMnemonic; };
 	bool IsKeepHistory() const { return keepHistory; };
 	std::string GetUseCustom() const { return useCustom; };
-	std::string GetMnemonicPhrase() const { return mnemonicPhrase; };
-	std::string GetKeepHistoryFilePath() const { return keepHistoryFilePath; };
 
 	// UI getters
 	void HandleUserOptions();
