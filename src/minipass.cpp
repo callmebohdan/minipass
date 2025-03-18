@@ -48,7 +48,6 @@ void MiniPass::HandleUserOptions() {
 	connect(ui->useUppercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseUppercase);
 	connect(ui->useLowercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseLowercase);
 	connect(ui->useNumbers, &QCheckBox::toggled, this, &MiniPass::ToggleUseNumbers);
-	connect(ui->defaultOptions, &QCheckBox::toggled, this, &MiniPass::ToggleDefaultOptions);
 	connect(ui->passwordLength, &QLineEdit::textChanged, this, &MiniPass::SetPasswordLength);
 }
 
@@ -127,7 +126,6 @@ void MiniPass::ClickOpenPasswordsHistory() {
 }
 
 void MiniPass::ClickResetOptions() {
-	//checkboxes
 	ui->useCustom->clear();
 	ui->makeMnemonic->setChecked(false);
 	ui->keepHistory->setChecked(false);
@@ -136,7 +134,6 @@ void MiniPass::ClickResetOptions() {
 	ui->useLowercase->setChecked(false);
 	ui->useNumbers->setChecked(false);
 	ui->passwordLength->clear();
-	//output
 	ui->randomPassword->clear();
 }
 
@@ -185,7 +182,6 @@ void MiniPass::ApplyMnemonicFilter(const std::string& password) {
 }
 
 std::string MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
-	std::string mnemonicSeed;
 	std::string filename = "assets/db/mnemonic-seeds.txt";
 	std::ifstream file(filename);
 

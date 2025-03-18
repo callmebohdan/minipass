@@ -73,10 +73,6 @@ public:
 	std::string EscapeDoubleQuotes(const std::string& str) const;
 	void KeepHistory(const std::string& str);
 	void PrintPassword(const std::string& str);
-	void ReturnGeneratedPassword();
-	void HandleCombinedShortOptions(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
-	void HandleLongOptions(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
-	void HandleShortOptionsWithInputValue(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
 
 	// Getters
 	uint32_t GetPasswordLength() const { return programOptions.passwordLength; };
