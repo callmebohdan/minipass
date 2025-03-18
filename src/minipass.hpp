@@ -68,6 +68,8 @@ public:
 	std::string GenerateRandomMnemonicSeed(const char& ch);
 	std::string GenerateRandomPassword();
 	std::string GetCurrentTime() const;
+	void HandleCommandLineProgramOptions(const PasswordSettings&);
+	std::string HandleUserInterfaceProgramOptions(const PasswordSettings& passwordSettings);
 	std::string EscapeDoubleQuotes(const std::string& str) const;
 	void KeepHistory(const std::string& str);
 	void PrintPassword(const std::string& str);

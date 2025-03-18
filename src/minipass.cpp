@@ -110,7 +110,7 @@ void MiniPass::CopyPassword() {
 void MiniPass::ClickGeneratePassword() {
 	ui->randomPassword->clear();
 	HandleUserOptions();
-	std::string randomPassword = ReturnGeneratedPasswordFromUI();
+	std::string randomPassword = HandleUserInterfaceProgramOptions(programOptions);
 	ui->randomPassword->setPlainText(QString::fromStdString(randomPassword));
 }
 
@@ -276,4 +276,28 @@ void MiniPass::KeepHistory(const std::string& password) {
 	std::string quotedPassword = "\"" + EscapeDoubleQuotes(password) + "\"";
 	passwordsDB << GetCurrentTime() << "," << quotedPassword << "," << GetMnemonicPhrase() << std::endl;
 	passwordsDB.close();
+}
+
+void MiniPass::HandleCommandLineProgramOptions(const PasswordSettings& passwordSettings) {
+	password = GenerateRandomPassword(passwordSettings);
+	std::cout << "Random Password: " << password << std::endl;
+	if (passwordSettings.makeMnemonic) {
+		ApplyMnemonicFilter(password);
+		std::cout << "Mnemonic Phrase: " << mnemonicPhrase << std::endl;
+	}
+	if (passwordSettings.keepHistory) {
+		KeepHistory(password);
+		std::cout << "Password saved to " << keepHistoryFilePath << std::endl;
+	}
+}
+
+std::string MiniPass::HandleUserInterfaceProgramOptions(const PasswordSettings& passwordSettings) {
+	password = GenerateRandomPassword(passwordSettings);
+	if (!password.empty() && passwordSettings.makeMnemonic) {
+		ApplyMnemonicFilter(password);
+	}
+	if (!password.empty() && passwordSettings.keepHistory) {
+		KeepHistory(password);
+	}
+	return password;
 }
