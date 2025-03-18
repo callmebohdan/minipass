@@ -158,6 +158,11 @@ MiniPass::~MiniPass() {
 	ui = nullptr;
 }
 
+
+int MiniPass::GenerateRandomIndex(const std::string& inputSet) {
+	quint32 index = QRandomGenerator::global()->bounded(0, static_cast<int>(inputSet.length()-1));
+	return static_cast<int>(index);
+}
 MiniPass::MiniPass(const PasswordSettings& passwordSettings)
 	: passwordLength(passwordSettings.passwordLength)
 	, useNumbers(passwordSettings.useNumbers)

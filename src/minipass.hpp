@@ -103,31 +103,6 @@ public:
 	void HandleUserActions();
 	void HandleUserOutput();
 
-	template <typename T>
-	int GenerateRandomIndex(const T& inputSet) {
-		if (inputSet.empty()) {
-			throw std::out_of_range("Input set is empty, cannot generate a random index.");
-		}
-
-		if (inputSet.size() > static_cast<size_t>(std::numeric_limits<int>::max())) {
-			throw std::overflow_error("Input set size exceeds maximum allowable value.");
-		}
-
-		std::random_device rd;
-		std::mt19937 gen(rd());
-		size_t size = inputSet.size() - 1;
-		std::uniform_int_distribution<size_t> seedSetDistribution(0, size);
-
-		size_t index = seedSetDistribution(gen);
-
-		if (index > std::numeric_limits<int>::max()) {
-			throw std::overflow_error("Generated index is too large to fit in an int.");
-		}
-
-		return static_cast<int>(index);
-	};
-
-
 	PasswordSettings ParseCommandLineArguments(int argc, char* argv[]);
 
 	void PrintHelp();
