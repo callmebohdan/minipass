@@ -65,13 +65,12 @@ private:
 	std::string keepHistoryFilePath;
 public:
 	explicit MiniPass(QWidget* parent = nullptr);
-	MiniPass();
+	MiniPass()=default;
 	~MiniPass();
 	// Constructors
 	MiniPass(const PasswordSettings& passwordSettings);
-	MiniPass(const MiniPass& newCopy);
-	MiniPass& operator=(const MiniPass& other);
-
+	MiniPass(const MiniPass& newCopy)=default;
+	MiniPass& operator=(const MiniPass& other)=default;	
 	// Member functions
 	std::string AllowedCharacters() const;
 	void ApplyMnemonicFilter(const std::string& str);

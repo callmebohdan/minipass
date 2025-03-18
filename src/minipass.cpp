@@ -143,16 +143,6 @@ void MiniPass::ClickExitMinipass() {
 	close();
 }
 
-MiniPass::MiniPass()
-	: passwordLength(16)
-	, useNumbers(false)
-	, useLowercase(false)
-	, useUppercase(false)
-	, useSpecial(false)
-	, makeMnemonic(false)
-	, keepHistory(false)
-	, useCustom() {}
-
 MiniPass::~MiniPass() {
 	delete ui;
 	ui = nullptr;
@@ -164,38 +154,9 @@ int MiniPass::GenerateRandomIndex(const std::string& inputSet) {
 	return static_cast<int>(index);
 }
 MiniPass::MiniPass(const PasswordSettings& passwordSettings)
-	: passwordLength(passwordSettings.passwordLength)
-	, useNumbers(passwordSettings.useNumbers)
-	, useLowercase(passwordSettings.useLowercase)
-	, useUppercase(passwordSettings.useUppercase)
-	, useSpecial(passwordSettings.useSpecial)
-	, makeMnemonic(passwordSettings.makeMnemonic)
-	, keepHistory(passwordSettings.keepHistory)
-	, useCustom(passwordSettings.useCustom) {}
+: programOptions(passwordSettings){}
 
-MiniPass::MiniPass(const MiniPass& newCopy)
-	: passwordLength(newCopy.passwordLength)
-	, useNumbers(newCopy.useNumbers)
-	, useLowercase(newCopy.useLowercase)
-	, useUppercase(newCopy.useUppercase)
-	, useSpecial(newCopy.useSpecial)
-	, makeMnemonic(newCopy.makeMnemonic)
-	, keepHistory(newCopy.keepHistory)
-	, useCustom(newCopy.useCustom) {}
 
-MiniPass& MiniPass::operator=(const MiniPass& other) {
-	if (this != &other) {
-		passwordLength = other.passwordLength;
-		useNumbers = other.useNumbers;
-		useLowercase = other.useLowercase;
-		useUppercase = other.useUppercase;
-		useSpecial = other.useSpecial;
-		makeMnemonic = other.makeMnemonic;
-		keepHistory = other.keepHistory;
-		useCustom = other.useCustom;
-	}
-	return *this;
-}
 
 std::string MiniPass::AllowedCharacters() const {
 	std::string allowedCharacters;
