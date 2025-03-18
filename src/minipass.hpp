@@ -49,6 +49,7 @@ private slots:
 	void ClearPassword();
 	void CopyPassword();
 private:
+	PasswordSettings programOptions;
 	Ui::MiniPass* ui;
 	std::string password;
 	std::string mnemonicPhrase;
@@ -76,14 +77,14 @@ public:
 	void HandleShortOptionsWithInputValue(int& index, int argc, char* argv[], PasswordSettings& passwordSettings);
 
 	// Getters
-	uint32_t GetPasswordLength() const { return passwordLength; };
-	bool IsUseNumbers() const { return useNumbers; };
-	bool IsUseLowercase() const { return useLowercase; };
-	bool IsUseUppercase() const { return useUppercase; };
-	bool IsUseSpecial() const { return useSpecial; };
-	bool IsMakeMnemonic() const { return makeMnemonic; };
-	bool IsKeepHistory() const { return keepHistory; };
-	std::string GetUseCustom() const { return useCustom; };
+	uint32_t GetPasswordLength() const { return programOptions.passwordLength; };
+	bool IsUseNumbers() const { return programOptions.useNumbers; };
+	bool IsUseLowercase() const { return programOptions.useLowercase; };
+	bool IsUseUppercase() const { return programOptions.useUppercase; };
+	bool IsUseSpecial() const { return programOptions.useSpecial; };
+	bool IsMakeMnemonic() const { return programOptions.makeMnemonic; };
+	bool IsKeepHistory() const { return programOptions.keepHistory; };
+	std::string GetUseCustom() const { return programOptions.useCustom; };
 
 	// UI getters
 	void HandleUserOptions();

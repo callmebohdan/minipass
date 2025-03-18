@@ -52,36 +52,37 @@ void MiniPass::HandleUserOptions() {
 	connect(ui->passwordLength, &QLineEdit::textChanged, this, &MiniPass::SetPasswordLength);
 }
 
-void MiniPass::SetUserCustomCharacters(const QString& _customCharacters) {
-	useCustom = _customCharacters.toStdString();
+void MiniPass::SetUserCustomCharacters(const QString& customCharacters) {
+	programOptions.useCustom = customCharacters.toStdString();
 }
+
 void MiniPass::ToggleMakeMnemonic(bool checked) {
-	makeMnemonic = checked;
+	programOptions.makeMnemonic = checked;
 }
 
 void MiniPass::ToggleKeepHistory(bool checked) {
-	keepHistory = checked;
+	programOptions.keepHistory = checked;
 }
 
 void MiniPass::ToggleUseSpecial(bool checked) {
-	useSpecial = checked;
+	programOptions.useSpecial = checked;
 }
 
 void MiniPass::ToggleUseUppercase(bool checked) {
-	useUppercase = checked;
+	programOptions.useUppercase = checked;
 }
 
 void MiniPass::ToggleUseLowercase(bool checked) {
-	useLowercase = checked;
+	programOptions.useLowercase = checked;
 }
 
 void MiniPass::ToggleUseNumbers(bool checked) {
-	useNumbers = checked;
+	programOptions.useNumbers = checked;
 }
 
 
 void MiniPass::SetPasswordLength(const QString& _passwordLength) {
-	passwordLength = _passwordLength.toInt();
+	programOptions.passwordLength = _passwordLength.toInt();
 }
 
 void MiniPass::HandleUserActions() {
@@ -160,12 +161,12 @@ MiniPass::MiniPass(const PasswordSettings& passwordSettings)
 
 std::string MiniPass::AllowedCharacters() const {
 	std::string allowedCharacters;
-	if (useNumbers && !makeMnemonic) allowedCharacters += "0123456789";
-	if (useLowercase) allowedCharacters += "abcdefghijklmnopqrstuvwxyz";
-	if (useUppercase && !makeMnemonic) allowedCharacters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	if (useSpecial && !makeMnemonic) allowedCharacters += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
+	if (programOptions.useNumbers && !programOptions.makeMnemonic) allowedCharacters += "0123456789";
+	if (programOptions.useLowercase) allowedCharacters += "abcdefghijklmnopqrstuvwxyz";
+	if (programOptions.useUppercase && !programOptions.makeMnemonic) allowedCharacters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	if (programOptions.useSpecial && !programOptions.makeMnemonic) allowedCharacters += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
 
-	std::unordered_set<char> customCharacters(useCustom.begin(), useCustom.end());
+	std::unordered_set<char> customCharacters(programOptions.useCustom.begin(), programOptions.useCustom.end());
 	std::string filteredCharacters;
 
 	for (char c : allowedCharacters) {
