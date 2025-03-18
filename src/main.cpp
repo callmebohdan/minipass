@@ -11,70 +11,65 @@ int main(int argc, char* argv[])
 	
 	QApplication app(argc, argv);
 	
-	MiniPass miniPass{nullptr};
-	
-	try
-	{
-		po::options_description description("Allowed options");
-		description.add_options()
-			("custom", po::value<std::string>()->default_value(""), "Use custom characters")
-			("default", "Use default settings")
-			("help", "Print help")
-			("history", "Keep passwords history")
-			("length", po::value<int>()->default_value(16), "Set password length")
-			("lower", "Use lowercase letters: a-z")
-			("mnemonic", "Make mnemonic password")
-			("numbers", "Use numbers: 0-9")
-			("special", "Use special characters: !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
-			("upper", "Use uppercase letters: A-Z")
-		;
+	if (argc == 1) {
+		// GUI mode
+		MiniPass minipassGUI{nullptr};
+		minipassGUI.show();
+		return app.exec();
+	} else {
+		// CLI mode
+		try {
+			po::options_description description("Allowed options");
+			description.add_options()
+				("custom,c", po::value<std::string>()->default_value(""), "Use custom characters")
+				("help,h", "Print help")
+				("history,k", "Keep passwords history")
+				("length,l", po::value<int>()->default_value(16), "Set password length")
+				("lower,o", "Use lowercase letters: a-z")
+				("mnemonic,m", "Make mnemonic password")
+				("numbers,n", "Use numbers: 0-9")
+				("special,s", "Use special characters: !\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~")
+				("upper,u", "Use uppercase letters: A-Z")
+			;
 
-		po::variables_map variables_map;
-		po::store(po::parse_command_line(argc, argv, description), variables_map);
-		po::notify(variables_map);
+			po::variables_map variables_map;
+			po::store(po::command_line_parser(argc, argv).options(description).run(), variables_map);
+			po::notify(variables_map);
 
-		if(variables_map.count("custom")){
-		
+			if(variables_map.count("help")) {
+				#if defined(__linux__)
+					std::cout << "Usage:" << std::endl;
+					std::cout << "  ./minipass [ options ]" << std::endl;
+				#elif defined (_WIN32) || defined(_WIN64)
+					std::cout << "Usage:" << std::endl;
+					std::cout << "  .\\minipass [ options ]" << std::endl;
+				#endif
+				std::cout << description;
+				return 0;
+			}
+
+			PasswordSettings passwordSettings{};
+			passwordSettings.useCustom = variables_map["custom"].as<std::string>();
+			passwordSettings.keepHistory = variables_map.count("history");
+			passwordSettings.passwordLength = variables_map["length"].as<int>();
+			passwordSettings.useLowercase = variables_map.count("lower");
+			passwordSettings.makeMnemonic = variables_map.count("mnemonic");
+			passwordSettings.useNumbers = variables_map.count("numbers");
+			passwordSettings.useSpecial = variables_map.count("special");
+			passwordSettings.useUppercase = variables_map.count("upper");
+
+			MiniPass minipassCLI{nullptr};
+			minipassCLI.HandleCommandLineProgramOptions(passwordSettings);
+			return 0;
 		}
-		if(variables_map.count("default")){
-			
+		catch(const std::exception& e) {
+			std::cerr << e.what() << '\n';
+			return 1;
 		}
-		if(variables_map.count("help")){
-			
-		}
-		if(variables_map.count("history")){
-			
-		}
-		if(variables_map.count("length")){
-			
-		}
-		if(variables_map.count("lower")){
-			
-		}
-		if(variables_map.count("mnemonic")){
-			
-		}
-		if(variables_map.count("numbers")){
-			
-		}
-		if(variables_map.count("special")){
-			
-		}
-		if(variables_map.count("upper")){
-			
+		catch(...) {
+			std::cerr << "Exception of unknown type!\n";
+			return 1;
 		}
 	}
-	catch(const std::exception& e)
-	{
-		std::cerr << e.what() << '\n';
-	}
-
-	if (argc > 1) {
-		miniPass.ParseCommandLineArguments(argc, argv);
-		miniPass.ReturnGeneratedPassword();
-		return 0;
-	}
-
-	miniPass.show();
-	return app.exec();
+	return 0;
 }
