@@ -54,7 +54,7 @@ private:
 	Ui::MiniPass* ui;
 	std::string password;
 	std::string mnemonicPhrase;
-	std::string keepHistoryFilePath;
+	std::string passwordsDatabasePath;
 public:
 	explicit MiniPass(QWidget* parent = nullptr);
 	MiniPass()=default;

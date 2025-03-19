@@ -29,6 +29,11 @@
 #include <vector>
 #include "minipass.hpp"
 #include "ui_minipass.h"
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
+#include <cstdlib>
+
+namespace bfs = boost::filesystem; 
 
 MiniPass::MiniPass(QWidget* parent)
 	: QMainWindow(parent)
@@ -117,11 +122,11 @@ void MiniPass::ClickGeneratePassword() {
 void MiniPass::ClickOpenPasswordsHistory() {
 	std::string executableDir = std::filesystem::current_path().string();
 #if defined(__linux__)
-	keepHistoryFilePath = executableDir + "//PasswordsHistory.csv";
+	passwordsDatabasePath = executableDir + "//PasswordsHistory.csv";
 #elif defined (_WIN32) || defined(_WIN64)
-	keepHistoryFilePath = executableDir + "\\PasswordsHistory.csv";
+	passwordsDatabasePath = executableDir + "\\PasswordsHistory.csv";
 #endif
-	QFile file(QString::fromStdString(keepHistoryFilePath));
+	QFile file(QString::fromStdString(passwordsDatabasePath));
 
 	if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {}
 }
@@ -261,20 +266,39 @@ std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
 }
 
 void MiniPass::KeepHistory(const std::string& password) {
-	std::string executableDir = std::filesystem::current_path().string();
-#if defined(__linux__)
-	keepHistoryFilePath = executableDir + "//PasswordsHistory.csv";
+	bfs::fstream passwordsDatabase;
+	#if defined(__linux__)
+	std::string homeDir = std::getenv("HOME");
+	passwordsDatabasePath = homeDir + "/Documents/minipass/passwords.csv";
 #elif defined (_WIN32) || defined(_WIN64)
-	keepHistoryFilePath = executableDir + "\\PasswordsHistory.csv";
+	passwordsDatabasePath = "%APPDATA%\\minipass\\passwords.csv";
 #endif
-	std::fstream passwordsDB;
-	passwordsDB.open(keepHistoryFilePath, std::ios::out | std::ios::app);
-	if (std::filesystem::is_empty(keepHistoryFilePath)) {
-		passwordsDB << "Creation Date,Password,Mnemonic Phrase" << std::endl;
+	bfs::path boostPasswordsDatabasePath(passwordsDatabasePath);
+	bfs::path parent_dir = boostPasswordsDatabasePath.parent_path();
+	if (!bfs::exists(parent_dir)){
+		bfs::create_directory(parent_dir);
+		bfs::fstream passwordsDatabase(passwordsDatabasePath);
 	}
-	std::string quotedPassword = "\"" + EscapeDoubleQuotes(password) + "\"";
-	passwordsDB << GetCurrentTime() << "," << quotedPassword << "," << mnemonicPhrase << std::endl;
-	passwordsDB.close();
+
+	passwordsDatabase.open(boostPasswordsDatabasePath, std::ios::out | std::ios::app);
+	
+	if (passwordsDatabase)
+	{
+		if (bfs::is_empty(boostPasswordsDatabasePath)) {
+			passwordsDatabase << "Creation Date,Password,Mnemonic Phrase" << std::endl;
+		}
+		
+		passwordsDatabase 
+			<< GetCurrentTime() << "," 
+			<< password << "," 
+			<< mnemonicPhrase << std::endl;
+		passwordsDatabase.close();
+	}
+	else
+	{
+		std::cerr << "File could not be opened!\n";
+		std::cerr << "Error code: " << strerror(errno);
+	}
 }
 
 void MiniPass::HandleCommandLineProgramOptions(const PasswordSettings& passwordSettings) {
@@ -286,7 +310,7 @@ void MiniPass::HandleCommandLineProgramOptions(const PasswordSettings& passwordS
 	}
 	if (passwordSettings.keepHistory) {
 		KeepHistory(password);
-		std::cout << "Password saved to " << keepHistoryFilePath << std::endl;
+		std::cout << "Password saved to " << passwordsDatabasePath << std::endl;
 	}
 }
 
