@@ -32,6 +32,7 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <cstdlib>
+#include <boost/date_time/posix_time/posix_time.hpp>
 
 namespace bfs = boost::filesystem; 
 
@@ -244,13 +245,7 @@ std::string MiniPass::GenerateRandomPassword(const PasswordSettings& passwordSet
 }
 
 std::string MiniPass::GetCurrentTime() const {
-	std::time_t now = std::time(nullptr);
-	char currentTime[26];
-	std::tm* tmNow = std::localtime(&now); // Convert to local time
-	if (std::strftime(currentTime, sizeof(currentTime), "%Y-%m-%d %H:%M:%S", tmNow) == 0) {
-		return "";
-	}
-	return currentTime;
+    return boost::posix_time::to_simple_string(boost::posix_time::second_clock::local_time());
 }
 
 std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
