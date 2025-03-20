@@ -45,9 +45,7 @@ private slots:
 	void ClickGeneratePassword();
 	void ClickOpenPasswordsHistory();
 	void ClickResetOptions();
-	void ClickExitMinipass();
 	// User output
-	void ClearPassword();
 	void CopyPassword();
 private:
 	PasswordSettings programOptions;
@@ -87,13 +85,8 @@ public:
 	std::string GetUseCustom() const { return programOptions.useCustom; };
 
 	// UI getters
-	void HandleUserOptions();
 	void HandleUserActions();
 	void HandleUserOutput();
-
-	PasswordSettings ParseCommandLineArguments(int argc, char* argv[]);
-
-	void PrintHelp();
 };
 
 #endif  // MINIPASS_HPP
