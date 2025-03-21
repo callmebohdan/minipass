@@ -41,20 +41,23 @@ MiniPass::MiniPass(QWidget* parent)
 	, ui(new Ui::MiniPass)
 {
 	ui->setupUi(this);
-	HandleUserOptions();
 	HandleUserActions();
 	HandleUserOutput();
 }
 
-void MiniPass::HandleUserOptions() {
-	connect(ui->useCustom, &QLineEdit::textChanged, this, &MiniPass::SetUserCustomCharacters);
-	connect(ui->makeMnemonic, &QCheckBox::toggled, this, &MiniPass::ToggleMakeMnemonic);
-	connect(ui->keepHistory, &QCheckBox::toggled, this, &MiniPass::ToggleKeepHistory);
-	connect(ui->useSpecial, &QCheckBox::toggled, this, &MiniPass::ToggleUseSpecial);
-	connect(ui->useUppercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseUppercase);
-	connect(ui->useLowercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseLowercase);
-	connect(ui->useNumbers, &QCheckBox::toggled, this, &MiniPass::ToggleUseNumbers);
-	connect(ui->passwordLength, &QLineEdit::textChanged, this, &MiniPass::SetPasswordLength);
+void MiniPass::HandleUserActions() {
+	connect(ui->LineEditCustom, &QLineEdit::textChanged, this, &MiniPass::SetUserCustomCharacters);
+	connect(ui->CheckBoxMnemonic, &QCheckBox::toggled, this, &MiniPass::ToggleMakeMnemonic);
+	connect(ui->CheckBoxHistory, &QCheckBox::toggled, this, &MiniPass::ToggleKeepHistory);
+	connect(ui->CheckBoxSpecial, &QCheckBox::toggled, this, &MiniPass::ToggleUseSpecial);
+	connect(ui->CheckBoxUppercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseUppercase);
+	connect(ui->CheckBoxLowercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseLowercase);
+	connect(ui->CheckBoxNumbers, &QCheckBox::toggled, this, &MiniPass::ToggleUseNumbers);
+	connect(ui->LineEditLength, &QLineEdit::textChanged, this, &MiniPass::SetPasswordLength);
+	connect(ui->ButtonGeneratePassword, &QToolButton::clicked, this, &MiniPass::ClickGeneratePassword);
+	connect(ui->ButtonOpenHistory, &QToolButton::clicked, this, &MiniPass::ClickOpenPasswordsHistory);
+	connect(ui->ButtonResetOptions, &QToolButton::clicked, this, &MiniPass::ClickResetOptions);
+	connect(ui->ButtonCopyPassword, &QToolButton::clicked, this, &MiniPass::CopyPassword);
 }
 
 void MiniPass::SetUserCustomCharacters(const QString& customCharacters) {
@@ -85,39 +88,21 @@ void MiniPass::ToggleUseNumbers(bool checked) {
 	programOptions.useNumbers = checked;
 }
 
-
 void MiniPass::SetPasswordLength(const QString& _passwordLength) {
 	programOptions.passwordLength = _passwordLength.toInt();
 }
 
-void MiniPass::HandleUserActions() {
-	connect(ui->generatePassword, &QToolButton::clicked, this, &MiniPass::ClickGeneratePassword);
-	connect(ui->openPasswordsHistory, &QToolButton::clicked, this, &MiniPass::ClickOpenPasswordsHistory);
-	connect(ui->resetOptions, &QToolButton::clicked, this, &MiniPass::ClickResetOptions);
-	connect(ui->exitMinipass, &QToolButton::clicked, this, &MiniPass::ClickExitMinipass);
-}
-
-void MiniPass::HandleUserOutput()
-{
-	connect(ui->clearPassword, &QPushButton::clicked, this, &MiniPass::ClearPassword);
-	connect(ui->copyPassword, &QToolButton::clicked, this, &MiniPass::CopyPassword);
-}
-
-void MiniPass::ClearPassword() {
-	ui->randomPassword->clear();
-}
-
 void MiniPass::CopyPassword() {
 	QClipboard* clipboard = QApplication::clipboard();
-	clipboard->setText(ui->randomPassword->toPlainText());
+	clipboard->setText(ui->TextEditPassword->toPlainText());
 }
 
 void MiniPass::ClickGeneratePassword() {
 	password.clear();
-	ui->randomPassword->clear();
-	HandleUserOptions();
+	ui->TextEditPassword->clear();
+	HandleUserActions();
 	std::string randomPassword = HandleUserInterfaceProgramOptions(programOptions);
-	ui->randomPassword->setPlainText(QString::fromStdString(randomPassword));
+	ui->TextEditPassword->setPlainText(QString::fromStdString(randomPassword));
 }
 
 void MiniPass::ClickOpenPasswordsHistory() {
@@ -133,20 +118,16 @@ void MiniPass::ClickOpenPasswordsHistory() {
 }
 
 void MiniPass::ClickResetOptions() {
-	ui->useCustom->clear();
-	ui->makeMnemonic->setChecked(false);
-	ui->keepHistory->setChecked(false);
-	ui->useSpecial->setChecked(false);
-	ui->useUppercase->setChecked(false);
-	ui->useLowercase->setChecked(false);
-	ui->useNumbers->setChecked(false);
-	ui->passwordLength->clear();
-	ui->randomPassword->clear();
+	ui->LineEditCustom->clear();
+	ui->CheckBoxMnemonic->setChecked(false);
+	ui->CheckBoxHistory->setChecked(false);
+	ui->CheckBoxSpecial->setChecked(false);
+	ui->CheckBoxUppercase->setChecked(false);
+	ui->CheckBoxLowercase->setChecked(false);
+	ui->CheckBoxNumbers->setChecked(false);
+	ui->LineEditLength->clear();
+	ui->TextEditPassword->clear();
 	password.clear();
-}
-
-void MiniPass::ClickExitMinipass() {
-	close();
 }
 
 MiniPass::~MiniPass() {
