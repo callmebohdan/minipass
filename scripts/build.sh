@@ -27,9 +27,6 @@ cd "$BUILD_DIR"
 echo "Running CMake configuration..."
 cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH="$QT_PATH" "$PROJECT_DIR"
 
-echo "Generating ui_minipass.h..."
-"$QT_LIB_PATH/uic" "$SRC_DIR/minipass.ui" -o "$SRC_DIR/ui_minipass.h"
-
 # Verbose build output
 make VERBOSE=0
 
