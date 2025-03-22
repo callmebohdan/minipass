@@ -39,7 +39,7 @@ int main(int argc, char* argv[])
 			if(variables_map.count("help")) {
 				#if defined(__linux__)
 					std::cout << "Usage:" << std::endl;
-					std::cout << "  ./minipass [ options ]" << std::endl;
+					std::cout << "  minipass [ options ]" << std::endl;
 				#elif defined (_WIN32) || defined(_WIN64)
 					std::cout << "Usage:" << std::endl;
 					std::cout << "  .\\minipass [ options ]" << std::endl;

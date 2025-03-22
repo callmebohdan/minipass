@@ -30,7 +30,7 @@ cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH="$QT_PATH" "$PROJECT_DIR"
 # Verbose build output
 make VERBOSE=0
 
-if [ -f "$BUILD_DIR/src/minipass" ]; then
+make install
     mkdir -p "$BIN_DIR"
     echo "Copying the application into bin/..."
     cp "$BUILD_DIR/src/minipass" "$BIN_DIR"

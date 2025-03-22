@@ -32,6 +32,7 @@ if(WIN32)
     qt_add_executable(minipass WIN32 ${SOURCE_FILES} ${HEADER_FILES} ${GENERATED_RESOURCES} ${ASSET_FILES})
 else()
     qt_add_executable(minipass ${SOURCE_FILES} ${HEADER_FILES} ${GENERATED_RESOURCES})
+    install(TARGETS minipass DESTINATION /usr/bin)
 endif()
 
 target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Boost::program_options Boost::filesystem Boost::system)

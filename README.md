@@ -69,7 +69,7 @@ Linux:
 4. Build the project:
 
     ```bash
-    bash ./scripts/build.sh
+    sudo bash ./scripts/build.sh
     ```
 
 5. Clean previous builds:
@@ -89,7 +89,7 @@ Windows:
 Linux
 
 ```bash
-./bin/minipass [options]
+minipass [options]
 ```
 
 ## Options
