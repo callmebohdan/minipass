@@ -130,7 +130,7 @@ Linux:
 
 1. Test minipass.cpp:
     ```bash
-    ./bin/GoogleTestMinipass
+    ./build/GoogleTestMinipass
     ```
 
 ## Troubleshooting
