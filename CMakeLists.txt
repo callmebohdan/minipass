@@ -39,5 +39,29 @@ target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Boost::pr
 option(ENABLE_TESTS "Enable test suite" OFF)
 if (ENABLE_TESTS)
     enable_testing()
-    add_subdirectory(test)
+
+    if(DEFINED ENV{VCPKG_ROOT})
+        set(CMAKE_TOOLCHAIN_FILE "$ENV{VCPKG_ROOT}/scripts/buildsystems/vcpkg.cmake" CACHE STRING "Vcpkg toolchain file")
+    endif()
+
+    if(WIN32)
+        set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+    endif()
+
+    include(FetchContent)
+
+    FetchContent_Declare(
+        googletest
+        URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+    )
+
+    FetchContent_MakeAvailable(googletest)
+
+    add_library(minipass_lib src/minipass.cpp)
+    
+    add_executable(GoogleTestMinipass src/test/googletest_minipass.cpp)
+
+    target_link_libraries(minipass_lib Qt6::Core Qt6::Gui Qt6::Multimedia Qt6::Widgets Qt6::MultimediaWidgets)
+    target_link_libraries(GoogleTestMinipass PRIVATE gtest gtest_main minipass_lib)
+
 endif()
