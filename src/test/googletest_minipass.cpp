@@ -3,7 +3,8 @@
 #include <stdexcept>
 #include <string>
 #include <vector>
-#include "../src/minipass.hpp"
+#include "../minipass.hpp"
+#include "../minipass.hpp"
 
 TEST(GoogleTestMinipass, DefaultConstructor) {
 	MiniPass minipass;
