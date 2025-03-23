@@ -71,7 +71,6 @@ public:
 	std::string HandleUserInterfaceProgramOptions(const PasswordSettings& passwordSettings);
 	std::string EscapeDoubleQuotes(const std::string& str) const;
 	void KeepHistory(const std::string& str);
-	void PrintPassword(const std::string& str);
 
 	// Getters
 	uint32_t GetPasswordLength() const { return programOptions.passwordLength; };
@@ -85,7 +84,6 @@ public:
 
 	// UI getters
 	void HandleUserActions();
-	void HandleUserOutput();
 	
 	template <typename T>
 	int GenerateRandomIndex(T inputSet) {

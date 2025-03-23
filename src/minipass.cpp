@@ -42,7 +42,6 @@ MiniPass::MiniPass(QWidget* parent)
 {
 	ui->setupUi(this);
 	HandleUserActions();
-	HandleUserOutput();
 }
 
 void MiniPass::HandleUserActions() {
