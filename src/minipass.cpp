@@ -141,19 +141,22 @@ std::string MiniPass::AllowedCharacters(const PasswordSettings& passwordSettings
 	std::string allowedCharacters;
 	if (programOptions.useNumbers && !programOptions.makeMnemonic) allowedCharacters += "0123456789";
 	if (programOptions.useLowercase) allowedCharacters += "abcdefghijklmnopqrstuvwxyz";
-	if (programOptions.useUppercase && !programOptions.makeMnemonic) allowedCharacters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	if (programOptions.useSpecial && !programOptions.makeMnemonic) allowedCharacters += "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~";
-
-	std::unordered_set<char> customCharacters(programOptions.useCustom.begin(), programOptions.useCustom.end());
-	std::string filteredCharacters;
-
-	for (char c : allowedCharacters) {
-		if (customCharacters.find(c) == customCharacters.end()) {
-			filteredCharacters += c;
+	if (programOptions.useUppercase) allowedCharacters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	if (programOptions.useSpecial && !programOptions.makeMnemonic) allowedCharacters += R"(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)";
+	for (char c : programOptions.useCustom){
+		if (allowedCharacters.find(c) == std::string::npos) {
+			if (programOptions.makeMnemonic) {
+				std::string specialCharacters = R"(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)"; 
+				bool isNotSpecial = specialCharacters.find(c) == std::string::npos; 
+				if (isNotSpecial && !isdigit(c)){
+					allowedCharacters += c;
+				}
+			} else {
+				allowedCharacters += c;
+			}
 		}
 	}
-
-	return filteredCharacters;
+	return allowedCharacters;
 }
 
 void MiniPass::ApplyMnemonicFilter(const std::string& password) {
