@@ -99,6 +99,7 @@ void MiniPass::CopyPassword() {
 
 void MiniPass::ClickGeneratePassword() {
 	password.clear();
+	mnemonicPhrase.clear();
 	ui->TextEditPassword->clear();
 	auto ClickGeneratePassword = QtConcurrent::run([this]() {
 		std::string randomPassword = HandleUserInterfaceProgramOptions(programOptions);
