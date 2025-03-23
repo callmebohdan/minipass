@@ -171,7 +171,7 @@ void MiniPass::ApplyMnemonicFilter(const std::string& password) {
 }
 
 char MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
-	std::string filename = "resources/db/mnemonic-seeds.txt";
+	std::string filename = "resources/seed-database/mnemonic-seeds.txt";
 	std::ifstream file(filename);
 
 	if (!std::filesystem::exists(filename)) {
