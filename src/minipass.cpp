@@ -33,6 +33,7 @@
 #include <boost/filesystem/fstream.hpp>
 #include <cstdlib>
 #include <boost/date_time/posix_time/posix_time.hpp>
+#include <QtConcurrent>
 
 namespace bfs = boost::filesystem; 
 
@@ -99,9 +100,12 @@ void MiniPass::CopyPassword() {
 void MiniPass::ClickGeneratePassword() {
 	password.clear();
 	ui->TextEditPassword->clear();
-	HandleUserActions();
-	std::string randomPassword = HandleUserInterfaceProgramOptions(programOptions);
-	ui->TextEditPassword->setPlainText(QString::fromStdString(randomPassword));
+	auto ClickGeneratePassword = QtConcurrent::run([this]() {
+		std::string randomPassword = HandleUserInterfaceProgramOptions(programOptions);
+		QMetaObject::invokeMethod(this, [randomPassword, this]() {
+			ui->TextEditPassword->setPlainText(QString::fromStdString(randomPassword));
+		});
+	});
 }
 
 void MiniPass::ClickOpenPasswordsHistory() {
