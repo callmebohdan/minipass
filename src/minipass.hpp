@@ -64,13 +64,12 @@ public:
 	// Member functions
 	std::string AllowedCharacters(const PasswordSettings& passwordSettings) const;
 	void ApplyMnemonicFilter(const std::string& str);
-	char GenerateRandomMnemonicSeed(const char& ch);
+	std::string GenerateRandomMnemonicSeed(const char& ch);
 	std::string GenerateRandomPassword(const PasswordSettings& passwordSettings);
 	std::string GetCurrentTime() const;
 	void HandleCommandLineProgramOptions(const PasswordSettings&);
 	std::string HandleUserInterfaceProgramOptions(const PasswordSettings& passwordSettings);
 	std::string EscapeDoubleQuotes(const std::string& str) const;
-    int GenerateRandomIndex(const std::string &inputSet);
 	void KeepHistory(const std::string& str);
 	void PrintPassword(const std::string& str);
 
@@ -87,6 +86,12 @@ public:
 	// UI getters
 	void HandleUserActions();
 	void HandleUserOutput();
+	
+	template <typename T>
+	int GenerateRandomIndex(T inputSet) {
+		quint32 index = QRandomGenerator::global()->bounded(0, static_cast<int>(inputSet.size()));
+		return static_cast<int>(index);
+	}
 };
 
 #endif  // MINIPASS_HPP

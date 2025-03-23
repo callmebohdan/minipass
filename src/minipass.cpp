@@ -135,15 +135,8 @@ MiniPass::~MiniPass() {
 	ui = nullptr;
 }
 
-
-int MiniPass::GenerateRandomIndex(const std::string& inputSet) {
-	quint32 index = QRandomGenerator::global()->bounded(0, static_cast<int>(inputSet.length()-1));
-	return static_cast<int>(index);
-}
 MiniPass::MiniPass(const PasswordSettings& passwordSettings)
 : programOptions(passwordSettings){}
-
-
 
 std::string MiniPass::AllowedCharacters(const PasswordSettings& passwordSettings) const {
 	std::string allowedCharacters;
@@ -170,7 +163,7 @@ void MiniPass::ApplyMnemonicFilter(const std::string& password) {
 	}
 }
 
-char MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
+std::string MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
 	std::string filename = "resources/seed-database/mnemonic-seeds.txt";
 	std::ifstream file(filename);
 
@@ -184,17 +177,18 @@ char MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
 		return {};
 	}
 
-	std::string characterNamedSeeds;
+	std::vector<std::string> characterNamedSeeds;
 	std::string line;
 
+	auto loweredCharacter = std::tolower(ch);
 	while (std::getline(file, line)) {
-		if (!line.empty() && line[0] == ch) {
-			characterNamedSeeds.append(line);
+		if (!line.empty() && line[0] == loweredCharacter) {
+			characterNamedSeeds.push_back(line);
 		}
 	}
 
 	if (characterNamedSeeds.empty()) {
-		std::cerr << "No words starting with '" << ch << "' found." << std::endl;
+		std::cerr << "No words starting with '" << loweredCharacter << "' found." << std::endl;
 		return {};
 	}
 
