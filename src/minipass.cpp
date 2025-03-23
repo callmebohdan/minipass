@@ -243,7 +243,7 @@ std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
 
 void MiniPass::KeepHistory(const std::string& password) {
 	bfs::fstream passwordsDatabase;
-	#if defined(__linux__)
+#if defined(__linux__)
 	std::string homeDir = std::getenv("HOME");
 	passwordsDatabasePath = homeDir + "/Documents/minipass/passwords.csv";
 #elif defined (_WIN32) || defined(_WIN64)
