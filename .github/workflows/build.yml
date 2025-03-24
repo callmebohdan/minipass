@@ -46,10 +46,6 @@ jobs:
           
           echo "Running CMake configuration..."
           cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH="$QT_PATH" "$GITHUB_WORKSPACE"
-          
-          echo "Generating ui_minipass.h..."
-          "$QT_LIB_PATH/uic" "$GITHUB_WORKSPACE/src/minipass.ui" -o "$GITHUB_WORKSPACE/src/ui_minipass.h"
-
       # Build the project
       - name: Build the project
         run: |
@@ -59,9 +55,10 @@ jobs:
       # Copy binaries
       - name: Copy build artifacts
         run: |
-          if [ -f "$GITHUB_WORKSPACE/build/src/minipass" ]; then
+          if [ -f "$GITHUB_WORKSPACE/build/minipass" ]; then
             mkdir -p "$GITHUB_WORKSPACE/bin"
-            cp "$GITHUB_WORKSPACE/build/src/minipass" "$GITHUB_WORKSPACE/bin"
+            cp "$GITHUB_WORKSPACE/build/minipass" "$GITHUB_WORKSPACE/bin"
+            echo "Success: minipass build was successful."
           else
             echo "Error: minipass build was not successful."
             exit 1
