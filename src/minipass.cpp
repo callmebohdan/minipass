@@ -56,6 +56,7 @@ void MiniPass::HandleUserActions() {
 	connect(ui->LineEditLength, &QLineEdit::textChanged, this, &MiniPass::SetPasswordLength);
 	connect(ui->ButtonGeneratePassword, &QToolButton::clicked, this, &MiniPass::ClickGeneratePassword);
 	connect(ui->ButtonOpenHistory, &QToolButton::clicked, this, &MiniPass::ClickOpenPasswordsHistory);
+	connect(ui->ButtonDefaultOptions, &QToolButton::clicked, this, &MiniPass::ClickDefaultOptions);
 	connect(ui->ButtonResetOptions, &QToolButton::clicked, this, &MiniPass::ClickResetOptions);
 	connect(ui->ButtonCopyPassword, &QToolButton::clicked, this, &MiniPass::CopyPassword);
 }
@@ -118,7 +119,13 @@ void MiniPass::ClickOpenPasswordsHistory() {
 #endif
 	QFile file(QString::fromStdString(passwordsDatabasePath));
 
-	if (file.open(QIODevice::WriteOnly | QIODevice::Text)) {}
+
+void MiniPass::ClickDefaultOptions() {
+	ui->CheckBoxUppercase->setChecked(true);
+	ui->CheckBoxLowercase->setChecked(true);
+	ui->CheckBoxNumbers->setChecked(true);
+	SetPasswordLength("16");
+	ui->LineEditLength->setText("16");
 }
 
 void MiniPass::ClickResetOptions() {
@@ -144,6 +151,10 @@ MiniPass::MiniPass(const PasswordSettings& passwordSettings)
 
 std::string MiniPass::AllowedCharacters(const PasswordSettings& passwordSettings) const {
 	std::string allowedCharacters;
+	if (programOptions.defaultOptions){
+		allowedCharacters += "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
+		return allowedCharacters;
+	}
 	if (programOptions.useNumbers && !programOptions.makeMnemonic) allowedCharacters += "0123456789";
 	if (programOptions.useLowercase) allowedCharacters += "abcdefghijklmnopqrstuvwxyz";
 	if (programOptions.useUppercase) allowedCharacters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";

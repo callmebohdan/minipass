@@ -13,6 +13,7 @@
 #include <string>
 
 struct PasswordSettings {
+	bool defaultOptions = false;
 	uint32_t passwordLength{16};
 	bool useNumbers = false;
 	bool useLowercase = false;
@@ -44,6 +45,7 @@ private slots:
 	// User actions
 	void ClickGeneratePassword();
 	void ClickOpenPasswordsHistory();
+    void ClickDefaultOptions();
 	void ClickResetOptions();
 	// User output
 	void CopyPassword();

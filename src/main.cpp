@@ -21,6 +21,7 @@ int main(int argc, char* argv[])
 		try {
 			po::options_description description("Allowed options");
 			description.add_options()
+				("default,d", "Default program options")
 				("custom,c", po::value<std::string>()->default_value(""), "Use custom characters")
 				("help,h", "Print help")
 				("history,k", "Keep passwords history")
@@ -49,6 +50,7 @@ int main(int argc, char* argv[])
 			}
 
 			PasswordSettings passwordSettings{};
+			passwordSettings.defaultOptions = variables_map.count("default");
 			passwordSettings.useCustom = variables_map["custom"].as<std::string>();
 			passwordSettings.keepHistory = variables_map.count("history");
 			passwordSettings.passwordLength = variables_map["length"].as<int>();
