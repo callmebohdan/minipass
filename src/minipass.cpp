@@ -34,6 +34,7 @@
 #include <cstdlib>
 #include <boost/date_time/posix_time/posix_time.hpp>
 #include <QtConcurrent>
+#include <QDesktopServices>
 
 namespace bfs = boost::filesystem; 
 
@@ -111,14 +112,27 @@ void MiniPass::ClickGeneratePassword() {
 }
 
 void MiniPass::ClickOpenPasswordsHistory() {
-	std::string executableDir = std::filesystem::current_path().string();
 #if defined(__linux__)
-	passwordsDatabasePath = executableDir + "//PasswordsHistory.csv";
+	std::string homeDir = std::getenv("HOME");
+	passwordsDatabasePath = homeDir + "/Documents/minipass/passwords.csv";
 #elif defined (_WIN32) || defined(_WIN64)
-	passwordsDatabasePath = executableDir + "\\PasswordsHistory.csv";
+	passwordsDatabasePath = "%APPDATA%\\minipass\\passwords.csv";
 #endif
-	QFile file(QString::fromStdString(passwordsDatabasePath));
+	auto ClickOpenPasswordsHistory = QtConcurrent::run([this]() {
+        QFile file(QString::fromStdString(passwordsDatabasePath));
 
+        if (file.open(QIODevice::WriteOnly | QIODevice::Text | QIODevice::Append)) {
+            QTextStream out(&file);
+            if (!file.exists()) {
+                out << "Creation Date,Password,Mnemonic Phrase\n";
+            }
+            file.close();
+        }
+
+        QUrl fileUrl = QUrl::fromLocalFile(QString::fromStdString(passwordsDatabasePath));
+        QDesktopServices::openUrl(fileUrl);
+    });
+}
 
 void MiniPass::ClickDefaultOptions() {
 	ui->CheckBoxUppercase->setChecked(true);

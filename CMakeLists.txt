@@ -16,7 +16,7 @@ if (MSVC)
     add_compile_options(/Zc:__cplusplus)
 endif()
 
-find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets)
+find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent)
 find_package(Boost REQUIRED COMPONENTS program_options filesystem system)
 
 set(HEADER_FILES src/minipass.hpp)
@@ -33,7 +33,7 @@ else()
     install(TARGETS minipass DESTINATION /usr/bin)
 endif()
 
-target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Boost::program_options Boost::filesystem Boost::system)
+target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Concurrent Boost::program_options Boost::filesystem Boost::system)
 
 option(ENABLE_TESTS "Enable test suite" OFF)
 if (ENABLE_TESTS)
