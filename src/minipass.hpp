@@ -56,13 +56,13 @@ private:
 	std::string mnemonicPhrase;
 	std::string passwordsDatabasePath;
 public:
+	// Constructors
 	explicit MiniPass(QWidget* parent = nullptr);
 	MiniPass()=default;
-	~MiniPass();
-	// Constructors
 	MiniPass(const PasswordSettings& passwordSettings);
 	MiniPass(const MiniPass& newCopy)=default;
 	MiniPass& operator=(const MiniPass& other)=default;	
+	~MiniPass();
 	// Member functions
 	std::string AllowedCharacters(const PasswordSettings& passwordSettings) const;
 	void ApplyMnemonicFilter(const std::string& str);
@@ -73,7 +73,7 @@ public:
 	std::string HandleUserInterfaceProgramOptions(const PasswordSettings& passwordSettings);
 	void KeepHistory(const std::string& str);
 
-	// Getters
+	// Private data member getters for tests
 	uint32_t GetPasswordLength() const { return programOptions.passwordLength; };
 	bool IsUseNumbers() const { return programOptions.useNumbers; };
 	bool IsUseLowercase() const { return programOptions.useLowercase; };
@@ -83,7 +83,7 @@ public:
 	bool IsKeepHistory() const { return programOptions.keepHistory; };
 	std::string GetUseCustom() const { return programOptions.useCustom; };
 
-	// UI getters
+	// Handle user input in UI
 	void HandleUserActions();
 	
 	template <typename T>
