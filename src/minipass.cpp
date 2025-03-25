@@ -160,22 +160,22 @@ MiniPass::~MiniPass() {
 	ui = nullptr;
 }
 
-MiniPass::MiniPass(const PasswordSettings& passwordSettings)
-: programOptions(passwordSettings){}
+MiniPass::MiniPass(const ProgramOptions& _programOptions)
+: programOptions(_programOptions){}
 
-std::string MiniPass::AllowedCharacters(const PasswordSettings& passwordSettings) const {
+std::string MiniPass::AllowedCharacters(const ProgramOptions& _programOptions) const {
 	std::string allowedCharacters;
-	if (programOptions.defaultOptions){
+	if (_programOptions.defaultOptions){
 		allowedCharacters += "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ";
 		return allowedCharacters;
 	}
-	if (programOptions.useNumbers && !programOptions.makeMnemonic) allowedCharacters += "0123456789";
-	if (programOptions.useLowercase) allowedCharacters += "abcdefghijklmnopqrstuvwxyz";
-	if (programOptions.useUppercase) allowedCharacters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-	if (programOptions.useSpecial && !programOptions.makeMnemonic) allowedCharacters += R"(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)";
-	for (char c : programOptions.useCustom){
+	if (_programOptions.numbers && !_programOptions.mnemonic) allowedCharacters += "0123456789";
+	if (_programOptions.lowercase) allowedCharacters += "abcdefghijklmnopqrstuvwxyz";
+	if (_programOptions.uppercase) allowedCharacters += "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	if (_programOptions.special && !_programOptions.mnemonic) allowedCharacters += R"(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)";
+	for (char c : _programOptions.custom){
 		if (allowedCharacters.find(c) == std::string::npos) {
-			if (programOptions.makeMnemonic) {
+			if (_programOptions.mnemonic) {
 				std::string specialCharacters = R"(!"#$%&'()*+,-./:;<=>?@[\]^_`{|}~)"; 
 				bool isNotSpecial = specialCharacters.find(c) == std::string::npos; 
 				if (isNotSpecial && !isdigit(c)){
@@ -236,14 +236,14 @@ std::string MiniPass::GenerateRandomMnemonicSeed(const char& ch) {
 	return characterNamedSeeds[randomMnemonicSeedIndex];
 }
 
-std::string MiniPass::GenerateRandomPassword(const PasswordSettings& passwordSettings) {
-	programOptions = passwordSettings;
-	std::string allowedCharacters = AllowedCharacters(passwordSettings);
+std::string MiniPass::GenerateRandomPassword(const ProgramOptions& _programOptions) {
+	programOptions = _programOptions;
+	std::string allowedCharacters = AllowedCharacters(programOptions);
 	if (allowedCharacters.size() < 1) {
 		return {};
 	}
 
-	while (password.length() < passwordSettings.passwordLength) {
+	while (password.length() < programOptions.passwordLength) {
 		auto randomizedCharacter = GenerateRandomIndex(allowedCharacters);
 		password += allowedCharacters[randomizedCharacter];
 	}
@@ -291,25 +291,27 @@ void MiniPass::KeepHistory(const std::string& password) {
 	}
 }
 
-void MiniPass::HandleCommandLineProgramOptions(const PasswordSettings& passwordSettings) {
-	password = GenerateRandomPassword(passwordSettings);
+void MiniPass::HandleCommandLineProgramOptions(const ProgramOptions& _programOptions) {
+	programOptions = _programOptions;
+	password = GenerateRandomPassword(programOptions);
 	std::cout << "Random Password: " << password << std::endl;
-	if (passwordSettings.makeMnemonic) {
+	if (programOptions.mnemonic) {
 		ApplyMnemonicFilter(password);
 		std::cout << "Mnemonic Phrase: " << mnemonicPhrase << std::endl;
 	}
-	if (passwordSettings.keepHistory) {
+	if (programOptions.history) {
 		KeepHistory(password);
 		std::cout << "Password saved to " << passwordsDatabasePath << std::endl;
 	}
 }
 
-std::string MiniPass::HandleUserInterfaceProgramOptions(const PasswordSettings& passwordSettings) {
-	password = GenerateRandomPassword(passwordSettings);
-	if (!password.empty() && passwordSettings.makeMnemonic) {
+std::string MiniPass::HandleUserInterfaceProgramOptions(const ProgramOptions& _programOptions) {
+	programOptions = _programOptions;
+	password = GenerateRandomPassword(programOptions);
+	if (!password.empty() && programOptions.mnemonic) {
 		ApplyMnemonicFilter(password);
 	}
-	if (!password.empty() && passwordSettings.keepHistory) {
+	if (!password.empty() && programOptions.history) {
 		KeepHistory(password);
 	}
 	return password;

@@ -8,7 +8,6 @@ namespace po = boost::program_options;
 
 int main(int argc, char* argv[])
 {
-	
 	QApplication app(argc, argv);
 	
 	if (argc == 1) {
@@ -49,19 +48,19 @@ int main(int argc, char* argv[])
 				return 0;
 			}
 
-			PasswordSettings passwordSettings{};
-			passwordSettings.defaultOptions = variables_map.count("default");
-			passwordSettings.useCustom = variables_map["custom"].as<std::string>();
-			passwordSettings.keepHistory = variables_map.count("history");
-			passwordSettings.passwordLength = variables_map["length"].as<int>();
-			passwordSettings.useLowercase = variables_map.count("lower");
-			passwordSettings.makeMnemonic = variables_map.count("mnemonic");
-			passwordSettings.useNumbers = variables_map.count("numbers");
-			passwordSettings.useSpecial = variables_map.count("special");
-			passwordSettings.useUppercase = variables_map.count("upper");
+			ProgramOptions programOptions{};
+			programOptions.defaultOptions = variables_map.count("default");
+			programOptions.custom = variables_map["custom"].as<std::string>();
+			programOptions.history = variables_map.count("history");
+			programOptions.passwordLength = variables_map["length"].as<int>();
+			programOptions.lowercase = variables_map.count("lower");
+			programOptions.mnemonic = variables_map.count("mnemonic");
+			programOptions.numbers = variables_map.count("numbers");
+			programOptions.special = variables_map.count("special");
+			programOptions.uppercase = variables_map.count("upper");
 
 			MiniPass minipassCLI{nullptr};
-			minipassCLI.HandleCommandLineProgramOptions(passwordSettings);
+			minipassCLI.HandleCommandLineProgramOptions(programOptions);
 			return 0;
 		}
 		catch(const std::exception& e) {

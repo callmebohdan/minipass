@@ -12,16 +12,16 @@
 #include <stdexcept>
 #include <string>
 
-struct PasswordSettings {
+struct ProgramOptions {
 	bool defaultOptions = false;
 	uint32_t passwordLength{16};
-	bool useNumbers = false;
-	bool useLowercase = false;
-	bool useUppercase = false;
-	bool useSpecial = false;
-	bool makeMnemonic = false;
-	bool keepHistory = false;
-	std::string useCustom{};
+	bool numbers = false;
+	bool lowercase = false;
+	bool uppercase = false;
+	bool special = false;
+	bool mnemonic = false;
+	bool history = false;
+	std::string custom{};
 };
 
 namespace Ui {
@@ -48,7 +48,7 @@ private slots:
 	void ClickReset();
 	void ClickCopy();
 private:
-	PasswordSettings programOptions;
+	ProgramOptions programOptions;
 	Ui::MiniPass* ui;
 	std::string password;
 	std::string mnemonicPhrase;
@@ -57,29 +57,29 @@ public:
 	// Constructors
 	explicit MiniPass(QWidget* parent = nullptr);
 	MiniPass()=default;
-	MiniPass(const PasswordSettings& passwordSettings);
+	MiniPass(const ProgramOptions& programOptions);
 	MiniPass(const MiniPass& newCopy)=default;
 	MiniPass& operator=(const MiniPass& other)=default;	
 	~MiniPass();
 	// Member functions
-	std::string AllowedCharacters(const PasswordSettings& passwordSettings) const;
+	std::string AllowedCharacters(const ProgramOptions& programOptions) const;
 	void ApplyMnemonicFilter(const std::string& str);
 	std::string GenerateRandomMnemonicSeed(const char& ch);
-	std::string GenerateRandomPassword(const PasswordSettings& passwordSettings);
+	std::string GenerateRandomPassword(const ProgramOptions& programOptions);
 	std::string GetCurrentTime() const;
-	void HandleCommandLineProgramOptions(const PasswordSettings&);
-	std::string HandleUserInterfaceProgramOptions(const PasswordSettings& passwordSettings);
+	void HandleCommandLineProgramOptions(const ProgramOptions&);
+	std::string HandleUserInterfaceProgramOptions(const ProgramOptions& programOptions);
 	void KeepHistory(const std::string& str);
 
 	// Private data member getters for tests
 	uint32_t GetPasswordLength() const { return programOptions.passwordLength; };
-	bool IsUseNumbers() const { return programOptions.useNumbers; };
-	bool IsUseLowercase() const { return programOptions.useLowercase; };
-	bool IsUseUppercase() const { return programOptions.useUppercase; };
-	bool IsUseSpecial() const { return programOptions.useSpecial; };
-	bool IsMakeMnemonic() const { return programOptions.makeMnemonic; };
-	bool IsKeepHistory() const { return programOptions.keepHistory; };
-	std::string GetUseCustom() const { return programOptions.useCustom; };
+	bool IsUseNumbers() const { return programOptions.numbers; };
+	bool IsUseLowercase() const { return programOptions.lowercase; };
+	bool IsUseUppercase() const { return programOptions.uppercase; };
+	bool IsUseSpecial() const { return programOptions.special; };
+	bool IsMakeMnemonic() const { return programOptions.mnemonic; };
+	bool IsKeepHistory() const { return programOptions.history; };
+	std::string GetUseCustom() const { return programOptions.custom; };
 
 	// Handle user input in UI
 	void HandleUserActions();
