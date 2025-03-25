@@ -6,7 +6,7 @@
 #include "../minipass.hpp"
 
 TEST(GoogleTestMinipass, DefaultConstructor) {
-	MiniPass minipass;
+	MiniPass minipass{nullptr};
 	ASSERT_EQ(minipass.GetPasswordLength(), 16);
 	ASSERT_FALSE(minipass.IsUseNumbers());
 	ASSERT_FALSE(minipass.IsUseLowercase());
