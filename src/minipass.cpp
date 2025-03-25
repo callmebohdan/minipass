@@ -47,59 +47,59 @@ MiniPass::MiniPass(QWidget* parent)
 }
 
 void MiniPass::HandleUserActions() {
-	connect(ui->LineEditCustom, &QLineEdit::textChanged, this, &MiniPass::SetUserCustomCharacters);
-	connect(ui->CheckBoxMnemonic, &QCheckBox::toggled, this, &MiniPass::ToggleMakeMnemonic);
-	connect(ui->CheckBoxHistory, &QCheckBox::toggled, this, &MiniPass::ToggleKeepHistory);
-	connect(ui->CheckBoxSpecial, &QCheckBox::toggled, this, &MiniPass::ToggleUseSpecial);
-	connect(ui->CheckBoxUppercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseUppercase);
-	connect(ui->CheckBoxLowercase, &QCheckBox::toggled, this, &MiniPass::ToggleUseLowercase);
-	connect(ui->CheckBoxNumbers, &QCheckBox::toggled, this, &MiniPass::ToggleUseNumbers);
-	connect(ui->LineEditLength, &QLineEdit::textChanged, this, &MiniPass::SetPasswordLength);
-	connect(ui->ButtonGeneratePassword, &QToolButton::clicked, this, &MiniPass::ClickGeneratePassword);
-	connect(ui->ButtonOpenHistory, &QToolButton::clicked, this, &MiniPass::ClickOpenPasswordsHistory);
-	connect(ui->ButtonDefaultOptions, &QToolButton::clicked, this, &MiniPass::ClickDefaultOptions);
-	connect(ui->ButtonResetOptions, &QToolButton::clicked, this, &MiniPass::ClickResetOptions);
-	connect(ui->ButtonCopyPassword, &QToolButton::clicked, this, &MiniPass::CopyPassword);
+	connect(ui->LineEditCustom, &QLineEdit::textChanged, this, &MiniPass::SetCustom);
+	connect(ui->LineEditLength, &QLineEdit::textChanged, this, &MiniPass::SetLength);
+	connect(ui->CheckBoxMnemonic, &QCheckBox::toggled, this, &MiniPass::ToggleMnemonic);
+	connect(ui->CheckBoxHistory, &QCheckBox::toggled, this, &MiniPass::ToggleHistory);
+	connect(ui->CheckBoxSpecial, &QCheckBox::toggled, this, &MiniPass::ToggleSpecial);
+	connect(ui->CheckBoxUppercase, &QCheckBox::toggled, this, &MiniPass::ToggleUppercase);
+	connect(ui->CheckBoxLowercase, &QCheckBox::toggled, this, &MiniPass::ToggleLowercase);
+	connect(ui->CheckBoxNumbers, &QCheckBox::toggled, this, &MiniPass::ToggleNumbers);
+	connect(ui->ButtonGeneratePassword, &QToolButton::clicked, this, &MiniPass::ClickGenerate);
+	connect(ui->ButtonOpenHistory, &QToolButton::clicked, this, &MiniPass::ClickHistory);
+	connect(ui->ButtonDefaultOptions, &QToolButton::clicked, this, &MiniPass::ClickDefault);
+	connect(ui->ButtonResetOptions, &QToolButton::clicked, this, &MiniPass::ClickReset);
+	connect(ui->ButtonCopyPassword, &QToolButton::clicked, this, &MiniPass::ClickCopy);
 }
 
-void MiniPass::SetUserCustomCharacters(const QString& customCharacters) {
+void MiniPass::SetCustom(const QString& customCharacters) {
 	programOptions.useCustom = customCharacters.toStdString();
 }
 
-void MiniPass::ToggleMakeMnemonic(bool checked) {
+void MiniPass::ToggleMnemonic(bool checked) {
 	programOptions.makeMnemonic = checked;
 }
 
-void MiniPass::ToggleKeepHistory(bool checked) {
+void MiniPass::ToggleHistory(bool checked) {
 	programOptions.keepHistory = checked;
 }
 
-void MiniPass::ToggleUseSpecial(bool checked) {
+void MiniPass::ToggleSpecial(bool checked) {
 	programOptions.useSpecial = checked;
 }
 
-void MiniPass::ToggleUseUppercase(bool checked) {
+void MiniPass::ToggleUppercase(bool checked) {
 	programOptions.useUppercase = checked;
 }
 
-void MiniPass::ToggleUseLowercase(bool checked) {
+void MiniPass::ToggleLowercase(bool checked) {
 	programOptions.useLowercase = checked;
 }
 
-void MiniPass::ToggleUseNumbers(bool checked) {
+void MiniPass::ToggleNumbers(bool checked) {
 	programOptions.useNumbers = checked;
 }
 
-void MiniPass::SetPasswordLength(const QString& _passwordLength) {
+void MiniPass::SetLength(const QString& _passwordLength) {
 	programOptions.passwordLength = _passwordLength.toInt();
 }
 
-void MiniPass::CopyPassword() {
+void MiniPass::ClickCopy() {
 	QClipboard* clipboard = QApplication::clipboard();
 	clipboard->setText(ui->TextEditPassword->toPlainText());
 }
 
-void MiniPass::ClickGeneratePassword() {
+void MiniPass::ClickGenerate() {
 	password.clear();
 	mnemonicPhrase.clear();
 	ui->TextEditPassword->clear();
@@ -111,7 +111,7 @@ void MiniPass::ClickGeneratePassword() {
 	});
 }
 
-void MiniPass::ClickOpenPasswordsHistory() {
+void MiniPass::ClickHistory() {
 #if defined(__linux__)
 	std::string homeDir = std::getenv("HOME");
 	passwordsDatabasePath = homeDir + "/Documents/minipass/passwords.csv";
@@ -134,15 +134,15 @@ void MiniPass::ClickOpenPasswordsHistory() {
     });
 }
 
-void MiniPass::ClickDefaultOptions() {
+void MiniPass::ClickDefault() {
 	ui->CheckBoxUppercase->setChecked(true);
 	ui->CheckBoxLowercase->setChecked(true);
 	ui->CheckBoxNumbers->setChecked(true);
-	SetPasswordLength("16");
+	SetLength("16");
 	ui->LineEditLength->setText("16");
 }
 
-void MiniPass::ClickResetOptions() {
+void MiniPass::ClickReset() {
 	ui->LineEditCustom->clear();
 	ui->CheckBoxMnemonic->setChecked(false);
 	ui->CheckBoxHistory->setChecked(false);

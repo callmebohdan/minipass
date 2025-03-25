@@ -33,22 +33,20 @@ class MiniPass : public QMainWindow
 	Q_OBJECT
 
 private slots:
-	// User options
-	void SetUserCustomCharacters(const QString& customCharacters);
-	void ToggleMakeMnemonic(bool checked);
-	void ToggleKeepHistory(bool checked);
-	void ToggleUseSpecial(bool checked);
-	void ToggleUseUppercase(bool checked);
-	void ToggleUseLowercase(bool checked);
-	void ToggleUseNumbers(bool checked);
-	void SetPasswordLength(const QString& passwordLength);
-	// User actions
-	void ClickGeneratePassword();
-	void ClickOpenPasswordsHistory();
-    void ClickDefaultOptions();
-	void ClickResetOptions();
-	// User output
-	void CopyPassword();
+	// Callback for handling user input
+	void SetCustom(const QString& customCharacters);
+	void SetLength(const QString& passwordLength);
+	void ToggleMnemonic(bool checked);
+	void ToggleHistory(bool checked);
+	void ToggleSpecial(bool checked);
+	void ToggleUppercase(bool checked);
+	void ToggleLowercase(bool checked);
+	void ToggleNumbers(bool checked);
+	void ClickGenerate();
+	void ClickHistory();
+    void ClickDefault();
+	void ClickReset();
+	void ClickCopy();
 private:
 	PasswordSettings programOptions;
 	Ui::MiniPass* ui;
