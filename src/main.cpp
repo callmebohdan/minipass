@@ -1,8 +1,8 @@
+#include <boost/program_options.hpp>
+#include <iostream>
 #include <qapplication.h>
 #include <qwindowdefs.h>
 #include "minipass.hpp"
-#include "boost/program_options.hpp"
-#include <iostream>
 
 namespace po = boost::program_options;
 

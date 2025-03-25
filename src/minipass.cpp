@@ -5,6 +5,10 @@
 #elif defined(__linux__)
     #include <unistd.h>
 #endif
+#include <boost/date_time/posix_time/posix_time.hpp>
+#include <boost/filesystem.hpp>
+#include <boost/filesystem/fstream.hpp>
+#include <cstdlib>
 #include <cstdlib>
 #include <ctime>
 #include <filesystem>
@@ -14,6 +18,7 @@
 #include <qapplication.h>
 #include <qcheckbox.h>
 #include <qclipboard.h>
+#include <QDesktopServices>
 #include <qfile.h>
 #include <qiodevice.h>
 #include <qiodevicebase.h>
@@ -22,6 +27,7 @@
 #include <qobject.h>
 #include <qpushbutton.h>
 #include <qstring.h>
+#include <QtConcurrent>
 #include <qtoolbutton.h>
 #include <qwidget.h>
 #include <string>
@@ -29,12 +35,6 @@
 #include <vector>
 #include "minipass.hpp"
 #include "ui_minipass.h"
-#include <boost/filesystem.hpp>
-#include <boost/filesystem/fstream.hpp>
-#include <cstdlib>
-#include <boost/date_time/posix_time/posix_time.hpp>
-#include <QtConcurrent>
-#include <QDesktopServices>
 
 namespace bfs = boost::filesystem; 
 
