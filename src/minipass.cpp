@@ -63,31 +63,31 @@ void MiniPass::HandleUserActions() {
 }
 
 void MiniPass::SetCustom(const QString& customCharacters) {
-	programOptions.useCustom = customCharacters.toStdString();
+	programOptions.custom = customCharacters.toStdString();
 }
 
-void MiniPass::ToggleMnemonic(bool checked) {
-	programOptions.makeMnemonic = checked;
+void MiniPass::ToggleMnemonic(bool state) {
+	programOptions.mnemonic = state;
 }
 
-void MiniPass::ToggleHistory(bool checked) {
-	programOptions.keepHistory = checked;
+void MiniPass::ToggleHistory(bool state) {
+	programOptions.history = state;
 }
 
-void MiniPass::ToggleSpecial(bool checked) {
-	programOptions.useSpecial = checked;
+void MiniPass::ToggleSpecial(bool state) {
+	programOptions.special = state;
 }
 
-void MiniPass::ToggleUppercase(bool checked) {
-	programOptions.useUppercase = checked;
+void MiniPass::ToggleUppercase(bool state) {
+	programOptions.uppercase = state;
 }
 
-void MiniPass::ToggleLowercase(bool checked) {
-	programOptions.useLowercase = checked;
+void MiniPass::ToggleLowercase(bool state) {
+	programOptions.lowercase = state;
 }
 
-void MiniPass::ToggleNumbers(bool checked) {
-	programOptions.useNumbers = checked;
+void MiniPass::ToggleNumbers(bool state) {
+	programOptions.numbers = state;
 }
 
 void MiniPass::SetLength(const QString& _passwordLength) {
