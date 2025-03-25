@@ -255,18 +255,6 @@ std::string MiniPass::GetCurrentTime() const {
     return boost::posix_time::to_simple_string(boost::posix_time::second_clock::local_time());
 }
 
-std::string MiniPass::EscapeDoubleQuotes(const std::string& str) const {
-	std::string result;
-	result.reserve(str.size() * 2);
-	for (char c : str) {
-		if (c == '"') {
-			result += '"';
-		}
-		result += c;
-	}
-	return result;
-}
-
 void MiniPass::KeepHistory(const std::string& password) {
 	bfs::fstream passwordsDatabase;
 #if defined(__linux__)

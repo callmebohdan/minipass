@@ -71,7 +71,6 @@ public:
 	std::string GetCurrentTime() const;
 	void HandleCommandLineProgramOptions(const PasswordSettings&);
 	std::string HandleUserInterfaceProgramOptions(const PasswordSettings& passwordSettings);
-	std::string EscapeDoubleQuotes(const std::string& str) const;
 	void KeepHistory(const std::string& str);
 
 	// Getters
