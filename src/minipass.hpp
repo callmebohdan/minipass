@@ -59,7 +59,12 @@ public:
 	MiniPass()=default;
 	MiniPass(const ProgramOptions& programOptions);
 	MiniPass(const MiniPass& newCopy)=default;
-	MiniPass& operator=(const MiniPass& other)=default;	
+	MiniPass& operator=(const MiniPass& other){
+		if (this != &other){
+			this->programOptions = other.programOptions;
+		}
+		return *this;
+	};	
 	~MiniPass();
 	// Member functions
 	std::string AllowedCharacters(const ProgramOptions& programOptions) const;
