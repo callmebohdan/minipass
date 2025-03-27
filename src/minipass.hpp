@@ -70,6 +70,7 @@ public:
 	void HandleCommandLineProgramOptions(const ProgramOptions&);
 	std::string HandleUserInterfaceProgramOptions(const ProgramOptions& programOptions);
 	void KeepHistory(const std::string& str);
+	ProgramOptions ParseCommandLineOptions(int argc, char **argv);
 
 	// Private data member getters for tests
 	uint32_t GetPasswordLength() const { return programOptions.passwordLength; };
