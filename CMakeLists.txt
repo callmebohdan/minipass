@@ -16,6 +16,10 @@ if (MSVC)
     add_compile_options(/Zc:__cplusplus)
 endif()
 
+if (CMAKE_VERSION VERSION_GREATER_EQUAL "3.24.0")
+    cmake_policy(SET CMP0135 NEW)
+endif()
+
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent)
 find_package(Boost REQUIRED COMPONENTS program_options filesystem system)
 
