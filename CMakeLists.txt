@@ -39,7 +39,7 @@ endif()
 
 target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Concurrent Boost::program_options Boost::filesystem Boost::system)
 
-option(ENABLE_TESTS "Enable test suite" OFF)
+option(ENABLE_TESTS "Enable test suite" ON)
 if (ENABLE_TESTS)
     enable_testing()
 
@@ -64,7 +64,7 @@ if (ENABLE_TESTS)
     
     add_executable(GoogleTestMinipass src/test/googletest_minipass.cpp)
 
-    target_link_libraries(minipass_lib Qt6::Core Qt6::Gui Qt6::Multimedia Qt6::Widgets Qt6::MultimediaWidgets)
+    target_link_libraries(minipass_lib Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Concurrent Boost::program_options Boost::filesystem Boost::system)
     target_link_libraries(GoogleTestMinipass PRIVATE gtest gtest_main minipass_lib)
 
 endif()
