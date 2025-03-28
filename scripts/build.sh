@@ -36,7 +36,7 @@ else
     echo "[Error]: minipass build was not successfull."
 fi
 
-if [ -f "$BUILD_DIR/test/GoogleTestMinipass" ]; then
+if [ -f "$BUILD_DIR/GoogleTestMinipass" ]; then
     echo "GoogleTestMinipass was created."
 else
     echo "No tests found. Skipping."
