@@ -24,14 +24,6 @@ int main(int argc, char* argv[])
 			std::cerr << e.what() << '\n';
 			return 1;
 		}
-		catch (const std::overflow_error& e) {
-			std::cerr << e.what() << '\n';
-			return 1;
-		}
-		catch (const std::runtime_error& e) {
-			std::cerr << e.what() << '\n';
-			return 1;
-		}
 		catch(...) {
 			std::cerr << "Exception of unknown type!\n";
 			return 1;
