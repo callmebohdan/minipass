@@ -26,7 +26,7 @@ cd "$BUILD_DIR"
 echo "Running CMake configuration..."
 cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH="$QT_PATH" "$PROJECT_DIR"
 
-make VERBOSE=0
+make VERBOSE=1
 
 make install
 
