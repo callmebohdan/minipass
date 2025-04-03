@@ -26,7 +26,7 @@ cd "$BUILD_DIR"
 echo "Running CMake configuration..."
 cmake -G "Unix Makefiles" -DCMAKE_PREFIX_PATH="$QT_PATH" "$PROJECT_DIR"
 
-make VERBOSE=0
+make VERBOSE=1
 
 make install
 
@@ -36,7 +36,7 @@ else
     echo "[Error]: minipass build was not successfull."
 fi
 
-if [ -f "$BUILD_DIR/test/GoogleTestMinipass" ]; then
+if [ -f "$BUILD_DIR/GoogleTestMinipass" ]; then
     echo "GoogleTestMinipass was created."
 else
     echo "No tests found. Skipping."
