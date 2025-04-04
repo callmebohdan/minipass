@@ -18,26 +18,26 @@ TEST(GoogleTestMinipass, DefaultConstructor) {
 }
 
 TEST(GoogleTestMinipass, ParametrizedConstructor) {
-	ProgramOptions settings;
-	settings.passwordLength = 32;
-	settings.numbers = true;
-	settings.lowercase = true;
-	settings.uppercase = true;
-	settings.special = true;
-	settings.mnemonic = true;
-	settings.history = true;
-	settings.custom = "true";
+	ProgramOptions programOptions;
+	programOptions.passwordLength = 32;
+	programOptions.numbers = true;
+	programOptions.lowercase = true;
+	programOptions.uppercase = true;
+	programOptions.special = true;
+	programOptions.mnemonic = true;
+	programOptions.history = true;
+	programOptions.custom = "true";
 
-	MiniPass minipass(settings);
+	MiniPass minipass(programOptions);
 
-	ASSERT_EQ(minipass.GetPasswordLength(), settings.passwordLength);
-	ASSERT_EQ(minipass.IsUseNumbers(), settings.numbers);
-	ASSERT_EQ(minipass.IsUseLowercase(), settings.lowercase);
-	ASSERT_EQ(minipass.IsUseUppercase(), settings.uppercase);
-	ASSERT_EQ(minipass.IsUseSpecial(), settings.special);
-	ASSERT_EQ(minipass.IsMakeMnemonic(), settings.mnemonic);
-	ASSERT_EQ(minipass.IsKeepHistory(), settings.history);
-	ASSERT_EQ(minipass.GetUseCustom(), settings.custom);
+	ASSERT_EQ(minipass.GetPasswordLength(), programOptions.passwordLength);
+	ASSERT_EQ(minipass.IsUseNumbers(), programOptions.numbers);
+	ASSERT_EQ(minipass.IsUseLowercase(), programOptions.lowercase);
+	ASSERT_EQ(minipass.IsUseUppercase(), programOptions.uppercase);
+	ASSERT_EQ(minipass.IsUseSpecial(), programOptions.special);
+	ASSERT_EQ(minipass.IsMakeMnemonic(), programOptions.mnemonic);
+	ASSERT_EQ(minipass.IsKeepHistory(), programOptions.history);
+	ASSERT_EQ(minipass.GetUseCustom(), programOptions.custom);
 }
 
 TEST(GoogleTestMinipass, CopyConstructor) {
@@ -89,14 +89,16 @@ TEST(GoogleTestMinipass, AssignmentOperator) {
 
 TEST(GoogleTestMinipass, GenerateRandomIndex_EmptySet)
 {
-	std::vector<int> inputSet(std::numeric_limits<int>::max()+1);
-	EXPECT_THROW(GenerateRandomIndex(inputSet), std::out_of_range);
+	std::vector<int> inputSet(std::numeric_limits<int>::max());
+	MiniPass minipass{nullptr};
+	EXPECT_THROW(minipass.GenerateRandomIndex(inputSet), std::out_of_range);
 }
 
 TEST(GoogleTestMinipass, BigSet) {
 	std::vector<int> inputSet(1000000, 1);
+	MiniPass minipass{nullptr};
 	for (int i = 0; i < 1000000; ++i) {
-		int index = GenerateRandomIndex(inputSet);
+		int index = minipass.GenerateRandomIndex(inputSet);
 		EXPECT_GE(index, 0);
 		EXPECT_LT(index, static_cast<int>(inputSet.size()));
 	}
@@ -104,14 +106,16 @@ TEST(GoogleTestMinipass, BigSet) {
 
 TEST(GoogleTestMinipass, GenerateRandomIndex_OverflowSet) {
 	std::vector<int> inputSet(static_cast<size_t>(std::numeric_limits<int>::max()) + 1);
-	EXPECT_THROW(GenerateRandomIndex(inputSet), std::overflow_error);
+	MiniPass minipass{nullptr};
+	EXPECT_THROW(minipass.GenerateRandomIndex(inputSet), std::overflow_error);
 }
 
 TEST(GoogleTestMinipass, GenerateRandomIndex_IntegerSet)
 {
 	std::vector<int> inputSet{1, 2, 3, 4, 5};
+	MiniPass minipass{nullptr};
 	for (int i = 0; i < 100; ++i) {
-		int index = GenerateRandomIndex(inputSet);
+		int index = minipass.GenerateRandomIndex(inputSet);
 		EXPECT_GE(index, 0);
 		EXPECT_LT(index, static_cast<int>(inputSet.size()));
 	}
@@ -120,8 +124,9 @@ TEST(GoogleTestMinipass, GenerateRandomIndex_IntegerSet)
 TEST(GoogleTestMinipass, GenerateRandomIndex_StringSet)
 {
 	std::vector<std::string> inputSet{"a", "b", "c", "d", "e"};
+	MiniPass minipass{nullptr};
 	for (int i = 0; i < 100; ++i) {
-		int index = GenerateRandomIndex(inputSet);
+		int index = minipass.GenerateRandomIndex(inputSet);
 		EXPECT_GE(index, 0);
 		EXPECT_LT(index, static_cast<int>(inputSet.size()));
 	}
@@ -130,8 +135,9 @@ TEST(GoogleTestMinipass, GenerateRandomIndex_StringSet)
 TEST(GoogleTestMinipass, GenerateRandomIndex_DoubleSet)
 {
 	std::vector<double> inputSet{0.1, 0.2, 0.3, 0.4, 0.5};
+	MiniPass minipass{nullptr};
 	for (int i = 0; i < 100; ++i) {
-		int index = GenerateRandomIndex(inputSet);
+		int index = minipass.GenerateRandomIndex(inputSet);
 		EXPECT_GE(index, 0);
 		EXPECT_LT(index, static_cast<int>(inputSet.size()));
 	}
@@ -140,8 +146,9 @@ TEST(GoogleTestMinipass, GenerateRandomIndex_DoubleSet)
 TEST(GoogleTestMinipass, GenerateRandomIndex_FloatSet)
 {
 	std::vector<float> inputSet{0.1f, 0.2f, 0.3f, 0.4f, 0.5f};
+	MiniPass minipass{nullptr};
 	for (int i = 0; i < 100; ++i) {
-		int index = GenerateRandomIndex(inputSet);
+		int index = minipass.GenerateRandomIndex(inputSet);
 		EXPECT_GE(index, 0);
 		EXPECT_LT(index, static_cast<int>(inputSet.size()));
 	}
@@ -150,198 +157,206 @@ TEST(GoogleTestMinipass, GenerateRandomIndex_FloatSet)
 TEST(GoogleTestMinipass, GenerateRandomIndex_CharSet)
 {
 	std::vector<char> inputSet{'a', 'b', 'c', 'd', 'e'};
+	MiniPass minipass{nullptr};
 	for (int i = 0; i < 100; ++i) {
-		int index = GenerateRandomIndex(inputSet);
+		int index = minipass.GenerateRandomIndex(inputSet);
 		EXPECT_GE(index, 0);
 		EXPECT_LT(index, static_cast<int>(inputSet.size()));
 	}
 }
 
 TEST(GoogleTestMinipass, ParseNoCommandLineArguments) {
-	char* argv[] = {"./minipass.exe"};
-	int argc = sizeof(argv) / sizeof(argv[0]);
+	char* input = {"./minipass"};
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
+	ProgramOptions programOptions{};
+	// programOptions.passwordLength = 16;
+	// programOptions.numbers = false;
+	// programOptions.lowercase = false;
+	// programOptions.uppercase = false;
+	// programOptions.special = false;
+	// programOptions.mnemonic = false;
+	// programOptions.history = false;
+	// programOptions.custom = "";
 
-	EXPECT_EQ(settings.passwordLength, 16);
-	EXPECT_FALSE(settings.numbers);
-	EXPECT_FALSE(settings.lowercase);
-	EXPECT_FALSE(settings.uppercase);
-	EXPECT_FALSE(settings.special);
-	EXPECT_FALSE(settings.mnemonic);
-	EXPECT_FALSE(settings.history);
-	EXPECT_EQ(settings.custom, "");
+	EXPECT_EQ(programOptions.passwordLength, 16);
+	EXPECT_FALSE(programOptions.numbers);
+	EXPECT_FALSE(programOptions.lowercase);
+	EXPECT_FALSE(programOptions.uppercase);
+	EXPECT_FALSE(programOptions.special);
+	EXPECT_FALSE(programOptions.mnemonic);
+	EXPECT_FALSE(programOptions.history);
+	EXPECT_EQ(programOptions.custom, std::string(""));
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_PasswordLengthWithoutNumber) {
-	char* argv[] = {"./minipass.exe", "-l"};
-	int argc = sizeof(argv) / sizeof(argv[0]);
+TEST(GoogleTestMinipass, ParseCommandLineOptions_PasswordLengthWithoutNumber) {
+	char* input = {"./minipass -l"};
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
+	ProgramOptions programOptions{};
+	// programOptions.passwordLength = 16;
 
-	EXPECT_EQ(settings.passwordLength, 16);
+	EXPECT_EQ(programOptions.passwordLength, 16);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_PasswordLengthIsNumber) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_PasswordLengthIsNumber) {
 	char* argv[] = {"./minipass.exe", "-l", "25"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.passwordLength, 25);
+	EXPECT_EQ(programOptions.passwordLength, 25);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_PasswordLengthIsString) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_PasswordLengthIsString) {
 	char* argv[] = {"./minipass.exe", "-l", "abc"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.passwordLength, 16);
+	EXPECT_EQ(programOptions.passwordLength, 16);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_PasswordLengthIsSpecialCharacter) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_PasswordLengthIsSpecialCharacter) {
 	char* argv[] = {"./minipass.exe", "-l", "!\"#$%&'()*+,-./:;<=>?@[\\]^_`{|}~"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.passwordLength, 16);
+	EXPECT_EQ(programOptions.passwordLength, 16);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_numbersShort) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_numbersShort) {
 	char* argv[] = {"./minipass.exe", "-n"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.numbers, true);
+	EXPECT_EQ(programOptions.numbers, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_numbersLong) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_numbersLong) {
 	char* argv[] = {"./minipass.exe", "--numbers"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.numbers, true);
+	EXPECT_EQ(programOptions.numbers, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_lowercaseShort) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_lowercaseShort) {
 	char* argv[] = {"./minipass.exe", "-o"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.lowercase, true);
+	EXPECT_EQ(programOptions.lowercase, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_lowercaseLong) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_lowercaseLong) {
 	char* argv[] = {"./minipass.exe", "--lower"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.lowercase, true);
+	EXPECT_EQ(programOptions.lowercase, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_uppercaseShort) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_uppercaseShort) {
 	char* argv[] = {"./minipass.exe", "-u"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.uppercase, true);
+	EXPECT_EQ(programOptions.uppercase, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_uppercaseLong) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_uppercaseLong) {
 	char* argv[] = {"./minipass.exe", "--upper"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.uppercase, true);
+	EXPECT_EQ(programOptions.uppercase, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_specialShort) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_specialShort) {
 	char* argv[] = {"./minipass.exe", "-s"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.special, true);
+	EXPECT_EQ(programOptions.special, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_specialLong) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_specialLong) {
 	char* argv[] = {"./minipass.exe", "--special"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.special, true);
+	EXPECT_EQ(programOptions.special, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_KeepHistoryShort) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_KeepHistoryShort) {
 	char* argv[] = {"./minipass.exe", "-k"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.history, true);
+	EXPECT_EQ(programOptions.history, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_KeepHistoryLong) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_KeepHistoryLong) {
 	char* argv[] = {"./minipass.exe", "--history"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.history, true);
+	EXPECT_EQ(programOptions.history, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_MakeMnemonicShort) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_MakeMnemonicShort) {
 	char* argv[] = {"./minipass.exe", "-m"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.mnemonic, true);
+	EXPECT_EQ(programOptions.mnemonic, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_MakeMnemonicLong) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_MakeMnemonicLong) {
 	char* argv[] = {"./minipass.exe", "--mnemonic"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.mnemonic, true);
+	EXPECT_EQ(programOptions.mnemonic, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_MultipleShortOptions) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_MultipleShortOptions) {
 	char* argv[] = {"./minipass.exe", "-dnouskm"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.numbers, true);
-	EXPECT_EQ(settings.lowercase, true);
-	EXPECT_EQ(settings.uppercase, true);
-	EXPECT_EQ(settings.special, true);
-	EXPECT_EQ(settings.history, true);
-	EXPECT_EQ(settings.mnemonic, true);
+	EXPECT_EQ(programOptions.numbers, true);
+	EXPECT_EQ(programOptions.lowercase, true);
+	EXPECT_EQ(programOptions.uppercase, true);
+	EXPECT_EQ(programOptions.special, true);
+	EXPECT_EQ(programOptions.history, true);
+	EXPECT_EQ(programOptions.mnemonic, true);
 }
 
-TEST(GoogleTestMinipass, ParseCommandLineArguments_MultipleShortOptionsWithLengthAndCustom) {
+TEST(GoogleTestMinipass, ParseCommandLineOptions_MultipleShortOptionsWithLengthAndCustom) {
 	char* argv[] = {"./minipass.exe", "-nuskmlc"};
 	int argc = sizeof(argv) / sizeof(argv[0]);
+	MiniPass minipass{nullptr};
+	ProgramOptions programOptions = minipass.ParseCommandLineOptions(argc, argv);
 
-	ProgramOptions settings = ParseCommandLineArguments(argc, argv);
-
-	EXPECT_EQ(settings.numbers, true);
-	EXPECT_EQ(settings.uppercase, true);
-	EXPECT_EQ(settings.special, true);
-	EXPECT_EQ(settings.history, true);
-	EXPECT_EQ(settings.mnemonic, true);
-	EXPECT_EQ(settings.passwordLength, 16);
-	EXPECT_EQ(settings.custom, "");
+	EXPECT_EQ(programOptions.numbers, true);
+	EXPECT_EQ(programOptions.uppercase, true);
+	EXPECT_EQ(programOptions.special, true);
+	EXPECT_EQ(programOptions.history, true);
+	EXPECT_EQ(programOptions.mnemonic, true);
+	EXPECT_EQ(programOptions.passwordLength, 16);
+	EXPECT_EQ(programOptions.custom, "");
 }
