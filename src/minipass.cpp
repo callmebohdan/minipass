@@ -9,7 +9,12 @@
 #include <boost/filesystem.hpp>
 #include <boost/filesystem/fstream.hpp>
 #include <boost/program_options.hpp>
-#include <cstdlib>
+#include <boost/mysql/tcp.hpp>
+#include <boost/mysql/handshake_params.hpp>
+#include <boost/mysql/results.hpp>
+#include <boost/mysql/statement.hpp>
+#include <boost/asio/io_context.hpp>
+#include <boost/asio/ip/tcp.hpp>
 #include <cstdlib>
 #include <ctime>
 #include <filesystem>
@@ -258,39 +263,59 @@ std::string MiniPass::GetCurrentTime() const {
 }
 
 void MiniPass::KeepHistory(const std::string& password) {
-	bfs::fstream passwordsDatabase;
-#if defined(__linux__)
-	std::string homeDir = std::getenv("HOME");
-	passwordsDatabasePath = homeDir + "/Documents/minipass/passwords.csv";
-#elif defined (_WIN32) || defined(_WIN64)
-	passwordsDatabasePath = "%APPDATA%\\minipass\\passwords.csv";
-#endif
-	bfs::path boostPasswordsDatabasePath(passwordsDatabasePath);
-	bfs::path parent_dir = boostPasswordsDatabasePath.parent_path();
-	if (!bfs::exists(parent_dir)){
-		bfs::create_directory(parent_dir);
-		bfs::fstream passwordsDatabase(passwordsDatabasePath);
-	}
+// 	bfs::fstream passwordsDatabase;
+// #if defined(__linux__)
+// 	std::string homeDir = std::getenv("HOME");
+// 	passwordsDatabasePath = homeDir + "/Documents/minipass/passwords.csv";
+// #elif defined (_WIN32) || defined(_WIN64)
+// 	passwordsDatabasePath = "%APPDATA%\\minipass\\passwords.csv";
+// #endif
+// 	bfs::path boostPasswordsDatabasePath(passwordsDatabasePath);
+// 	bfs::path parent_dir = boostPasswordsDatabasePath.parent_path();
+// 	if (!bfs::exists(parent_dir)){
+// 		bfs::create_directory(parent_dir);
+// 		bfs::fstream passwordsDatabase(passwordsDatabasePath);
+// 	}
 
-	passwordsDatabase.open(boostPasswordsDatabasePath, std::ios::out | std::ios::app);
+// 	passwordsDatabase.open(boostPasswordsDatabasePath, std::ios::out | std::ios::app);
 	
-	if (passwordsDatabase)
-	{
-		if (bfs::is_empty(boostPasswordsDatabasePath)) {
-			passwordsDatabase << "Creation Date,Password,Mnemonic Phrase" << std::endl;
-		}
+// 	if (passwordsDatabase)
+// 	{
+// 		if (bfs::is_empty(boostPasswordsDatabasePath)) {
+// 			passwordsDatabase << "Creation Date,Password,Mnemonic Phrase" << std::endl;
+// 		}
 		
-		passwordsDatabase 
-			<< GetCurrentTime() << "," 
-			<< password << "," 
-			<< mnemonicPhrase << std::endl;
-		passwordsDatabase.close();
-	}
-	else
-	{
-		std::cerr << "File could not be opened!\n";
-		std::cerr << "Error code: " << strerror(errno);
-	}
+// 		passwordsDatabase 
+// 			<< GetCurrentTime() << "," 
+// 			<< password << "," 
+// 			<< mnemonicPhrase << std::endl;
+// 		passwordsDatabase.close();
+// 	}
+// 	else
+// 	{
+// 		std::cerr << "File could not be opened!\n";
+// 		std::cerr << "Error code: " << strerror(errno);
+// 	}
+	boost::asio::io_context io_context;
+	boost::mysql::tcp_connection connection(io_context);
+
+	boost::mysql::handshake_params parameters("username", "password", "minipass");
+	connection.connect(boost::asio::ip::tcp::endpoint(
+		boost::asio::ip::address::from_string("127.0.0.1"), 3306), 
+		parameters
+	);
+	
+	boost::mysql::results result;
+	boost::mysql::statement statement = connection.prepare_statement("INSERT INTO passwords (creation_date, password, mnemonic_phrase) VALUES (?, ?, ?)");
+	
+	connection.execute(
+		statement.bind(GetCurrentTime(), password, mnemonicPhrase), 
+		result
+	);
+	// assert(result.rows().empty());
+
+	connection.close();
+	std::cout << "Password added to database successfully\n";
 }
 
 ProgramOptions MiniPass::ParseCommandLineOptions(int argc, char** argv)
