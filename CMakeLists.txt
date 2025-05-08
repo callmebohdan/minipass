@@ -22,6 +22,7 @@ endif()
 
 find_package(Qt6 REQUIRED COMPONENTS Core Gui Widgets Concurrent)
 find_package(Boost REQUIRED COMPONENTS program_options filesystem system)
+find_package(OpenSSL REQUIRED)
 
 set(HEADER_FILES src/minipass.hpp)
 set(SOURCE_FILES src/main.cpp src/minipass.cpp)
@@ -37,7 +38,7 @@ else()
     install(TARGETS minipass DESTINATION /usr/bin)
 endif()
 
-target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Concurrent Boost::program_options Boost::filesystem Boost::system)
+target_link_libraries(minipass PRIVATE Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Concurrent Boost::program_options Boost::filesystem Boost::system OpenSSL::SSL OpenSSL::Crypto)
 
 option(ENABLE_TESTS "Enable test suite" ON)
 if (ENABLE_TESTS)
@@ -64,7 +65,7 @@ if (ENABLE_TESTS)
     
     add_executable(GoogleTestMinipass src/test/googletest_minipass.cpp)
 
-    target_link_libraries(minipass_lib Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Concurrent Boost::program_options Boost::filesystem Boost::system)
+    target_link_libraries(minipass_lib Qt6::Core Qt6::Gui Qt6::Widgets Qt6::Concurrent Boost::program_options Boost::filesystem Boost::system OpenSSL::SSL OpenSSL::Crypto)
     target_link_libraries(GoogleTestMinipass PRIVATE gtest gtest_main minipass_lib)
 
 endif()
