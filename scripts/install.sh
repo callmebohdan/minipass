@@ -13,12 +13,12 @@ sudo apt-get -y install cmake
 sudo apt-get -y install build-essential
 
 # Install Qt6
-sudo apt-get -y install qt6-base-dev qt6-base-dev-tools qt6-tools-dev \ 
-    qt6-tools-dev-tools qt6ct qt6-multimedia-dev libgl1-mesa-dev \
-    libglu1-mesa-dev freeglut3-dev mesa-common-dev libxcb-cursor0
+sudo apt-get -y install qt6-base-dev qt6-base-dev-tools qt6-tools-dev qt6-declarative-dev qt6-tools-dev-tools qt6ct qt6-multimedia-dev libgl1-mesa-dev libglu1-mesa-dev freeglut3-dev mesa-common-dev libxcb-cursor0
 
 # Install Boost
-sudo apt-get -y install libboost-all-dev
+sudo apt-get -y install libboost1.83-dev libboost-system1.83-dev libboost-filesystem1.83-dev libboost-program-options1.83-dev
+
+sudo apt-get install libssl-dev
 
 # Install XKB library
 sudo apt-get -y install libxkbcommon-dev
